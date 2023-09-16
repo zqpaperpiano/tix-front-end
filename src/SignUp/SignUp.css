@@ -1,0 +1,239 @@
+.sign-up {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.sign-up .div {
+  background-color: #ffffff;
+  height: 1024px;
+  position: relative;
+  width: 1440px;
+}
+
+.sign-up .text-wrapper-2 {
+  color: #000000;
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 30px;
+  font-weight: 600;
+  left: 297px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 100px;
+}
+
+.sign-up .full-name {
+  height: 88px;
+  left: 294px;
+  position: absolute;
+  top: 200px;
+  width: 404px;
+}
+
+.sign-up .text-wrapper-3 {
+  color: #000000;
+  font-family: "Poppins-Medium", Helvetica;
+  font-size: 20px;
+  font-weight: 500;
+  left: 3px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 0;
+}
+
+.sign-up .input-wrapper {
+  background-color: #d9d9d999;
+  border-radius: 5px;
+  height: 50px;
+  left: 0;
+  position: absolute;
+  top: 38px;
+  width: 400px;
+}
+
+.sign-up .name-input {
+  background-color: transparent;
+  border: none;
+  color: #000000;
+  font-family: "Poppins-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  height: 40px;
+  left: 8px;
+  letter-spacing: 0;
+  line-height: 26px;
+  padding: none;
+  position: absolute;
+  top: 5px;
+  white-space: nowrap;
+  width: 96%;
+  justify-content: center;
+}
+
+.sign-up .email-address {
+  height: 88px;
+  left: 294px;
+  position: absolute;
+  top: 320px;
+  width: 404px;
+}
+
+.sign-up .text-wrapper-4 {
+  color: #000000;
+  font-family: "Poppins-Medium", Helvetica;
+  font-size: 20px;
+  font-weight: 500;
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 0;
+}
+
+.sign-up .email-input {
+  background-color: transparent;
+  border: none;
+  color: #000000;
+  font-family: "Poppins-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  height: 40px;
+  left: 8px;
+  letter-spacing: 0;
+  line-height: 26px;
+  padding: none;
+  position: absolute;
+  top: 5px;
+  white-space: nowrap;
+  width: 96%;
+  justify-content: center;
+}
+
+.sign-up .password {
+  height: 88px;
+  left: 297px;
+  position: absolute;
+  top: 440px;
+  width: 404px;
+}
+
+.sign-up .password-input{
+  background-color: transparent;
+  border: none;
+  color: #000000;
+  font-family: "Poppins-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  height: 40px;
+  left: 8px;
+  letter-spacing: 0;
+  line-height: 26px;
+  padding: none;
+  position: absolute;
+  top: 5px;
+  white-space: nowrap;
+  width: 96%;
+  justify-content: center;
+} 
+
+.sign-up .confirm-password-input{
+  background-color: transparent;
+  border: none;
+  color: #000000;
+  font-family: "Poppins-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  height: 40px;
+  left: 8px;
+  letter-spacing: 0;
+  line-height: 26px;
+  padding: none;
+  position: absolute;
+  top: 5px;
+  white-space: nowrap;
+  width: 96%;
+  justify-content: center; 
+}
+
+.sign-up .confirm-password {
+  height: 88px;
+  left: 767px;
+  position: absolute;
+  top: 440px;
+  width: 404px;
+}
+
+.sign-up .contact {
+  height: 88px;
+  left: 767px;
+  position: absolute;
+  top: 320px;
+  width: 404px;
+}
+
+.sign-up .contact-input {
+  background-color: transparent;
+  border: none;
+  color: #000000;
+  font-family: "Poppins-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  height: 26px;
+  left: 16px;
+  letter-spacing: 0;
+  line-height: 26px;
+  padding: none;
+  position: absolute;
+  top: 12px;
+  white-space: nowrap;
+  width: 90%;
+  justify-content: center;
+}
+
+.sign-up .text-wrapper-5 {
+  color: #000000;
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 20px;
+  font-weight: 600;
+  left: 294px;
+  letter-spacing: 0;
+  line-height: 24px;
+  position: absolute;
+  text-align: center;
+  top: 620px;
+  white-space: nowrap;
+}
+
+.sign-up .login-btm {
+  cursor: pointer;
+  left: 562px !important;
+  position: absolute !important;
+  top: 620px !important;
+}
+
+.sign-up .sign-up-btm {
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 20px;
+  font-weight: 600;
+  left: 520px;
+  letter-spacing: 0;
+  line-height: 24px;
+  position: absolute;
+  text-align: center;
+  top: 560px;
+  white-space: nowrap;
+
+  background-color: black;
+  color: white;
+  padding: 10px;
+  width: 6em;
+  border-radius: 15px;
+
+  left: 297px !important;
+  position: absolute !important;
+  top: 550px !important;
+}

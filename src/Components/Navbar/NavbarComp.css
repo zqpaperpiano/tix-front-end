@@ -1,0 +1,50 @@
+.navbar .navbar-brand {
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Poppins';
+}
+
+.navbar .nav-link{
+    color: white;
+    font-size: 20px;
+    font-weight: normal;
+    font-family: 'Poppins';
+    margin-right: 15px;
+}
+
+.navbar .form-control{
+    margin-left: 25px;
+    width: 300px;
+}
+
+.navbar .search-button {
+    margin-left: 10px;
+    color: black;
+    border-color: white;
+    background-color: white;
+    font-family: 'Poppins';
+    font-size: 20px;
+}
+
+.navbar .search-button:hover{
+    text-decoration: underline;
+}
+
+.navbar .search-button:click{
+    text-decoration: underline;
+    background-color: white;
+    border-color: white;
+}
+
+.underline-on-hover .nav-link:hover {
+    text-decoration: underline;
+  }
+
+.navbar .dropdownitem:hover{
+    text-decoration: underline !important;
+}
+
+
+
+
