@@ -1,0 +1,228 @@
+.payment {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .payment .div {
+    background-color: #ffffff;
+    height: 1401px;
+    overflow: hidden;
+    position: relative;
+    width: 1440px;
+  }
+  
+  .payment .text-wrapper {
+    color: #000000;
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-size: 30px;
+    font-weight: 600;
+    left: 75px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 901px;
+  }
+  
+  .payment .credit-card-number {
+    height: 88px;
+    left: 145px;
+    position: absolute;
+    top: 997px;
+    width: 404px;
+  }
+  
+  .payment .text-wrapper-2 {
+    color: #000000;
+    font-family: "Poppins-Medium", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    left: 3px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+  }
+  
+  .payment .overlap-group {
+    background-color: #d9d9d999;
+    border-radius: 5px;
+    height: 50px;
+    left: 0;
+    position: absolute;
+    top: 38px;
+    width: 400px;
+  }
+  
+  .payment .number {
+    background-color: transparent;
+    border: 0;
+    color: #000000;
+    font-family: "Poppins-Regular", Helvetica;
+    font-size: 18px;
+    font-weight: 400;
+    height: 26px;
+    left: 15px;
+    letter-spacing: 0;
+    line-height: 26px;
+    padding: 0;
+    position: relative;
+    top: 12px;
+    white-space: nowrap;
+    width: 73px;
+  }
+  
+  .payment .dateof-expiry {
+    height: 88px;
+    left: 633px;
+    position: absolute;
+    top: 991px;
+    width: 304px;
+  }
+  
+  .payment .text-wrapper-3 {
+    color: #000000;
+    font-family: "Poppins-Medium", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+  }
+  
+  .payment .overlap {
+    background-color: #d9d9d999;
+    border-radius: 5px;
+    height: 50px;
+    left: 0;
+    position: absolute;
+    top: 38px;
+    width: 300px;
+  }
+  
+  .payment .date {
+    background-color: transparent;
+    border: 0;
+    color: #000000;
+    font-family: "Poppins-Regular", Helvetica;
+    font-size: 18px;
+    font-weight: 400;
+    height: 26px;
+    left: 12px;
+    letter-spacing: 0;
+    line-height: 26px;
+    padding: 0;
+    position: relative;
+    top: 12px;
+    white-space: nowrap;
+    width: 43px;
+  }
+  
+  .payment .CVV {
+    height: 88px;
+    left: 1008px;
+    position: absolute;
+    top: 991px;
+    width: 204px;
+  }
+  
+  .payment .CVV-wrapper {
+    background-color: #d9d9d999;
+    border-radius: 5px;
+    height: 50px;
+    left: 0;
+    position: absolute;
+    top: 38px;
+    width: 200px;
+  }
+  
+  .payment .input {
+    background-color: transparent;
+    border: 0;
+    color: #000000;
+    font-family: "Poppins-Regular", Helvetica;
+    font-size: 18px;
+    font-weight: 400;
+    height: 26px;
+    left: 12px;
+    letter-spacing: 0;
+    line-height: 26px;
+    padding: 0;
+    position: relative;
+    top: 12px;
+    white-space: nowrap;
+    width: 39px;
+  }
+  
+  .payment .taylor-swift {
+    height: 320px;
+    left: 75px;
+    position: absolute;
+    top: 70px;
+    width: 602px;
+  }
+  
+  .payment .taylor-swift-title {
+    height: 168px;
+    left: 720px;
+    position: absolute;
+    top: 150px;
+    width: 727px;
+  }
+  
+  .payment .text-wrapper-4 {
+    color: #000000;
+    font-family: "Poppins-Bold", Helvetica;
+    font-size: 40px;
+    font-weight: 700;
+    height: 72px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: absolute;
+    top: 0;
+    width: 663px;
+  }
+  
+  .payment .p {
+    color: #000000;
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-size: 32px;
+    font-weight: 600;
+    left: 3px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 72px;
+    width: 718px;
+  }
+  
+  .payment .text-wrapper-5 {
+    color: #000000;
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-size: 32px;
+    font-weight: 600;
+    left: 3px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 120px;
+    width: 570px;
+  }
+  
+  .payment .text-wrapper-6 {
+    color: #000000;
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-size: 30px;
+    font-weight: 600;
+    left: 1106px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 1128px;
+  }
+  

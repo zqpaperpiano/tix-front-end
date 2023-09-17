@@ -1,0 +1,185 @@
+.events-all{
+  background-color: blue;
+  display: grid;
+  height: 100%;
+  grid-template-rows: 5% 40% 50% 5%;
+  row-gap: 10px;
+}
+
+.sub-nav-buttons{
+  grid-row-start: 1;
+  height: 100%;
+}
+
+.carousel {
+  grid-row-start: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.events-overview{
+  grid-row-start: 3;
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: 5% 45% 45% 5%;
+}
+
+.image{
+  grid-row-start:1 ;
+}
+
+.title{
+  grid-row-start: 2;
+}
+
+.taylor-swift {
+  grid-column-start: 2;
+
+  display: grid;
+  grid-template-rows: 75% 25%;
+}
+
+.UFC{
+  grid-column-start: 3;
+
+  display: grid;
+  grid-template-rows: 75% 25%;
+}
+
+
+img{
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+
+/* .events-all {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .events-all .div {
+    background-color: #ffffff;
+    height: 1024px;
+    position: relative;
+    width: 1440px;
+  }
+  
+  .events-all .allbutton {
+    color: #000000;
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    left: 80px;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: absolute;
+    text-align: center;
+    top: 80px;
+    white-space: nowrap;
+    background-color: transparent;
+    text-decoration: underline !important;
+  }
+
+  
+  .events-all .musicbutton {
+    color: #000000;
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    left: 190px;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: absolute;
+    text-align: center;
+    top: 80px;
+    white-space: nowrap;
+    background-color: transparent;
+    text-decoration: none !important;
+  }
+  
+  .events-all .sportbutton {
+    color: #000000;
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    left: 320px;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: absolute;
+    text-align: center;
+    top: 80px;
+    white-space: nowrap;
+    background-color: transparent;
+    text-decoration: none !important;
+  }
+  
+  .events-all .taylor-swift {
+    height: 370px;
+    left: 81px;
+    position: absolute;
+    top: 200px;
+    width: 604px;
+  }
+  
+  .events-all .text-wrapper {
+    color: #000000;
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    left: 74px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 325px;
+    width: 454px;
+  }
+  
+  .events-all .taylor-2 {
+    height: 320px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 602px;
+  }
+  
+  .events-all .UFC {
+    height: 358px;
+    left: 743px;
+    position: absolute;
+    top: 200px;
+    width: 603px;
+  }
+  
+  .events-all .text-wrapper-2 {
+    color: #000000;
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    left: 41px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 322px;
+    width: 520px;
+  }
+  
+  .events-all .UFC-2 {
+    height: 320px;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 601px;
+  }
+  
+   */
