@@ -4,22 +4,30 @@ import "./Login.css";
 
 
 class Login extends Component{
+  constructor(){
+    super();
+    this.state({
+      email: '',
+      password: '',
+      message: '',
+    })
+  }
 
-  {/* I used this logic for the login, can just see if u wan to use it */}
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
+  // {/* I used this logic for the login, can just see if u wan to use it */}
+  // const [formData, setFormData] = useState({
+  //   email: '',
+  //   password: '',
+  // });
 
-  const [message, setMessage] = useState('');
+  // const [message, setMessage] = useState('');
 
-  const { email, password } = formData;
+  // const { email, password } = formData;
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
 
-  const handleSubmit = async (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -30,18 +38,16 @@ class Login extends Component{
 
         // Store the token in local storage or a secure storage mechanism
         localStorage.setItem('jwtToken', token);
-
-        setMessage('Login successful');
+        this.setState({message: 'Login successful'});
+        // setMessage('Login successful');
       } else {
-        setMessage('Login failed');
+        // setMessage('Login failed');
+        this.setState({message: 'Login failed'});
       }
     } catch (error) {
       console.error('Login error:', error);
     }
   };
-
-
-
   
   onEmailChange = (event) => {
     this.setState({
@@ -61,9 +67,9 @@ class Login extends Component{
 
   onClickLogin(){
     if(this.state.loginEmail != ''){
-      this.props.loadUser(this.state.loginEmail);
-
-      this.props.onRouteChange('AllEvents');
+      // this.props.loadUser(this.state.loginEmail);
+      this.handleSubmit();
+      // this.props.onRouteChange('AllEvents');
     }
   }
 

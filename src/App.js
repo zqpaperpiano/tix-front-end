@@ -3,11 +3,11 @@ import { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarCompProfile from './Components/Navbar/NavbarCompProfile';
 import SignUp from './SignUp/SignUp';
-import Login from './Login/Login';
-import EventsAll from './Events/EventsAll';
+// import Login from './Login/Login';
+// import EventsAll from './Events/EventsAll';
 import NavbarComp from './Components/Navbar/NavbarComp';
-import EventsMusic from './Events/EventsMusic';
-import EventsSports from './Events/EventsSports';
+// import EventsMusic from './Events/EventsMusic';
+// import EventsSports from './Events/EventsSports';
 
 class App extends Component{
   constructor(){
@@ -42,20 +42,20 @@ class App extends Component{
     })
   }
 
-  pageNavigation(){
-    switch(this.state.route){
-          case 'Login':
-            return <Login onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
-          case 'SignUp':
-            return <SignUp onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
-          case 'AllEvents':
-            return <EventsAll onRouteChange={this.onRouteChange} />
-          case 'Music':
-            return <EventsMusic onRouteChange={this.onRouteChange} />  
-          case 'Sports':
-            return <EventsSports onRouteChange={this.onRouteChange} />
-        }
-  }
+  // pageNavigation(){
+  //   switch(this.state.route){
+  //         case 'Login':
+  //           return <Login onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
+  //         case 'SignUp':
+  //           return <SignUp onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
+  //         case 'AllEvents':
+  //           return <EventsAll onRouteChange={this.onRouteChange} />
+  //         case 'Music':
+  //           return <EventsMusic onRouteChange={this.onRouteChange} />  
+  //         case 'Sports':
+  //           return <EventsSports onRouteChange={this.onRouteChange} />
+  //       }
+  // }
 
   render(){
     return (
