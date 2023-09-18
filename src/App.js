@@ -3,7 +3,7 @@ import { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarCompProfile from './Components/Navbar/NavbarCompProfile';
 import SignUp from './SignUp/SignUp';
-// import Login from './Login/Login';
+import Login from './Login/Login';
 // import EventsAll from './Events/EventsAll';
 import NavbarComp from './Components/Navbar/NavbarComp';
 // import EventsMusic from './Events/EventsMusic';
@@ -61,7 +61,7 @@ class App extends Component{
     return (
       <div className="App">
         <NavbarComp onRouteChange={this.onRouteChange} />
-        <SignUp onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
+        <Login onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
         {/* <header>
           {this.onUserLogin()}
         </header>
