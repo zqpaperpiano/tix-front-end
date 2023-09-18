@@ -1,230 +1,129 @@
-.sign-up {
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+.sign-up{
+  background-color: white;
+  height: 100%;
   width: 100%;
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  grid-template-rows: 10% 80% 5% 5%;
 }
 
-.sign-up .div {
-  background-color: #ffffff;
-  height: 1024px;
-  position: relative;
-  width: 1440px;
+.welcome-sign-up{
+  grid-column-start: 2;
+  padding-bottom: 50px;
 }
 
-.sign-up .text-wrapper-2 {
+.format{
+  grid-column-start:2;
+  grid-row-start: 2;
+
+  display: grid;
+  grid-template-columns: 50% 50%;
+  column-gap: 50px;
+}
+
+.left-sign-ups{
+  grid-column-start: 1;
+  display: grid;
+  grid-template-rows: 25% 25% 25% 25%;
+  row-gap: 10px;
+}
+
+.right-sign-ups{
+  grid-column-start: 2;
+  display: grid;
+  grid-template-rows: 25% 25% 25% 25%;
+  row-gap: 10px;
+}
+
+.left-sign-ups > .full-name{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.left-sign-ups > .email-address{
+  grid-row-start: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.left-sign-ups > .password{
+  grid-row-start: 3;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.right-sign-ups > .contact{
+  grid-row-start: 2;
+}
+
+.right-sign-ups > .confirm-password{
+  grid-row-start: 3;
+}
+
+.login-here{
+  display: flex;
+  grid-row-start: 3;
+  grid-column-start: 2;
+}
+
+.text-wrapper-2 {
   color: #000000;
   font-family: "Poppins-SemiBold", Helvetica;
   font-size: 30px;
   font-weight: 600;
-  left: 297px;
   letter-spacing: 0;
   line-height: normal;
-  position: absolute;
-  top: 100px;
 }
 
-.sign-up .full-name {
-  height: 88px;
-  left: 294px;
-  position: absolute;
-  top: 200px;
-  width: 404px;
-}
-
-.sign-up .text-wrapper-3 {
+.text-wrapper-3 {
   color: #000000;
   font-family: "Poppins-Medium", Helvetica;
   font-size: 20px;
   font-weight: 500;
-  left: 3px;
   letter-spacing: 0;
   line-height: normal;
-  position: absolute;
-  top: 0;
+  padding-bottom: 10px;;
 }
 
-.sign-up .input-wrapper {
+.input-wrapper {
   background-color: #d9d9d999;
   border-radius: 5px;
   height: 50px;
-  left: 0;
-  position: absolute;
-  top: 38px;
-  width: 400px;
+  width: 100%;
 }
 
-.sign-up .name-input {
+.data-input {
   background-color: transparent;
   border: none;
   color: #000000;
   font-family: "Poppins-Regular", Helvetica;
   font-size: 18px;
   font-weight: 400;
-  height: 40px;
-  left: 8px;
   letter-spacing: 0;
   line-height: 26px;
-  padding: none;
-  position: absolute;
-  top: 5px;
+  padding-left: 15px;
   white-space: nowrap;
-  width: 96%;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
   justify-content: center;
 }
 
-.sign-up .email-address {
-  height: 88px;
-  left: 294px;
-  position: absolute;
-  top: 320px;
-  width: 404px;
-}
+.sign-up .sign-up-btm{
+  grid-row-start: 4;
 
-.sign-up .text-wrapper-4 {
-  color: #000000;
-  font-family: "Poppins-Medium", Helvetica;
-  font-size: 20px;
-  font-weight: 500;
-  left: 0;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 0;
-}
-
-.sign-up .email-input {
-  background-color: transparent;
-  border: none;
-  color: #000000;
-  font-family: "Poppins-Regular", Helvetica;
-  font-size: 18px;
-  font-weight: 400;
-  height: 40px;
-  left: 8px;
-  letter-spacing: 0;
-  line-height: 26px;
-  padding: none;
-  position: absolute;
-  top: 5px;
-  white-space: nowrap;
-  width: 96%;
-  justify-content: center;
-}
-
-.sign-up .password {
-  height: 88px;
-  left: 297px;
-  position: absolute;
-  top: 440px;
-  width: 404px;
-}
-
-.sign-up .password-input{
-  background-color: transparent;
-  border: none;
-  color: #000000;
-  font-family: "Poppins-Regular", Helvetica;
-  font-size: 18px;
-  font-weight: 400;
-  height: 40px;
-  left: 8px;
-  letter-spacing: 0;
-  line-height: 26px;
-  padding: none;
-  position: absolute;
-  top: 5px;
-  white-space: nowrap;
-  width: 96%;
-  justify-content: center;
-} 
-
-.sign-up .confirm-password-input{
-  background-color: transparent;
-  border: none;
-  color: #000000;
-  font-family: "Poppins-Regular", Helvetica;
-  font-size: 18px;
-  font-weight: 400;
-  height: 40px;
-  left: 8px;
-  letter-spacing: 0;
-  line-height: 26px;
-  padding: none;
-  position: absolute;
-  top: 5px;
-  white-space: nowrap;
-  width: 96%;
-  justify-content: center; 
-}
-
-.sign-up .confirm-password {
-  height: 88px;
-  left: 767px;
-  position: absolute;
-  top: 440px;
-  width: 404px;
-}
-
-.sign-up .contact {
-  height: 88px;
-  left: 767px;
-  position: absolute;
-  top: 320px;
-  width: 404px;
-}
-
-.sign-up .contact-input {
-  background-color: transparent;
-  border: none;
-  color: #000000;
-  font-family: "Poppins-Regular", Helvetica;
-  font-size: 18px;
-  font-weight: 400;
-  height: 26px;
-  left: 16px;
-  letter-spacing: 0;
-  line-height: 26px;
-  padding: none;
-  position: absolute;
-  top: 12px;
-  white-space: nowrap;
-  width: 90%;
-  justify-content: center;
-}
-
-.sign-up .text-wrapper-5 {
-  color: #000000;
   font-family: "Poppins-SemiBold", Helvetica;
   font-size: 20px;
   font-weight: 600;
-  left: 294px;
+
   letter-spacing: 0;
   line-height: 24px;
   position: absolute;
   text-align: center;
-  top: 620px;
-  white-space: nowrap;
-}
 
-.sign-up .login-btm {
-  cursor: pointer;
-  left: 562px !important;
-  position: absolute !important;
-  top: 620px !important;
-}
-
-.sign-up .sign-up-btm {
-  font-family: "Poppins-SemiBold", Helvetica;
-  font-size: 20px;
-  font-weight: 600;
-  left: 520px;
-  letter-spacing: 0;
-  line-height: 24px;
-  position: absolute;
-  text-align: center;
-  top: 560px;
   white-space: nowrap;
 
   background-color: black;
@@ -232,8 +131,20 @@
   padding: 10px;
   width: 6em;
   border-radius: 15px;
+}
 
-  left: 297px !important;
-  position: absolute !important;
-  top: 550px !important;
+.sign-up .text-wrapper-5 {
+  color: #000000;
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 24px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.login-btm{
+  padding-left: 15px;
+  cursor: pointer;
 }
