@@ -39,7 +39,6 @@ class Login extends Component{
 
       if (response.status === 200) {
         const token = response.data;
-
         // Store the token in local storage or a secure storage mechanism
         localStorage.setItem('jwtToken', token);
         this.setState({message: 'Login successful'});

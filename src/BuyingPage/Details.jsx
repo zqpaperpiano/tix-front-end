@@ -1,7 +1,8 @@
 import React from "react";
 import "./Details.css";
+import TaylorSwift from '../assets/TaylorSwift.jpeg';
 
-export const Details = () => {
+export const Details = ({onRouteChange}) => {
 
   
 
@@ -9,7 +10,7 @@ export const Details = () => {
     <div className="details">
       <div className="div">
 
-        <img className="taylor-swift" alt="Taylor swift" src="taylor-swift.png" />
+        <img className="taylor-swift" alt="Taylor swift" src={TaylorSwift} />
         <div className="taylor-swift-title">
           <div className="text-wrapper">Taylor Swift Era Tour</div>
           <p className="p">2 March 2024 (Sat) ~ 9 March 2024 (Sat)</p>
@@ -45,7 +46,9 @@ export const Details = () => {
         </div>
         
         <div className="text-wrapper-6">Personal Details</div>
-        <div className="text-wrapper-7">Button</div>  {/* Button */}
+        <div className="text-wrapper-7">
+          <button onClick={() => {onRouteChange('Seating')}}>Next</button>  
+        </div>  {/* Button */}
       </div>
     </div>
   );
