@@ -64,6 +64,8 @@ class App extends Component{
             return <Seating onRouteChange={this.onRouteChange} />
           case 'Payment':
             return <Payment onRouteChange={this.onRouteChange} />
+            case 'TSInfo':
+              return <TaylorSwiftInfo onRouteChange={this.onRouteChange} />
         }
   }
 
@@ -71,13 +73,13 @@ class App extends Component{
     return (
       <div className="main-page">
         <div className='navbar-top'>
-          {/* {this.onUserLogin()} */}
-          <NavbarComp onRouteChange={this.onRouteChange} />
+          {this.onUserLogin()}
+          {/* <NavbarComp onRouteChange={this.onRouteChange} /> */}
         </div>
 
         <div className="other-pages">
-          {/* {this.pageNavigation()} */}
-          <Login onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
+          {this.pageNavigation()}
+          {/* <EventsMusic onRouteChange={this.onRouteChange} /> */}
         </div>
       </div>
     );

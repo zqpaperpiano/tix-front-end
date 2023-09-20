@@ -1,6 +1,6 @@
 import React from "react";
 import "./Payment.css";
-
+import TaylorSwitft from '../assets/TaylorSwift.jpeg';
 
 export const Payment = () => {
   
@@ -33,7 +33,7 @@ export const Payment = () => {
           </div>
         </div>
 
-        <img className="taylor-swift" alt="Taylor swift" src="taylor-swift.png" />
+        <img className="taylor-swift" alt="Taylor swift" src={TaylorSwitft} />
         <div className="taylor-swift-title">
           <div className="text-wrapper-4">Taylor Swift Era Tour</div>
           <p className="p">2 March 2024 (Sat) ~ 9 March 2024 (Sat)</p>

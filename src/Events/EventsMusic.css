@@ -1,4 +1,19 @@
-/* .events-all {
+
+
+/* .events-music{
+  height: 100%;
+}
+
+.ts-music{
+
+}
+
+img{
+  height: 100%;
+  width: 100%;
+} */
+
+/* .events-music {
     background-color: #ffffff;
     display: flex;
     flex-direction: row;
@@ -6,14 +21,14 @@
     width: 100%;
   }
   
-  .events-all .div {
+  .events-music .div {
     background-color: #ffffff;
     height: 1024px;
     position: relative;
     width: 1440px;
   }
   
-  .events-all .allbutton {
+  .events-music .allbutton {
     color: #000000;
     font-family: "Poppins-SemiBold", Helvetica;
     font-size: 24px;
@@ -30,7 +45,7 @@
   }
 
   
-  .events-all .musicbutton {
+  .events-music .musicbutton {
     color: #000000;
     font-family: "Poppins-SemiBold", Helvetica;
     font-size: 24px;
@@ -46,7 +61,7 @@
     text-decoration: none !important;
   }
   
-  .events-all .sportbutton {
+  .events-music .sportbutton {
     color: #000000;
     font-family: "Poppins-SemiBold", Helvetica;
     font-size: 24px;
@@ -62,7 +77,7 @@
     text-decoration: none !important;
   }
   
-  .events-all .taylor-swift {
+  .events-music .taylor-swift {
     height: 370px;
     left: 81px;
     position: absolute;
@@ -70,7 +85,7 @@
     width: 604px;
   }
   
-  .events-all .text-wrapper {
+  .events-music .text-wrapper {
     color: #000000;
     font-family: "Poppins-SemiBold", Helvetica;
     font-size: 24px;
@@ -84,7 +99,7 @@
     width: 454px;
   }
   
-  .events-all .taylor-2 {
+  .events-music .taylor-2 {
     height: 320px;
     left: 0;
     position: absolute;

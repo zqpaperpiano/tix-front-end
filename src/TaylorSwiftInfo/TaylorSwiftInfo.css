@@ -1,9 +1,13 @@
-/* .taylor-swift-info {
+.taylor-swift-info {
     background-color: #ffffff;
     display: flex;
     flex-direction: row;
     justify-content: center;
     width: 100%;
+  }
+
+  .buy-btm{
+    cursor: pointer;
   }
   
   .taylor-swift-info .div {
@@ -283,4 +287,4 @@
     top: 1035px;
     width: 1187px;
   }
-   */
+  
