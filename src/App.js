@@ -11,6 +11,7 @@ import EventsSports from './Events/EventsSports';
 import Details from './BuyingPage/Details';
 import Seating from './BuyingPage/Seating';
 import Payment from './BuyingPage/Payment';
+import TaylorSwiftInfo from './TaylorSwiftInfo/TaylorSwiftInfo';
 
 class App extends Component{
   constructor(){
@@ -71,12 +72,12 @@ class App extends Component{
       <div className="main-page">
         <div className='navbar-top'>
           {/* {this.onUserLogin()} */}
-          {/* <NavbarComp onRouteChange={this.onRouteChange} /> */}
+          <NavbarComp onRouteChange={this.onRouteChange} />
         </div>
 
         <div className="other-pages">
           {/* {this.pageNavigation()} */}
-          {/* <SignUp onRouteChange={this.onRouteChange} loadUser={this.loadUser}/> */}
+          <Login onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
         </div>
       </div>
     );

@@ -1,13 +1,11 @@
 body > #root > div {
-  height: 100%;
+  height: 100vh;
 }
 
-main-page{
+.main-page{
   display: grid;
   grid-template-rows: 15% 85%;
 }
-
-/* .
 
 .navbar-top{
   height: 100%;
@@ -15,6 +13,6 @@ main-page{
 
 .other-pages{
   grid-row-start: 2;
-} */
+} 
 
 
