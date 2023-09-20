@@ -16,38 +16,7 @@ export const EventsAll = ({onRouteChange}) => {
           <Button onClick={() => onRouteChange('Sports')} variant="light" className="sportbutton" href="#EventsSports">Sports</Button>
         </div>
 
-      <div className="carousel">
-        <CarouselProvider
-          naturalSlideWidth={100}
-          naturalSlideHeight={125}
-          totalSlides={2}>
-          <Slider index={0}>I am first</Slider>
-          <Slider index={1}>I am first</Slider>
-          <ButtonBack>Back</ButtonBack>
-          <ButtonNext>Next</ButtonNext>
-        </CarouselProvider>
-      </div>
         
-      <div className="events-overview">
-        <div className="taylor-swift">
-        <div className="image">
-              <img onClick={() => {onRouteChange('Details')}} className="taylor-2" alt="Taylor swift" src={TaylorSwift} />
-            </div>
-          <div className="title">
-            <p className="text-wrapper-2">TAYLOR SWIFT | THE ERAS TOUR</p>
-          </div>
-            
-          </div>
-
-      <div className="UFC">
-            <div className="title">
-              <p className="text-wrapper-2">UFC | HOLLOWAY vs THE KOREAN ZOMBIE</p>
-            </div>
-            <div className="image">
-              <img className="UFC-2" alt="Ufc" src={UFC} />
-            </div>
-          </div>
-      </div>
 
     </div>
   );

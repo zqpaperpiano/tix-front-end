@@ -68,16 +68,16 @@ class App extends Component{
 
   render(){
     return (
-      <div className="App">
-        {/* <NavbarComp onRouteChange={this.onRouteChange} />
-        <EventsAll onRouteChange={this.onRouteChange} /> */}
-        <header>
-          {this.onUserLogin()}
-        </header>
-        
-        <main>
-          {this.pageNavigation()}
-        </main>
+      <div className="main-page">
+        <div className='navbar-top'>
+          {/* {this.onUserLogin()} */}
+          {/* <NavbarComp onRouteChange={this.onRouteChange} /> */}
+        </div>
+
+        <div className="other-pages">
+          {/* {this.pageNavigation()} */}
+          {/* <SignUp onRouteChange={this.onRouteChange} loadUser={this.loadUser}/> */}
+        </div>
       </div>
     );
   }

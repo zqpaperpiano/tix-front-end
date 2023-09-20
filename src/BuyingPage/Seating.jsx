@@ -47,7 +47,7 @@ class Seating extends Component{
   }
 
   render(){
-    console.log('date: ', this.state.date, 'cat: ', this.state.category);
+    // console.log('date: ', this.state.date, 'cat: ', this.state.category);
     return (
       <div className="details">
         <div className="div">

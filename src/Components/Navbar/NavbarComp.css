@@ -1,8 +1,16 @@
+.navbar{
+    height: 15%;
+}
+
 .navbar .navbar-brand {
     color: white;
     font-size: 40px;
     font-weight: bold;
     font-family: 'Poppins';
+}
+
+.navbar .navbar-items{
+    padding-left: 20px;
 }
 
 .navbar .nav-link{
@@ -24,7 +32,6 @@
     border-color: white;
     background-color: white;
     font-family: 'Poppins';
-    font-size: 20px;
 }
 
 .navbar .search-button:hover{
@@ -44,7 +51,3 @@
 .navbar .dropdownitem:hover{
     text-decoration: underline !important;
 }
-
-
-
-

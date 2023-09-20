@@ -9,6 +9,8 @@
 .sub-nav-buttons{
   grid-row-start: 1;
   height: 100%;
+  position: sticky;
+  top: 0;
 }
 
 .carousel {
