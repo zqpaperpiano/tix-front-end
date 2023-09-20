@@ -1,6 +1,7 @@
 import React from "react";
 import "./Payment.css";
 
+
 export const Payment = () => {
   
 
@@ -39,7 +40,9 @@ export const Payment = () => {
           <div className="text-wrapper-5">Singapore National Stadium</div>
         </div>
 
-        <div className="text-wrapper-6">Button</div> {/* Finish Button */}
+        <div className="text-wrapper-6">
+          <button>Complete Payment</button>
+        </div> {/* Finish Button */}
       </div>
     </div>
   );

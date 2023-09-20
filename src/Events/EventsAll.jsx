@@ -31,7 +31,7 @@ export const EventsAll = ({onRouteChange}) => {
       <div className="events-overview">
         <div className="taylor-swift">
         <div className="image">
-              {/* <img className="taylor-2" alt="Taylor swift" src={TaylorSwift} /> */}
+              <img onClick={() => {onRouteChange('Details')}} className="taylor-2" alt="Taylor swift" src={TaylorSwift} />
             </div>
           <div className="title">
             <p className="text-wrapper-2">TAYLOR SWIFT | THE ERAS TOUR</p>
