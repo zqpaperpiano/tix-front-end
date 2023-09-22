@@ -11,6 +11,7 @@ import EventsSports from './Events/EventsSports';
 import Details from './BuyingPage/Details';
 import Seating from './BuyingPage/Seating';
 import Payment from './BuyingPage/Payment';
+import TaylorSwiftInfo from './TaylorSwiftInfo/TaylorSwiftInfo';
 
 class App extends Component{
   constructor(){
@@ -63,21 +64,23 @@ class App extends Component{
             return <Seating onRouteChange={this.onRouteChange} />
           case 'Payment':
             return <Payment onRouteChange={this.onRouteChange} />
+            case 'TSInfo':
+              return <TaylorSwiftInfo onRouteChange={this.onRouteChange} />
         }
   }
 
   render(){
     return (
-      <div className="App">
-        {/* <NavbarComp onRouteChange={this.onRouteChange} />
-        <EventsAll onRouteChange={this.onRouteChange} /> */}
-        <header>
+      <div className="main-page">
+        <div className='navbar-top'>
           {this.onUserLogin()}
-        </header>
-        
-        <main>
+          {/* <NavbarComp onRouteChange={this.onRouteChange} /> */}
+        </div>
+
+        <div className="other-pages">
           {this.pageNavigation()}
-        </main>
+          {/* <EventsMusic onRouteChange={this.onRouteChange} /> */}
+        </div>
       </div>
     );
   }

@@ -1,19 +1,24 @@
 import React from "react";
 import "./TaylorSwiftInfo.css";
+import SeatMapPicture from '../assets/SeatMapPicture.png';
+import PricingTable from '../assets/PricingTable.jpg';
+import TaylorSwift from '../assets/TaylorSwift.jpeg'
 
-export const TaylorSwiftInfo = () => {
+export const TaylorSwiftInfo = ({onRouteChange}) => {
   return (
     <div className="taylor-swift-info">
       <div className="div">
 
-        <img className="taylor-swift" alt="Taylor swift" src="TaylorSwift.jpeg" />
+        <img className="taylor-swift" alt="Taylor swift" src={TaylorSwift} />
 
         <div className="title">
           <div className="overlap-group">
             <div className="overlap">
               <div className="text-wrapper">Taylor Swift Era Tour</div>
               <p className="p">2 March 2024 (Sat) ~ 9 March 2024 (Sat)</p>
-              <div className="text-wrapper-2">Buy Ticket</div>
+              <div className="text-wrapper-2">
+                <p onClick={() => {onRouteChange('Details')}} className="buy-btm">Buy Now</p>
+              </div>
             </div>
             <div className="text-wrapper-3">Singapore National Stadium</div>
           </div>
@@ -79,8 +84,8 @@ export const TaylorSwiftInfo = () => {
 
         <div className="seat-map">
           <p className="seat-map-ticket">Seat Map &amp; Ticket Pricing</p>
-          <img className="seating-picture" alt="Seating picture" src="SeatMapPicture.jpeg" />
-          <img className="category-table" alt="Category table" src="PricingTable.jpeg" />
+          <img className="seating-picture" alt="Seating picture" src={SeatMapPicture} />
+          <img className="category-table" alt="Category table" src={PricingTable} />
         </div>
       </div>
     </div>

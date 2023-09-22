@@ -5,6 +5,10 @@
     justify-content: center;
     width: 100%;
   }
+
+  .buy-btm{
+    cursor: pointer;
+  }
   
   .taylor-swift-info .div {
     background-color: #ffffff;

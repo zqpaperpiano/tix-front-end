@@ -3,6 +3,7 @@
   height: 100%;
   width: 100%;
   display: grid;
+  padding-top: 30px;
   grid-template-columns: 20% 60% 20%;
   grid-template-rows: 10% 80% 5% 5%;
 }
@@ -133,7 +134,7 @@
   border-radius: 15px;
 }
 
-.sign-up .text-wrapper-5 {
+.text-wrapper-5 {
   color: #000000;
   font-family: "Poppins-SemiBold", Helvetica;
   font-size: 20px;

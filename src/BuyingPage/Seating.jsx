@@ -3,7 +3,7 @@ import { Component } from "react";
 import "./Seating.css";
 import SeatMapPicture from '../assets/SeatMapPicture.png';
 import PricingTable from '../assets/PricingTable.jpg';
-import TaylorSwitft from '../assets/TaylorSwift.jpeg'
+import TaylorSwitft from '../assets/TaylorSwift.jpeg';
 import { Form } from "react-bootstrap";
 
 
@@ -47,7 +47,7 @@ class Seating extends Component{
   }
 
   render(){
-    console.log('date: ', this.state.date, 'cat: ', this.state.category);
+    // console.log('date: ', this.state.date, 'cat: ', this.state.category);
     return (
       <div className="details">
         <div className="div">

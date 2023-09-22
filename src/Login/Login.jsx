@@ -118,10 +118,10 @@ class Login extends Component{
         </div>
 
         <div className="to-sign-up">
-            <div className="text-wrapper-3">Don’t have an account?</div>
+            <div className="text-wrapper-5">Don’t have an account?</div>
             <p 
             onClick={() => {this.onClickSignup()}}
-            className="text-wrapper-3 sign-up-btm">Sign Up</p>
+            className="text-wrapper-5 sign-up-btm">Sign Up</p>
         </div>
 
       </div>
