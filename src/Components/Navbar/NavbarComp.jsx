@@ -8,7 +8,9 @@ export const NavbarComp = ({onRouteChange}) => {
   return (
     <Navbar bg="black fixed-top" variant="dark" className='navbar'>
       <Container>
-        <Navbar.Brand href="#home" className='Company'>TIX</Navbar.Brand>
+        <Navbar.Brand
+        onClick={() => {onRouteChange('Home')}}
+        href="#home" className='Company'>TIX</Navbar.Brand>
   
         <Form className="d-flex">
           <Form.Control type="search" placeholder="Search" className="me-2" aria-label="Search"/>
@@ -17,7 +19,7 @@ export const NavbarComp = ({onRouteChange}) => {
 
         
         <Nav className="ms-auto underline-on-hover">
-          <Nav.Link onClick={() => {onRouteChange('AllEvents')}} href="#home">Home</Nav.Link>
+          <Nav.Link onClick={() => {onRouteChange('Home')}} href="#home">Home</Nav.Link>
 
           <NavDropdown title="Events" id="basic-nav-dropdown">
             <NavDropdown.Item 

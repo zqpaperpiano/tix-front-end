@@ -12,6 +12,7 @@ import Details from './BuyingPage/Details';
 import Seating from './BuyingPage/Seating';
 import Payment from './BuyingPage/Payment';
 import TaylorSwiftInfo from './TaylorSwiftInfo/TaylorSwiftInfo';
+import HomePage from './Home/Home';
 
 class App extends Component{
   constructor(){
@@ -64,8 +65,10 @@ class App extends Component{
             return <Seating onRouteChange={this.onRouteChange} />
           case 'Payment':
             return <Payment onRouteChange={this.onRouteChange} />
-            case 'TSInfo':
-              return <TaylorSwiftInfo onRouteChange={this.onRouteChange} />
+          case 'TSInfo':
+            return <TaylorSwiftInfo onRouteChange={this.onRouteChange} />
+          case 'Home':
+            return <HomePage onRouteChange={this.onRouteChange} />
         }
   }
 
@@ -78,8 +81,9 @@ class App extends Component{
         </div>
 
         <div className="other-pages">
-          {/* {this.pageNavigation()} */}
-          <TaylorSwiftInfo onRouteChange={this.onRouteChange} />
+          {this.pageNavigation()}
+          {/* <HomePage onRouteChange={this.onRouteChange} /> */}
+          {/* <TaylorSwiftInfo onRouteChange={this.onRouteChange} /> */}
         </div>
       </div>
     );
