@@ -7,21 +7,34 @@ import TaylorSwift from '../assets/TaylorSwift.jpeg'
 export const TaylorSwiftInfo = ({onRouteChange}) => {
   return (
     <div className="taylor-swift-info">
-      <div className="div">
 
-        <img className="taylor-swift" alt="Taylor swift" src={TaylorSwift} />
+      <div className="event-banner">
+        <img className="taylor-swift-banner" alt="Taylor swift" src={TaylorSwift} />
+      </div>
 
-        <div className="title">
-          <div className="overlap-group">
+        <div className="event-detail-title">
+          <div className="event-summary">
+            <p className="text-wrapper">Taylor Swift Era Tour</p>
+            <p className="text-wrapper-2">2 March 2024 (Sat) ~ 9 March 2024 (Sat)</p>
+            <p className="text-wrapper-2">Singapore National Stadium</p>
+          </div>
+
+          <div className="purchase-now-button">
+          <p 
+          onClick={() => {onRouteChange('Seating')}} 
+          className="buy-btm text-wrapper-3">
+            Buy Now</p>
+        </div>
+          {/* <div className="overlap-group">
             <div className="overlap">
               <div className="text-wrapper">Taylor Swift Era Tour</div>
               <p className="p">2 March 2024 (Sat) ~ 9 March 2024 (Sat)</p>
               <div className="text-wrapper-2">
-                <p onClick={() => {onRouteChange('Details')}} className="buy-btm">Buy Now</p>
+                <p onClick={() => {onRouteChange('Seating')}} className="buy-btm">Buy Now</p>
               </div>
             </div>
             <div className="text-wrapper-3">Singapore National Stadium</div>
-          </div>
+          </div> */}
         </div>
 
         <div className="event-details">
@@ -58,6 +71,12 @@ export const TaylorSwiftInfo = ({onRouteChange}) => {
           </div>
         </div>
 
+        <div className="seat-map">
+          <p className="seat-map-ticket">Seat Map &amp; Ticket Pricing</p>
+          <img className="seating-picture" alt="Seating picture" src={SeatMapPicture} />
+          <img className="category-table" alt="Category table" src={PricingTable} />
+        </div>
+
         <div className="admission-policy">
           <div className="overlap-3">
             <div className="text-wrapper-11">Admission Policy</div>
@@ -82,12 +101,7 @@ export const TaylorSwiftInfo = ({onRouteChange}) => {
           </div>
         </div>
 
-        <div className="seat-map">
-          <p className="seat-map-ticket">Seat Map &amp; Ticket Pricing</p>
-          <img className="seating-picture" alt="Seating picture" src={SeatMapPicture} />
-          <img className="category-table" alt="Category table" src={PricingTable} />
-        </div>
-      </div>
+      
     </div>
   );
 };

@@ -78,8 +78,8 @@ class App extends Component{
         </div>
 
         <div className="other-pages">
-          {this.pageNavigation()}
-          {/* <EventsMusic onRouteChange={this.onRouteChange} /> */}
+          {/* {this.pageNavigation()} */}
+          <TaylorSwiftInfo onRouteChange={this.onRouteChange} />
         </div>
       </div>
     );
