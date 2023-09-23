@@ -22,10 +22,15 @@ class Login extends Component{
   //   });
 
   handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     try {
+
       const response = await axios.post('http://localhost:8081/api/v1/auth/login', {
+
+      console.log('entered handle submit');
+      const response = await axios.post('/api/customer/login', {
+
         email: this.state.email,
         password: this.state.password,
       });
@@ -62,6 +67,11 @@ class Login extends Component{
 
   onClickLogin(){
     if(this.state.loginEmail != ''){
+
+
+      console.log('entered onClickLogin');
+      // this.props.loadUser(this.state.loginEmail);
+
       this.handleSubmit();
     }
   }

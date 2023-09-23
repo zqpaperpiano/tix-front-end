@@ -23,6 +23,8 @@ class SignUp extends Component{
     e.preventDefault();
 
     try {
+      console.log('handle submit');
+
       const response = await axios.post('http://localhost:8081/api/v1/auth/signup', {
         fullName: this.state.fullName,
         email: this.state.email,
@@ -95,6 +97,18 @@ class SignUp extends Component{
       try {
         alert("Nice")
         this.handleSubmit();
+
+    e.preventDefault();
+    if(true){
+    // if(this.state.samePassword === true && this.state.isNumber === true){
+      try {
+        console.log('clicked');
+        // Call any additional logic you need after successful registration here
+        // For example, you can redirect the user to another page.
+        // this.props.loadUser(this.state.registerEmail);
+        // this.props.onRouteChange('AllEvents');
+        this.handleSubmit(e);
+
         
       } catch (err) {
         console.error(err);
@@ -151,7 +165,7 @@ class SignUp extends Component{
             <div className="submit-button">
             <input
           type="submit"
-          onClick={() => {this.onClickSubmit()}}
+          onClick={(e) => {this.onClickSubmit(e)}}
           className="sign-up-btm" value="Sign Up"/>
           </div>
 
