@@ -149,3 +149,13 @@
   padding-left: 15px;
   cursor: pointer;
 }
+
+.error {
+  color: red;
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 20px;
+  text-align: center;
+  
+}
+
+/* Need do the error message css */

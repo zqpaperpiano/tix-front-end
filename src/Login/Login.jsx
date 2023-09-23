@@ -10,46 +10,42 @@ class Login extends Component{
     this.state = ({
       email: '',
       password: '',
-      message: '',
+      errorMessage: '',
     })
   }
 
-  // {/* I used this logic for the login, can just see if u wan to use it */}
-  // const [formData, setFormData] = useState({
-  //   email: '',
-  //   password: '',
-  // });
-
-  // const [message, setMessage] = useState('');
-
-  // const { email, password } = formData;
-
-  // const handleChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
+  // const register = (username, email, password) => {
+  //   return axios.post(API_URL + "signup", {
+  //     username,
+  //     email,
+  //     password,
+  //   });
 
   handleSubmit = async (e) => {
     // e.preventDefault();
 
     try {
+
+      const response = await axios.post('http://localhost:8081/api/v1/auth/login', {
+
       console.log('entered handle submit');
       const response = await axios.post('/api/customer/login', {
+
         email: this.state.email,
         password: this.state.password,
       });
 
-      if (response.status === 200) {
-        const token = response.data;
-        // Store the token in local storage or a secure storage mechanism
-        localStorage.setItem('jwtToken', token);
-        this.setState({message: 'Login successful'});
-        // setMessage('Login successful');
-      } else {
-        // setMessage('Login failed');
-        this.setState({message: 'Login failed'});
-      }
-    } catch (error) {
-      console.error('Login error:', error);
+        alert("Login Successful! Redirecting to the Home Page ");
+        setTimeout(() => {
+          this.props.onRouteChange('Home'); 
+        }, 2000);
+
+      } catch (error) {
+        if (error.response && error.response.data && error.response.data.message) {
+          this.setState({errorMessage: error.response.data.message});
+        } else {
+          this.setState({errorMessage: 'There was a error with the Login.'});
+        }
     }
   };
   
@@ -71,10 +67,12 @@ class Login extends Component{
 
   onClickLogin(){
     if(this.state.loginEmail != ''){
+
+
       console.log('entered onClickLogin');
       // this.props.loadUser(this.state.loginEmail);
+
       this.handleSubmit();
-      // this.props.onRouteChange('AllEvents');
     }
   }
 
@@ -126,6 +124,8 @@ class Login extends Component{
             className="text-wrapper-5 sign-up-btm">Sign Up</p>
         </div>
 
+        {this.state.errorMessage && <div className="error">{this.state.errorMessage}</div>}
+        
       </div>
     );
   }

@@ -1,0 +1,34 @@
+import React from "react";
+import AuthService from "../services/auth.service";
+
+const Profile = () => {
+  const currentUser = AuthService.getCurrentUser();
+
+  return (
+    <div className="container">
+      <header className="jumbotron">
+        {/* <h3>
+          <strong>{currentUser.email}</strong> Profile
+        </h3> */}
+      </header>
+      {/* <p>
+        <strong>Id:</strong> {currentUser.id}
+      </p> */}
+      <p>
+        <strong>Fullname:</strong> {currentUser.fullname}
+      </p>
+      <p>
+        <strong>Email:</strong> {currentUser.email}
+      </p>
+      <p>
+        <strong>Mobile:</strong> {currentUser.mobile}
+      </p>
+      <ul>
+        {currentUser.roles &&
+          currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
+      </ul>
+    </div>
+  );
+};
+
+export default Profile;
