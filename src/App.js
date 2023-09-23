@@ -81,9 +81,9 @@ class App extends Component{
         </div>
 
         <div className="other-pages">
-          {this.pageNavigation()}
-          {/* <HomePage onRouteChange={this.onRouteChange} /> */}
-          {/* <TaylorSwiftInfo onRouteChange={this.onRouteChange} /> */}
+          {/* {this.pageNavigation()} */}
+          <Payment onRouteChange={this.onRouteChange} />
+          {/* <SignUp onRouteChange={this.onRouteChange} loadUser={this.loadUser}/> */}
         </div>
       </div>
     );
