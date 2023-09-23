@@ -79,3 +79,13 @@
   padding-left: 1%;
 }
 
+.error {
+  color: red;
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 20px;
+  text-align: center;
+  
+}
+
+
+/* Need do the error message css */
