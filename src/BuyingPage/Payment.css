@@ -1,19 +1,97 @@
 .payment {
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-  }
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.confirmation-title{
+  margin-top: 1%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.confirmation-title img{
+  grid-column-start: 1;
+  width: 100%;
+}
+
+.taylor-swift-title{
+  grid-column-start: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirmation-details{
+  border: 2px solid black;
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-top: 3%;
+  padding-left: 3%;
+  padding-top: 1%;
+
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.card-details-payment{
+  margin-top: 2%;
+}
+
+.payment .text-wrapper-2 {
+  color: #000000;
+  font-family: "Poppins-Medium", Helvetica;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.card-details{
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  column-gap: 3%;
+  margin-left: 3%;
+}
+
+.card-input-wrapper{
+  background-color: #d9d9d999;
+  border-radius: 5px;
+  height: 50px;
+  width: 100%;
+}
+
+input{
+  background-color: transparent;
+  border: none;
+  height: 50px;
+}
+
+.payment-placement{
+  margin-top: 3%;
+  margin-bottom: 3%;
+  margin-right: 4%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.payment-button{
+  background-color: black;
+  border-radius: 15px;
+  color: white;
+  height:50px;
+  width: 20%;
   
-  .payment .div {
-    background-color: #ffffff;
-    height: 1401px;
-    overflow: hidden;
-    position: relative;
-    width: 1440px;
-  }
-  
+}
+
+/* .payment .text-wrapper-6 {
+  color: #000000;
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 30px;
+  font-weight: 600;
+}
   .payment .text-wrapper {
     color: #000000;
     font-family: "Poppins-SemiBold", Helvetica;
@@ -24,9 +102,9 @@
     line-height: normal;
     position: absolute;
     top: 901px;
-  }
+  } */
   
-  .payment .credit-card-number {
+  /* .payment .credit-card-number {
     height: 88px;
     left: 145px;
     position: absolute;
@@ -197,8 +275,7 @@
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
-    top: 72px;
-    width: 718px;
+
   }
   
   .payment .text-wrapper-5 {
@@ -212,17 +289,6 @@
     position: absolute;
     top: 120px;
     width: 570px;
-  }
-  
-  .payment .text-wrapper-6 {
-    color: #000000;
-    font-family: "Poppins-SemiBold", Helvetica;
-    font-size: 30px;
-    font-weight: 600;
-    left: 1106px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 1128px;
-  }
+  } */
+
   
