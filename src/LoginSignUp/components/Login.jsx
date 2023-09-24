@@ -25,8 +25,6 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const navigate = useNavigate();
-
   const onChangeEmail = (e) => {
     const email = e.target.value;
     setEmail(email);
@@ -48,7 +46,6 @@ const Login = () => {
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.login(email, password).then(
         () => {
-          navigate("/profile");
           window.location.reload();
           alert("Login Success")
         },

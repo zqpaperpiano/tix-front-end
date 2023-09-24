@@ -1,7 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import "./Login.css";
-import axios from 'axios';
+import AuthService from "../LoginSignUp/services/auth.service";
 
 
 class Login extends Component{
@@ -13,41 +13,6 @@ class Login extends Component{
       errorMessage: '',
     })
   }
-
-  // const register = (username, email, password) => {
-  //   return axios.post(API_URL + "signup", {
-  //     username,
-  //     email,
-  //     password,
-  //   });
-
-  handleSubmit = async (e) => {
-    // e.preventDefault();
-
-    try {
-
-      const response = await axios.post('http://localhost:8081/api/v1/auth/login', {
-
-      console.log('entered handle submit');
-      const response = await axios.post('/api/customer/login', {
-
-        email: this.state.email,
-        password: this.state.password,
-      });
-
-        alert("Login Successful! Redirecting to the Home Page ");
-        setTimeout(() => {
-          this.props.onRouteChange('Home'); 
-        }, 2000);
-
-      } catch (error) {
-        if (error.response && error.response.data && error.response.data.message) {
-          this.setState({errorMessage: error.response.data.message});
-        } else {
-          this.setState({errorMessage: 'There was a error with the Login.'});
-        }
-    }
-  };
   
   onEmailChange = (event) => {
     this.setState({
@@ -67,12 +32,24 @@ class Login extends Component{
 
   onClickLogin(){
     if(this.state.loginEmail != ''){
+      AuthService.login(this.state.loginEmail, 
+        this.state.loginPassword)
+        .then(
+        () => {
+          this.props.loadUser(this.state.loginEmail);
+          this.props.onRouteChange('Home');
+        },
+        (error) => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
 
-
-      console.log('entered onClickLogin');
-      // this.props.loadUser(this.state.loginEmail);
-
-      this.handleSubmit();
+          console.log(resMessage);
+        }
+      );
     }
   }
 
@@ -131,4 +108,4 @@ class Login extends Component{
   }
 }
 
-export default Login
+export default Login;

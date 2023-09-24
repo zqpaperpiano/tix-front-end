@@ -33,7 +33,7 @@ export const NavbarCompProfile = ({loadUser, onRouteChange}) => {
         <NavDropdown title="Profile" id="basic-nav-dropdown">
           <NavDropdown.Item href="#profile">Profile</NavDropdown.Item>
           <NavDropdown.Item 
-          onClick={() => {loadUser('')}}
+          onClick={() => {loadUser('', '', '')}}
           href="#signout">Sign Out</NavDropdown.Item>
         </NavDropdown>
         </Nav>
