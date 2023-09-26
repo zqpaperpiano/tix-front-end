@@ -2,9 +2,9 @@ import React from "react";
 import "./Details.css";
 import TaylorSwift from '../assets/TaylorSwift.jpeg';
 import { useState, useEffect } from 'react';
+import AuthService from "../LoginSignUp/services/auth.service";
 
 export const Details = ({ onRouteChange }) => {
-
   const currentUser = AuthService.getCurrentUser();
 
   return (
@@ -33,8 +33,9 @@ export const Details = ({ onRouteChange }) => {
             <div className="profile-id">
               <div className="text-wrapper-3">Profile</div>
               <div className="overlap-group">
-                <div className="text-wrapper-4">Id</div>
-                <div className="id">{currentUser.id}</div>
+                {/* <div className="text-wrapper-4">Id</div> */}
+                <div className="id">{userProfile.id}</div>
+
               </div>
             </div>
 

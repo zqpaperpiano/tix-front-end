@@ -36,7 +36,11 @@ class Login extends Component{
         this.state.loginPassword)
         .then(
         () => {
-          this.props.loadUser(this.state.loginEmail);
+          // console.log(AuthService.getCurrentUser());
+          const user = AuthService.getCurrentUser();
+          this.props.loadUser(
+            user.fullname, user.email, user.mobile
+          );
           this.props.onRouteChange('Home');
         },
         (error) => {
@@ -46,8 +50,7 @@ class Login extends Component{
               error.response.data.message) ||
             error.message ||
             error.toString();
-
-          console.log(resMessage);
+          alert(resMessage);
         }
       );
     }
