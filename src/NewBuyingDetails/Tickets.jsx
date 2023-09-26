@@ -94,22 +94,38 @@ export const SeatingPayment = () => {
         });
     };
 
+    //save purchase info 
     const handlePayment = () => {
         TicketService.savePurchaseInfo(eventName, selectedDate, selectedCategory, selectedSeat, currentUser.id)
         .then (
+          () => {
+              
+          },(error) => {
+            const resMessage =
+              (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+              error.message ||
+              error.toString();
+            setMessage(resMessage);
+          }
+        );
+          
+        //sets the ticket to sold
+          TicketService.setTicketToSold(ticket.id)
+          .then (
             () => {
-                
-              },
-              (error) => {
-                const resMessage =
-                  (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                  error.message ||
-                  error.toString();
-                setMessage(resMessage);
-              }
-            );
+
+            },(error) => {
+              const resMessage =
+                (error.response &&
+                  error.response.data &&
+                  error.response.data.message) ||
+                error.message ||
+                error.toString();
+              setMessage(resMessage);
+            }
+          );
     };
   
     return (
