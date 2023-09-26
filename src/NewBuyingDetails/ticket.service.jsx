@@ -68,7 +68,8 @@ const getTicketByNameDateCategorySeat = (eventName, eventDate, eventCategory, se
       seatNum
     })
     .then((response) => {
-      const ticket = response.data
+      const ticket = response.data;
+      localStorage.setItem("ticket", JSON.stringify(response.data));
       return ticket;
     })
     .catch((error) => {
@@ -89,6 +90,25 @@ const savePurchaseInfo = (eventName, eventDate, eventCategory, seatNum, userId) 
     })
 }
 
+const getCurrentTicket = () => {
+  return JSON.parse(localStorage.getItem("ticket"));
+};
+
+const getPurchaseInfoFromTicketId = (ticketId) => {
+  return axios.get
+    (API_URL + `purchases/byTicketId/${ticketId}`, {
+    })
+    .then((response) => {
+      const purchase = response.data;
+      return purchase;
+    })
+    .catch((error) => {
+      console.error("Error fetching purchase:", error);
+      throw error;
+    });
+}
+
+
 
 
 
@@ -97,7 +117,9 @@ const TicketService = {
   getCategories,
   getSeatNumbers,
   getTicketByNameDateCategorySeat,
-  savePurchaseInfo
+  savePurchaseInfo,
+  getCurrentTicket,
+  getPurchaseInfoFromTicketId
 }
 
 export default TicketService;

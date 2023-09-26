@@ -67,14 +67,14 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
         }
       };
       
-    //fetch dates when component mounts
+    //fetch dates upon page load
     useEffect(() => {
         TicketService.getDates(eventName).then((dates) => {
         setEventDates(dates);
         });
     }, [eventName]);
 
-    //fetch categories when component mounts
+    //fetch categories upon page load
     useEffect(() => {
         TicketService.getCategories(eventName).then((categories) => {
         setEventCategories(categories);
