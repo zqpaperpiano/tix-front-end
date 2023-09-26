@@ -2,9 +2,9 @@ import React from "react";
 import "./Details.css";
 import TaylorSwift from '../assets/TaylorSwift.jpeg';
 import { useState, useEffect } from 'react';
+import AuthService from "../LoginSignUp/services/auth.service";
 
 export const Details = ({ onRouteChange }) => {
-
   const currentUser = AuthService.getCurrentUser();
 
   return (
@@ -17,10 +17,10 @@ export const Details = ({ onRouteChange }) => {
           <div className="text-wrapper-2">Singapore National Stadium</div>
         </div>
         
-        {isLoading && <p>Loading user profile...</p>}
+        {/* {isLoading && <p>Loading user profile...</p>}
         {error && <p>Error: {error}</p>}
         
-        {userProfile && (
+        {userProfile && ( */}
           
           <div>
             <div className="full-name">
@@ -33,8 +33,9 @@ export const Details = ({ onRouteChange }) => {
             <div className="profile-id">
               <div className="text-wrapper-3">Profile</div>
               <div className="overlap-group">
-                <div className="text-wrapper-4">Id</div>
+                {/* <div className="text-wrapper-4">Id</div> */}
                 <div className="id">{currentUser.id}</div>
+
               </div>
             </div>
 
@@ -52,10 +53,10 @@ export const Details = ({ onRouteChange }) => {
               </div>
             </div>
           </div>
-        )}
+        // )}
         
         <div className="text-wrapper-7">
-          <button onClick={() => { onRouteChange('Seating') }}>Next</button>
+          <button onClick={() => { onRouteChange('SeatingPayment') }}>Next</button>
         </div>
       </div>
     </div>

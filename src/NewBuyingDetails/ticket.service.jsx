@@ -40,6 +40,7 @@ const getCategories = (eventName) => {
 
 //returns list of available seats from event, date and category
 const getSeatNumbers = (eventName, eventDate, eventCategory) => {
+  // console.log(API_URL + `events/getEventByNameDate/${eventName}/${eventDate}/ticketByCategory/${eventCategory}/allSeats`);
   return axios.get
     (API_URL + `events/getEventByNameDate/${eventName}/${eventDate}/ticketByCategory/${eventCategory}/allSeats`, {
       eventName,
@@ -67,7 +68,8 @@ const getTicketByNameDateCategorySeat = (eventName, eventDate, eventCategory, se
       seatNum
     })
     .then((response) => {
-      const ticket = response.data
+      const ticket = response.data;
+      localStorage.setItem("ticket", JSON.stringify(response.data));
       return ticket;
     })
     .catch((error) => {
@@ -88,20 +90,24 @@ const savePurchaseInfo = (eventName, eventDate, eventCategory, seatNum, userId) 
     })
 }
 
-// should return a list of his purchases, returns the first one?
-const getPurchaseInfo = (userId) => {
-  return axios.get
-  (API_URL + `purchases/${userId}`,{
-    userId
-  }) .then((response) => { 
-    const dates = response.data;
-    return dates;
-  })
-  .catch((error) => {
-    console.error("Error fetching purchase Info:", error);
-    throw error;
-  });
+const getCurrentTicket = () => {
+  return JSON.parse(localStorage.getItem("ticket"));
 };
+
+const getPurchaseInfoFromTicketId = (ticketId) => {
+  return axios.get
+    (API_URL + `purchases/byTicketId/${ticketId}`, {
+    })
+    .then((response) => {
+      const purchase = response.data;
+      return purchase;
+    })
+    .catch((error) => {
+      console.error("Error fetching purchase:", error);
+      throw error;
+    });
+}
+
 
 
 
@@ -112,7 +118,8 @@ const TicketService = {
   getSeatNumbers,
   getTicketByNameDateCategorySeat,
   savePurchaseInfo,
-  getPurchaseInfo
+  getCurrentTicket,
+  getPurchaseInfoFromTicketId
 }
 
 export default TicketService;

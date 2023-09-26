@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, Container, NavDropdown, Form, Button } from 'react-bootstrap';
 import './NavbarComp.css'
+import AuthService from '../../LoginSignUp/services/auth.service';
 
 export const NavbarCompProfile = ({loadUser, onRouteChange}) => {
   return (
@@ -12,9 +13,9 @@ export const NavbarCompProfile = ({loadUser, onRouteChange}) => {
           <Button variant="outline-success" className='search-button'>Search</Button>
         </Form>
 
-        <Navbar.Brand href="#home" className="logo">TIX</Navbar.Brand>
+        <Navbar.Brand onClick={() => {onRouteChange('Home')}} href="#home" className="logo">TIX</Navbar.Brand>
         <Nav className="ms-auto underline-on-hover">
-          <Nav.Link onClick={() => {onRouteChange('AllEvents')}} href="#home">Home</Nav.Link>
+          <Nav.Link onClick={() => {onRouteChange('Home')}} href="#home">Home</Nav.Link>
           <NavDropdown title="Events" id="basic-nav-dropdown">
             <NavDropdown.Item 
             onClick={() => {onRouteChange('AllEvents')}}
@@ -31,9 +32,18 @@ export const NavbarCompProfile = ({loadUser, onRouteChange}) => {
 
         <Nav className="ml-auto">
         <NavDropdown title="Profile" id="basic-nav-dropdown">
-          <NavDropdown.Item href="#profile">Profile</NavDropdown.Item>
           <NavDropdown.Item 
-          onClick={() => {loadUser('', '', '')}}
+          onClick={() => {
+              onRouteChange('Profile')
+          }}
+          href="#profile">Profile</NavDropdown.Item>
+          <NavDropdown.Item 
+          onClick={() => {
+            localStorage.removeItem("user");
+            loadUser('','','');
+            alert("You've successfully logged out");
+            onRouteChange("Home");
+          }}
           href="#signout">Sign Out</NavDropdown.Item>
         </NavDropdown>
         </Nav>

@@ -4,7 +4,7 @@ import SeatMapPicture from '../assets/SeatMapPicture.png';
 import PricingTable from '../assets/PricingTable.jpg';
 import TaylorSwift from '../assets/TaylorSwift.jpeg'
 
-export const TaylorSwiftInfo = ({onRouteChange}) => {
+export const TaylorSwiftInfo = ({onRouteChange, user}) => {
   return (
     <div className="taylor-swift-info">
 
@@ -21,7 +21,14 @@ export const TaylorSwiftInfo = ({onRouteChange}) => {
 
           <div className="purchase-now-button">
           <p 
-          onClick={() => {onRouteChange('Seating')}} 
+          onClick={() => {
+            if(!user){
+              alert('Please log in or sign up first!');
+              onRouteChange('Login');
+            }else{
+              onRouteChange('Details');
+            }
+          }} 
           className="buy-btm text-wrapper-3">
             Buy Now</p>
         </div>
