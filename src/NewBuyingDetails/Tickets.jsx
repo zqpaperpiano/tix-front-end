@@ -110,22 +110,6 @@ export const SeatingPayment = () => {
             setMessage(resMessage);
           }
         );
-          
-        //sets the ticket to sold
-          TicketService.setTicketToSold(ticket.id)
-          .then (
-            () => {
-
-            },(error) => {
-              const resMessage =
-                (error.response &&
-                  error.response.data &&
-                  error.response.data.message) ||
-                error.message ||
-                error.toString();
-              setMessage(resMessage);
-            }
-          );
     };
   
     return (

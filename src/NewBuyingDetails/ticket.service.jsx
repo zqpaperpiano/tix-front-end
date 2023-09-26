@@ -88,9 +88,8 @@ const savePurchaseInfo = (eventName, eventDate, eventCategory, seatNum, userId) 
     })
 }
 
-
 // should return a list of his purchases, returns the first one?
-const purchaseInfo = (userId) => {
+const getPurchaseInfo = (userId) => {
   return axios.get
   (API_URL + `purchases/${userId}`,{
     userId
@@ -104,12 +103,6 @@ const purchaseInfo = (userId) => {
   });
 };
 
-const setTicketToSold = (ticketId) =>{
-  return axios.put
-  (API_URL + `tickets/${ticketId}/sell`), {
-    ticketId
-  }
-}
 
 
 
@@ -119,8 +112,7 @@ const TicketService = {
   getSeatNumbers,
   getTicketByNameDateCategorySeat,
   savePurchaseInfo,
-  purchaseInfo,
-  setTicketToSold
+  getPurchaseInfo
 }
 
 export default TicketService;
