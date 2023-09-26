@@ -22,15 +22,14 @@ class SignUp extends Component{
   // handleSubmit = async (e) => {
   //   e.preventDefault();
 
-  //   try {
-  //     console.log('handle submit');
-
-  //     const response = await axios.post('http://localhost:8081/api/v1/auth/signup', {
-  //       fullName: this.state.fullName,
-  //       email: this.state.email,
-  //       mobile: this.state.mobile,
-  //       password: this.state.password,
-  //     });
+    try {
+      console.log('handle submit');
+      const response = await axios.post('http://localhost:8081/api/v1/auth/signup', {
+        fullName: this.state.fullName,
+        email: this.state.email,
+        mobile: this.state.mobile,
+        password: this.state.password,
+      });
      
   //     alert("Sign Up Successful! Redirecting to the Login Page.");
   //     setTimeout(() => {
