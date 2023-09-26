@@ -22,7 +22,7 @@ export const TaylorSwiftInfo = ({onRouteChange, user}) => {
           <div className="purchase-now-button">
           <p 
           onClick={() => {
-            if(user.email === ''){
+            if(!user){
               alert('Please log in or sign up first!');
               onRouteChange('Login');
             }else{

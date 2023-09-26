@@ -9,12 +9,11 @@ import NavbarComp from './Components/Navbar/NavbarComp';
 import EventsMusic from './Events/EventsMusic';
 import EventsSports from './Events/EventsSports';
 import Details from './BuyingPage/Details';
-import Seating from './BuyingPage/Seating';
-import Payment from './BuyingPage/Payment';
 import TaylorSwiftInfo from './TaylorSwiftInfo/TaylorSwiftInfo';
 import HomePage from './Home/Home';
-import Login2 from './LoginSignUp/components/Login';
+import SeatingPayment from './NewBuyingDetails/SeatingPayment';
 import Profile from './Profile/Profile';
+import Confirmation from './NewBuyingDetails/Confirmation';
 
 class App extends Component{
   constructor(){
@@ -25,6 +24,13 @@ class App extends Component{
         fullName: '',
         email: '',
         mobile: '',
+      },
+      ticket: {
+        eventName: '',
+        date: '',
+        cat: '',
+        ticketId: '',
+        price: '',
       }
     })
   }
@@ -39,10 +45,23 @@ class App extends Component{
     })
   }
 
+  onMadePurchase = (eventName, date, cat, ticketID, price) => {
+    this.setState({
+      ticket:{
+        eventName: eventName,
+        date: date,
+        cat: cat,
+        ticketID: ticketID,
+        price: price,
+      }
+    })
+
+  }
+
   onUserLogin(){
     if(this.state.user.email != ''){
       return <NavbarCompProfile onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
-    }else{
+    }else{ 
       return <NavbarComp onRouteChange={this.onRouteChange} />
     }
   }
@@ -67,35 +86,30 @@ class App extends Component{
             return <EventsSports onRouteChange={this.onRouteChange} />
           case 'Details':
             return <Details onRouteChange={this.onRouteChange} />
-          case 'Seating':
-            return <Seating onRouteChange={this.onRouteChange} />
-          case 'Payment':
-            return <Payment onRouteChange={this.onRouteChange} />
+          case 'SeatingPayment':
+            return <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange}/>
           case 'TSInfo':
             return <TaylorSwiftInfo onRouteChange={this.onRouteChange} user={this.state.user}/>
           case 'Home':
             return <HomePage onRouteChange={this.onRouteChange} />
           case 'Profile':
-            return <Profile />
+            return <Profile onRouteChange={this.onRouteChange} />
+          case 'Confirmation':
+            return <Confirmation ticket={this.state.ticket} onRouteChange={this.onRouteChange} />
         }
   }
 
   render(){
+    console.log('purchase', this.state.purchase);
     return (
       <div className="main-page">
         <div className='navbar-top'>
           {this.onUserLogin()}
-          {/* <NavbarComp onRouteChange={this.onRouteChange} /> */}
         </div>
 
         <div className="other-pages">
-          {/* {this.pageNavigation()} */}
           {this.pageNavigation()}
-
-          {/* <TaylorSwiftInfo onRouteChange={this.onRouteChange} /> */}
-          {/* <SignUp onRouteChange={this.onRouteChange} loadUser={this.loadUser}/> */}
-          {/* <Payment onRouteChange={this.onRouteChange} /> */}
-          {/* <SignUp onRouteChange={this.onRouteChange} loadUser={this.loadUser}/> */}
+          {/* <SeatingPayment /> */}
 
         </div>
       </div>

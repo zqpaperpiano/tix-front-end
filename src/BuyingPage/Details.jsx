@@ -17,10 +17,10 @@ export const Details = ({ onRouteChange }) => {
           <div className="text-wrapper-2">Singapore National Stadium</div>
         </div>
         
-        {isLoading && <p>Loading user profile...</p>}
+        {/* {isLoading && <p>Loading user profile...</p>}
         {error && <p>Error: {error}</p>}
         
-        {userProfile && (
+        {userProfile && ( */}
           
           <div>
             <div className="full-name">
@@ -34,7 +34,7 @@ export const Details = ({ onRouteChange }) => {
               <div className="text-wrapper-3">Profile</div>
               <div className="overlap-group">
                 {/* <div className="text-wrapper-4">Id</div> */}
-                <div className="id">{userProfile.id}</div>
+                <div className="id">{currentUser.id}</div>
 
               </div>
             </div>
@@ -53,10 +53,10 @@ export const Details = ({ onRouteChange }) => {
               </div>
             </div>
           </div>
-        )}
+        // )}
         
         <div className="text-wrapper-7">
-          <button onClick={() => { onRouteChange('Seating') }}>Next</button>
+          <button onClick={() => { onRouteChange('SeatingPayment') }}>Next</button>
         </div>
       </div>
     </div>
