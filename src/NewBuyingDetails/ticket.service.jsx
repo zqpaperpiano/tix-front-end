@@ -90,10 +90,12 @@ const savePurchaseInfo = (eventName, eventDate, eventCategory, seatNum, userId) 
     })
 }
 
+//returns the ticket stored in the local Storage
 const getCurrentTicket = () => {
   return JSON.parse(localStorage.getItem("ticket"));
 };
 
+//returns the purchase entity as JSON
 const getPurchaseInfoFromTicketId = (ticketId) => {
   return axios.get
     (API_URL + `purchases/byTicketId/${ticketId}`, {
