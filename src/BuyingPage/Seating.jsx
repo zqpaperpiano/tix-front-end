@@ -7,6 +7,7 @@ import TaylorSwitft from '../assets/TaylorSwift.jpeg';
 import { Form } from "react-bootstrap";
 
 
+
 class Seating extends Component{
   constructor(){
     super();

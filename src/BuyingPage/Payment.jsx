@@ -2,8 +2,9 @@ import React from "react";
 import "./Payment.css";
 import TaylorSwitft from '../assets/TaylorSwift.jpeg';
 
-export const Payment = () => {
+export const Payment = ({ onRouteChange }) => {
   
+  const currentUser = AuthService.getCurrentUser();
 
   return (
     <div className="payment">
@@ -17,6 +18,7 @@ export const Payment = () => {
           </div>
         </div>
 
+        {/* User fullname, user email, Event Name, Event Date, Event Cat, Seat Num, Price */}
         <div className="confirmation-details">
           <div className="confirm-date">
             <p>Date</p>
