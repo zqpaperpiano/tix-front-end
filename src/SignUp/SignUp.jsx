@@ -1,8 +1,8 @@
 import React from "react";
-import { Component, useState, useEffect } from "react";
+import { Component } from "react";
 import "./SignUp.css";
-import axios from 'axios';
 import PasswordStrengthBar from "react-password-strength-bar";
+import AuthService from "../LoginSignUp/services/auth.service";
 
 class SignUp extends Component{
   constructor(){
@@ -19,30 +19,34 @@ class SignUp extends Component{
   }
 
 
-  handleSubmit = async (e) => {
-    e.preventDefault();
+  // handleSubmit = async (e) => {
+  //   e.preventDefault();
 
     try {
-      const response = await axios.post('/api/customer/register', {
+<<<<<<<<< Temporary merge branch 1
+=========
+      console.log('handle submit');
+>>>>>>>>> Temporary merge branch 2
+      const response = await axios.post('http://localhost:8081/api/v1/auth/signup', {
         fullName: this.state.fullName,
         email: this.state.email,
         mobile: this.state.mobile,
         password: this.state.password,
       });
      
-      alert("Sign Up Successful! Redirecting to the Login Page.");
-      setTimeout(() => {
-        this.props.onRouteChange('Login'); 
-      }, 2000);
+  //     alert("Sign Up Successful! Redirecting to the Login Page.");
+  //     setTimeout(() => {
+  //       this.props.onRouteChange('Login'); 
+  //     }, 2000);
       
-    } catch (err) {
-      if (err.response && err.response.data && err.response.data.message) {
-        this.setState({errorMessage: err.response.data.message});
-      } else {
-        this.setState({errorMessage: 'There was an error with the Sign Up'});
-      }
-    }
-  }
+  //   } catch (err) {
+  //     if (err.response && err.response.data && err.response.data.message) {
+  //       this.setState({errorMessage: err.response.data.message});
+  //     } else {
+  //       this.setState({errorMessage: 'There was an error with the Sign Up'});
+  //     }
+  //   }
+  // }
 
   onPasswordChange = (event) => {
     this.setState({
@@ -89,28 +93,37 @@ class SignUp extends Component{
     this.props.onRouteChange('Login');
   }
 
-  onClickSubmit = (e) => {
-    e.preventDefault();
-    if(this.state.samePassword === true && this.state.isNumber === true){
-      try {
-        // Call any additional logic you need after successful registration here
-        // For example, you can redirect the user to another page.
-        // this.props.loadUser(this.state.registerEmail);
-        // this.props.onRouteChange('AllEvents');
-        this.handleSubmit();
-        
-      } catch (err) {
-        console.error(err);
-        alert("Sign Up Failed");
+  onClickSubmit = () => {
+    AuthService.register(
+      this.state.fullName, 
+      this.state.email, 
+      this.state.mobile, 
+      this.state.password)
+      .then(
+      (response) => {
+        console.log(response.data.message);
+        // setMessage(response.data.message);
+        // setSuccessful(true);
+      },
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        console.log(resMessage);
+        // setMessage(resMessage);
+        // setSuccessful(false);
       }
-    }else{
-      alert("Die")
-      console.log(this.state.samePassword, 'number', this.state.isNumber);
-      console.log('Password not the same!');
-    }
+    );
+    this.props.loadUser(this.state.fullName, this.state.email, this.state.mobile);
+    this.props.onRouteChange('Home');
   }
 
   render(){
+    // console.log('name: ', this.state.fullName);
     return (
       <div className="sign-up">
         <div className="welcome-sign-up">

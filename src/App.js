@@ -13,6 +13,7 @@ import Seating from './BuyingPage/Seating';
 import Payment from './BuyingPage/Payment';
 import TaylorSwiftInfo from './TaylorSwiftInfo/TaylorSwiftInfo';
 import HomePage from './Home/Home';
+import Login2 from './LoginSignUp/components/Login';
 
 class App extends Component{
   constructor(){
@@ -20,15 +21,19 @@ class App extends Component{
     this.state=({
       route: 'AllEvents',
       user: {
+        fullName: '',
         email: '',
+        mobile: '',
       }
     })
   }
 
-  loadUser = (email) => {
+  loadUser = (fullName, email, mobile) => {
     this.setState({
       user: {
+        fullName: fullName,
         email: email,
+        mobile: mobile
       }
     })
   }
@@ -82,11 +87,13 @@ class App extends Component{
 
         <div className="other-pages">
           {/* {this.pageNavigation()} */}
+          {this.pageNavigation()}
+
           {/* <TaylorSwiftInfo onRouteChange={this.onRouteChange} /> */}
-          <SignUp onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
-          {/* {this.pageNavigation()} */}
-          <Payment onRouteChange={this.onRouteChange} />
           {/* <SignUp onRouteChange={this.onRouteChange} loadUser={this.loadUser}/> */}
+          {/* <Payment onRouteChange={this.onRouteChange} /> */}
+          {/* <SignUp onRouteChange={this.onRouteChange} loadUser={this.loadUser}/> */}
+
         </div>
       </div>
     );
