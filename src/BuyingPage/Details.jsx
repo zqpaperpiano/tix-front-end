@@ -5,37 +5,7 @@ import { useState, useEffect } from 'react';
 import AuthService from "../LoginSignUp/services/auth.service";
 
 export const Details = ({ onRouteChange }) => {
-  const [userProfile, setUserProfile] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-    
-  const user = AuthService.getCurrentUser();
-
-  useEffect(() => {
-    setUserProfile(user);
-    
-    // fetch('http://localhost:8081/api/auth/profile', {
-    //   // method: 'GET',
-    //   // credentials: 'include',
-    // })
-    //   .then((response) => {
-    //     response.json()
-    //     // if (response.status === 200) {
-    //     //   return response.json();
-    //     // } else {
-    //     //   throw new Error('User profile request failed.');
-    //     // }
-    //   })
-    //   .then((data) => {console.log(data)})
-    //   .then((data) => {
-    //     setUserProfile(data); 
-    //     setIsLoading(false); 
-    //   })
-    //   .catch((error) => {
-    //     setError(error.message); 
-    //     setIsLoading(false); 
-    //   });
-  }, []);
+  const currentUser = AuthService.getCurrentUser();
 
   return (
     <div className="details">
@@ -56,7 +26,7 @@ export const Details = ({ onRouteChange }) => {
             <div className="full-name">
               <div className="text-wrapper-3">Full Name</div>
               <div className="overlap-group">
-                <div className="name">{userProfile.fullname}</div>
+                <div className="name">{currentUser.fullname}</div>
               </div>
             </div>
 
@@ -65,20 +35,21 @@ export const Details = ({ onRouteChange }) => {
               <div className="overlap-group">
                 {/* <div className="text-wrapper-4">Id</div> */}
                 <div className="id">{userProfile.id}</div>
+
               </div>
             </div>
 
             <div className="email-address">
               <div className="text-wrapper-5">Email Address</div>
               <div className="overlap-group">
-                <div className="email">{userProfile.email}</div>
+                <div className="email">{currentUser.email}</div>
               </div>
             </div>
 
             <div className="contact">
-              <div className="text-wrapper-5">Contact</div>
+              <div className="text-wrapper-5">Mobile</div>
               <div className="overlap-group">
-                <div className="number">{userProfile.mobile}</div>
+                <div className="number">{currentUser.mobile}</div>
               </div>
             </div>
           </div>
@@ -86,7 +57,7 @@ export const Details = ({ onRouteChange }) => {
         
         <div className="text-wrapper-7">
           <button onClick={() => { onRouteChange('Seating') }}>Next</button>
-        </div> {/* Button */}
+        </div>
       </div>
     </div>
   );
