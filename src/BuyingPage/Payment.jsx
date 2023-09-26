@@ -83,28 +83,7 @@ class Payment extends Component{
   
           <p className="text-wrapper-5">Payment</p>
   
-          <div className="card-details">
-            <div className="credit-card-number">
-              <p className="text-wrapper-2">Credit Card Number</p>
-              <div className="card-input-wrapper">
-                <input onChange={this.onCardNoChange} className="number" />
-              </div>
-            </div>
-  
-            <div className="dateof-expiry">
-              <p className="text-wrapper-2">Date of Expiry</p>
-              <div className="card-input-wrapper">
-                <input onChange={this.onExpiryChange} className="date" value={"mm/yy"} />
-              </div>
-            </div>
-  
-            <div className="CVV">
-              <p className="text-wrapper-2">CVV</p>
-              <div className="card-input-wrapper">
-                <input onChange={this.onCVVChange} className="input" />
-              </div>
-            </div>
-          </div>
+          
           
           <div className="payment-placement text-wrapper-2">
             <button className="payment-button">Complete Payment</button>

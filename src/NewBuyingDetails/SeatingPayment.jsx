@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import TicketService from "../services/ticket.service"
-import AuthService from "../services/auth.service";
+import TicketService from "./ticket.service";
+import AuthService from "../LoginSignUp/services/auth.service";
 
 
 
-export const SeatingPayment = () => {
+export const SeatingPayment = ({purchase, onRouteChange}) => {
     const currentUser = AuthService.getCurrentUser();
     const [eventName, setName] = useState("Taylor Swift Concert");
 
@@ -24,6 +24,21 @@ export const SeatingPayment = () => {
     const [ticketDetails, setTicketDetails] = useState(null);
     const [message, setMessage] = useState("");
 
+    const [cardNumber, setCardNumber] = useState("");
+    const [expiry, setExpiry] = useState("");
+    const [cvv, setCVV] = useState("")
+
+    const onChangeCardNumber = (event) => {
+      setCardNumber(event.target.value);
+    }
+
+    const onChangeExpiry = (event) => {
+      setExpiry(event.target.value);
+    }
+
+    const onChangeCVV = (event) => {
+      setCVV(event.target.value);
+    }
 
     const onChangeSeat = (event) => {
       const selectedSeat = event.target.value;
@@ -69,23 +84,26 @@ export const SeatingPayment = () => {
     
     //fetch available seats from name, date and cat
     const handleDateCategorySubmit = () => {
-        setChosenDate(selectedDate);
-        setChosenCategory(selectedCategory);
-        TicketService.getSeatNumbers(eventName, selectedDate, selectedCategory)
-        .then((numbers) => {
-          setSeatNumbers(numbers);
-        }, (error) => {
-            const resMessage =
-              (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-            setMessage(resMessage);
-        });
-      };
+      setChosenDate(selectedDate);
+      setChosenCategory(selectedCategory);
+      TicketService.getSeatNumbers(eventName, selectedDate, selectedCategory)
+      .then((numbers) => {
+        setSeatNumbers(numbers);
+      }, (error) => {
+          const resMessage =
+            (error.response && error.response.data && error.response.data.message)  
+            || error.message  
+            || error.toString();
+          setMessage(resMessage);
+      });
+    };
   
     //fetch ticket based on chosen
     const handleDateCategorySeatSubmit = () => {
       setChosenSeat(selectedSeat);
       TicketService.getTicketByNameDateCategorySeat(eventName, selectedDate, selectedCategory, selectedSeat)
       .then((ticket) => {
+        console.log(ticket);
         setTicketDetails(ticket);
         }, (error) => {
             const resMessage =
@@ -94,12 +112,15 @@ export const SeatingPayment = () => {
         });
     };
 
-    //save purchase info 
+    // save purchase info 
     const handlePayment = () => {
-        TicketService.savePurchaseInfo(eventName, selectedDate, selectedCategory, selectedSeat, currentUser.id)
+        if(cardNumber.length !== 16 || cvv.length !== 3){
+          alert("Invalid card details. Please try again.")
+        }else{
+          purchase(eventName, selectedDate, selectedCategory, ticketDetails.id, ticketDetails.price);
+          TicketService.savePurchaseInfo(eventName, selectedDate, selectedCategory, selectedSeat, currentUser.id)
         .then (
           () => {
-              
           },(error) => {
             const resMessage =
               (error.response &&
@@ -109,23 +130,9 @@ export const SeatingPayment = () => {
               error.toString();
             setMessage(resMessage);
           }
-        );
-          
-        //sets the ticket to sold
-          TicketService.setTicketToSold(ticket.id)
-          .then (
-            () => {
-
-            },(error) => {
-              const resMessage =
-                (error.response &&
-                  error.response.data &&
-                  error.response.data.message) ||
-                error.message ||
-                error.toString();
-              setMessage(resMessage);
-            }
-          );
+        )
+        .then(onRouteChange('Confirmation'))
+        }
     };
   
     return (
@@ -190,11 +197,37 @@ export const SeatingPayment = () => {
               <p>Ticket ID: {ticketDetails.id}</p>
               <p>Price: {ticketDetails.price}</p>
               {/* Add the payment input */}
-              <button onClick={handlePayment}>Pay</button>
+              <div className="card-details">
+            <div className="credit-card-number">
+              <p className="text-wrapper-2">Credit Card Number</p>
+              <div className="card-input-wrapper">
+                <input onChange={onChangeCardNumber} className="number" />
+              </div>
+            </div>
+  
+            <div className="dateof-expiry">
+              <p className="text-wrapper-2">Date of Expiry</p>
+              <div className="card-input-wrapper">
+                <input onChange={onChangeExpiry} className="date" placeholder={"mm/yy"} />
+              </div>
+            </div>
+  
+            <div className="CVV">
+              <p className="text-wrapper-2">CVV</p>
+              <div className="card-input-wrapper">
+                <input onChange={onChangeCVV} className="input" />
+              </div>
+            </div>
+          </div>
+              <button
+               onClick={handlePayment}
+               >
+                Pay</button>
             </div>
           )}
         </div>
       )}
+
       </div>
     );
   }

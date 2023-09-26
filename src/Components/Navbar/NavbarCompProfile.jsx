@@ -33,12 +33,16 @@ export const NavbarCompProfile = ({loadUser, onRouteChange}) => {
         <Nav className="ml-auto">
         <NavDropdown title="Profile" id="basic-nav-dropdown">
           <NavDropdown.Item 
-          onClick={() => {onRouteChange('Profile')}}
+          onClick={() => {
+              onRouteChange('Profile')
+          }}
           href="#profile">Profile</NavDropdown.Item>
           <NavDropdown.Item 
           onClick={() => {
             localStorage.removeItem("user");
             loadUser('','','');
+            alert("You've successfully logged out");
+            onRouteChange("Home");
           }}
           href="#signout">Sign Out</NavDropdown.Item>
         </NavDropdown>

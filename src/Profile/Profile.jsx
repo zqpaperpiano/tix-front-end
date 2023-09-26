@@ -8,7 +8,7 @@ const Profile = () => {
     return(
         <div>
             <div className="profile-name">
-                <p>{`Name: ${user.fullName}`}</p>
+                <p>{`Name: ${user.fullname}`}</p>
             </div>
             <div className="profile-email">
                 <p>{`Email: ${user.email}`}</p>
