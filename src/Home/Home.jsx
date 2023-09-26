@@ -11,9 +11,15 @@ const HomePage = ({onRouteChange}) => {
           infiniteLoop={true}
           showThumbs={false}
           showArrows={true}
+          onClickItem={(index) => {
+            if(index === 0){
+              onRouteChange("TSInfo");
+            }
+
+          }}
           width={1100}>
             <div>
-              <img onClick={() => {onRouteChange('TSInfo')}} className="taylor-2" alt="Taylor swift" src={TaylorSwift} />
+              <img className="taylor-2" alt="Taylor swift" src={TaylorSwift} />
             </div>
 
             <div>

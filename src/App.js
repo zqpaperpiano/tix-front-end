@@ -14,12 +14,13 @@ import Payment from './BuyingPage/Payment';
 import TaylorSwiftInfo from './TaylorSwiftInfo/TaylorSwiftInfo';
 import HomePage from './Home/Home';
 import Login2 from './LoginSignUp/components/Login';
+import Profile from './Profile/Profile';
 
 class App extends Component{
   constructor(){
     super();
     this.state=({
-      route: 'AllEvents',
+      route: 'Home',
       user: {
         fullName: '',
         email: '',
@@ -71,9 +72,11 @@ class App extends Component{
           case 'Payment':
             return <Payment onRouteChange={this.onRouteChange} />
           case 'TSInfo':
-            return <TaylorSwiftInfo onRouteChange={this.onRouteChange} />
+            return <TaylorSwiftInfo onRouteChange={this.onRouteChange} user={this.state.user}/>
           case 'Home':
             return <HomePage onRouteChange={this.onRouteChange} />
+          case 'Profile':
+            return <Profile />
         }
   }
 
