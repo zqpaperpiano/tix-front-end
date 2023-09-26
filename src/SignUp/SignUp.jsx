@@ -23,10 +23,7 @@ class SignUp extends Component{
   //   e.preventDefault();
 
     try {
-<<<<<<<<< Temporary merge branch 1
-=========
       console.log('handle submit');
->>>>>>>>> Temporary merge branch 2
       const response = await axios.post('http://localhost:8081/api/v1/auth/signup', {
         fullName: this.state.fullName,
         email: this.state.email,
