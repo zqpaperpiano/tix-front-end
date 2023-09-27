@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TicketService from "./ticket.service";
 import AuthService from "../LoginSignUp/services/auth.service";
+import './Confirmation.css';
 
 const Confirmation = ({onRouteChange}) => {
 
@@ -10,7 +11,9 @@ const Confirmation = ({onRouteChange}) => {
     const getPurchaseInfo = () => {
         const currentTicket = TicketService.getCurrentTicket();
             TicketService.getPurchaseInfoFromTicketId(currentTicket.id)
-            .then((purchaseInfo) => {setPurchaseInfo(purchaseInfo)}
+            .then((purchaseInfo) => {
+                console.log(purchaseInfo)
+                setPurchaseInfo(purchaseInfo)}
             )
     }
 
@@ -21,7 +24,7 @@ const Confirmation = ({onRouteChange}) => {
     }, []);
 
     return(
-         <div>
+         <div className="confirmation">
             <h1>Thank you for your purchase!</h1>
             <h2>Your ticket details are as follows:</h2>
 

@@ -127,7 +127,7 @@ const getUserPurchasesFromUserId = (userId) => {
 
 const deletePurchase = (purchaseId) => {
   return axios.delete 
-  (API_URL +`purchases/byUserId/${purchaseId}`, {
+  (API_URL +`purchases/${purchaseId}`, {
     purchaseId
   });
 }
