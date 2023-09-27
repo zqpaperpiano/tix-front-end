@@ -14,6 +14,7 @@ import HomePage from './Home/Home';
 import SeatingPayment from './NewBuyingDetails/SeatingPayment';
 import Profile from './Profile/Profile';
 import Confirmation from './NewBuyingDetails/Confirmation';
+import AuthService from './LoginSignUp/services/auth.service';
 
 class App extends Component{
   constructor(){
@@ -25,13 +26,6 @@ class App extends Component{
         email: '',
         mobile: '',
       },
-      ticket: {
-        eventName: '',
-        date: '',
-        cat: '',
-        ticketId: '',
-        price: '',
-      }
     })
   }
 
@@ -95,12 +89,13 @@ class App extends Component{
           case 'Profile':
             return <Profile onRouteChange={this.onRouteChange} />
           case 'Confirmation':
-            return <Confirmation ticket={this.state.ticket} onRouteChange={this.onRouteChange} />
+            return <Confirmation onRouteChange={this.onRouteChange} />
         }
   }
 
   render(){
-    console.log('purchase', this.state.purchase);
+    // console.log('from state:', this.state.user);
+    // console.log('from authservice: ', AuthService.getCurrentUser());
     return (
       <div className="main-page">
         <div className='navbar-top'>
@@ -109,7 +104,6 @@ class App extends Component{
 
         <div className="other-pages">
           {this.pageNavigation()}
-          {/* <SeatingPayment /> */}
 
         </div>
       </div>

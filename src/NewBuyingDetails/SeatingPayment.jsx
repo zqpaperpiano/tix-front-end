@@ -117,7 +117,6 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
         if(cardNumber.length !== 16 || cvv.length !== 3){
           alert("Invalid card details. Please try again.")
         }else{
-          purchase(eventName, selectedDate, selectedCategory, ticketDetails.id, ticketDetails.price);
           TicketService.savePurchaseInfo(eventName, selectedDate, selectedCategory, selectedSeat, currentUser.id)
         .then (
           () => {
