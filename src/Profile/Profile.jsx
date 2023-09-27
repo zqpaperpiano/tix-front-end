@@ -7,6 +7,9 @@ const user = AuthService.getCurrentUser();
 const Profile = () => {
     return(
         <div>
+            <div className="profile-id">
+                <p>{`Name: ${user.id}`}</p>
+            </div>
             <div className="profile-name">
                 <p>{`Name: ${user.fullname}`}</p>
             </div>

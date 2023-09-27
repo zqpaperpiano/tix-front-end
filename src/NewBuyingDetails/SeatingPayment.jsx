@@ -187,14 +187,18 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
   
         {chosenSeat && (
         <div>
-          <p>Chosen Seat: {chosenSeat}</p>
+          {/* <p>Chosen Seat: {chosenSeat}</p> */}
           {ticketDetails && (
             <div>
-              <p>Event: {eventName}</p>
-              <p>Date: {selectedDate}</p>
+              <p>User Fullname: {currentUser.id}</p>
+              <p>User Fullname: {currentUser.fullname}</p>
+              <p>User Email: {currentUser.email}</p>
+              <p>Event Name: {eventName}</p>
+              <p>Event Date: {selectedDate}</p>
               <p>Category: {selectedCategory}</p>
               <p>Ticket ID: {ticketDetails.id}</p>
               <p>Price: {ticketDetails.price}</p>
+              <p>Chosen Seat: {chosenSeat}</p>
               {/* Add the payment input */}
               <div className="card-details">
             <div className="credit-card-number">
