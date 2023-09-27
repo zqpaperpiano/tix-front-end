@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TicketService from "./ticket.service";
 import AuthService from "../LoginSignUp/services/auth.service";
+import './SeatingPayment.css';
 
 
 
@@ -135,7 +136,7 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
     };
   
     return (
-      <div>
+      <div className="seating-payment">
         <label htmlFor="dateDropdown">Select an Event Date:</label>
         <select
           id="dateDropdown"
@@ -218,11 +219,11 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
             <div className="CVV">
               <p className="text-wrapper-2">CVV</p>
               <div className="card-input-wrapper">
-                <input onChange={onChangeCVV} className="input" />
+                <input onChange={onChangeCVV} className="cvv-input" />
               </div>
             </div>
           </div>
-              <button
+              <button className="payment-button"
                onClick={handlePayment}
                >
                 Pay</button>

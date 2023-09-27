@@ -17,12 +17,26 @@ const UserPurchases = () => {
       });
   }, [userID]);
 
+  const handleDeletePurchase = (purchaseId) => {
+    TicketService.deletePurchase(purchaseId)
+      .then(() => {
+        setPurchaseInfoList((prevPurchaseInfoList) =>
+          prevPurchaseInfoList.filter(
+            (purchaseInfo) => purchaseInfo.purchaseId !== purchaseId
+          )
+        );
+      })
+      .catch((error) => {
+        console.error(`Error deleting purchase with ID ${purchaseId}:`, error);
+      });
+  };
+
   const getTicketDetails = () => {
     const promises = [];
     userPurchases.map((purchase) => {
-      console.log(purchase);
+      // console.log(purchase);
       const id = purchase.ticketId
-      console.log('purchase', id);
+      // console.log('purchase', id);
       promises.push(
         TicketService.getPurchaseInfoFromTicketId(id)
         .then(data => {return data} )
@@ -31,7 +45,7 @@ const UserPurchases = () => {
 
       Promise.all(promises)
       .then((infoList) => {
-        console.log('infolislt: ', infoList )
+        // console.log('infolislt: ', infoList )
         setPurchaseInfoList(infoList);
       })
       .catch((error) => {
@@ -62,6 +76,7 @@ const UserPurchases = () => {
           <p>{`Ticket ID: ${purchaseInfo.ticketId}`}</p>
           <p>{`Price: ${purchaseInfo.ticketPrice}`}</p>
           <p>{`Seat Number: ${purchaseInfo.seatNum}`}</p>
+          <button onClick={() => handleDeletePurchase(purchaseInfo.purchaseId)}>Sell Ticket</button>
         </div>
       ))}
     </div>

@@ -82,13 +82,11 @@ class SignUp extends Component{
           error.message ||
           error.toString();
 
-        console.log(resMessage);
+        alert(resMessage, 'Please try again');
         // setMessage(resMessage);
         // setSuccessful(false);
       }
     );
-    this.props.loadUser(this.state.fullName, this.state.email, this.state.mobile);
-    this.props.onRouteChange('Home');
   }
 
   render(){
