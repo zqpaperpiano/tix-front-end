@@ -1,22 +1,35 @@
 import React, { useState, useEffect } from "react";
 import TicketService from "./ticket.service";
 
-const Confirmation = ({tickets, onRouteChange}) => {
+const Confirmation = ({onRouteChange}) => {
 
-    const currentTicket = TicketService.getCurrentTicket();
     const [purchaseInfo, setPurchaseInfo] = useState("");
 
+    const getPurchaseInfo = () => {
+        const currentTicket = TicketService.getCurrentTicket();
+            TicketService.getPurchaseInfoFromTicketId(currentTicket.id)
+            .then((purchaseInfo) => {setPurchaseInfo(purchaseInfo)}
+            )
+            .then(console.log(purchaseInfo));
+    }
+
     useEffect(() => {
-        TicketService.getPurchaseInfoFromTicketId(currentTicket.id).then((purchaseInfo) => {
-        setPurchaseInfo(purchaseInfo);
-        });
-    }, [currentTicket.id]);
+        setTimeout(() => {
+            getPurchaseInfo();
+        }, 3000)
+    }, []);
 
     return(
          <div>
             <h1>Thank you for your purchase!</h1>
             <h2>Your ticket details are as follows:</h2>
 
+            {
+                purchaseInfo === "" ?
+                <div class="spinner-grow" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                : 
             <div>
                 <p>{`Event Name: ${purchaseInfo.eventName}`}</p>
                 <p>{`Event Date: ${purchaseInfo.eventDate}`}</p>
@@ -25,8 +38,9 @@ const Confirmation = ({tickets, onRouteChange}) => {
                 <p>{`Price: ${purchaseInfo.ticketPrice}`}</p>
                 <p>{`Seat Number: ${purchaseInfo.seatNum}`}</p>
             </div>
+            }
 
-            {/* <p onClick={onRouteChange('Home')}>Click here to return to home</p> */}
+            <h3 onClick={() => {onRouteChange('Home')}}>Click here to return to home</h3>
          </div>
     );
 }

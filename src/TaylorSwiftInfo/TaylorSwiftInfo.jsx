@@ -22,7 +22,7 @@ export const TaylorSwiftInfo = ({onRouteChange, user}) => {
           <div className="purchase-now-button">
           <p 
           onClick={() => {
-            if(!user){
+            if(user.email === ''){
               alert('Please log in or sign up first!');
               onRouteChange('Login');
             }else{
@@ -48,9 +48,6 @@ export const TaylorSwiftInfo = ({onRouteChange, user}) => {
           <div className="text-wrapper-4">Event Details</div>
           <p className="taylor-swift-2">
             <span className="span">
-              Each account is only able to purchase 1 ticket.
-              <br />
-              <br />
               Taylor Swift announced additional dates to Taylor Swift | The Eras Tour today. Singapore will be the only
               stop in Southeast Asia. Taylor Swift | The Eras Tour in Singapore is presented by Marina Bay Sands and
               supported by the Singapore Tourism Board, official bank and pre-sale partner UOB, and official experience
