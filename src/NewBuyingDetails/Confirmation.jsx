@@ -4,7 +4,7 @@ import AuthService from "../LoginSignUp/services/auth.service";
 
 const Confirmation = ({onRouteChange}) => {
 
-    const  currentUser = AuthService.getCurrentUser();
+    // const  currentUser = AuthService.getCurrentUser();
     const [purchaseInfo, setPurchaseInfo] = useState("");
 
     const getPurchaseInfo = () => {
@@ -33,6 +33,10 @@ const Confirmation = ({onRouteChange}) => {
                 </div>
                 : 
             <div>
+                <p>{`Purchase ID: ${purchaseInfo.purchaseId}`}</p>
+                <p>{`User ID: ${purchaseInfo.userId}`}</p>
+                <p>{`User Fullname: ${purchaseInfo.userFullname}`}</p>
+                <p>{`User Email: ${purchaseInfo.userEmail}`}</p>
                 <p>{`Event Name: ${purchaseInfo.eventName}`}</p>
                 <p>{`Event Date: ${purchaseInfo.eventDate}`}</p>
                 <p>{`Category: ${purchaseInfo.category}`}</p>
@@ -42,6 +46,7 @@ const Confirmation = ({onRouteChange}) => {
                 <p>{`Name: ${currentUser.fullname}`}</p>
                 <p>{`Email: ${currentUser.email}`}</p>
                 <h3 onClick={() => {onRouteChange('Home')}}>Click here to return to home</h3>
+
             </div>
 
 

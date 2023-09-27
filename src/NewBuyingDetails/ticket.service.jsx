@@ -110,8 +110,27 @@ const getPurchaseInfoFromTicketId = (ticketId) => {
     });
 }
 
+//retruns the list of purchases user made
+const getUserPurchasesFromUserId = (userId) => {
+  return axios.get
+    (API_URL + `purchases/byUserId/${userId}`, {
+    })
+    .then((response) => {
+      const userPurchases = response.data;
+      return userPurchases;
+    })
+    .catch((error) => {
+      console.error("Error fetching user's purchases:", error);
+      throw error;
+    });
+}
 
-
+const deletePurchase = (purchaseId) => {
+  return axios.delete 
+  (API_URL +`purchases/byUserId/${purchaseId}`, {
+    purchaseId
+  });
+}
 
 
 const TicketService = {
@@ -121,7 +140,9 @@ const TicketService = {
   getTicketByNameDateCategorySeat,
   savePurchaseInfo,
   getCurrentTicket,
-  getPurchaseInfoFromTicketId
+  getPurchaseInfoFromTicketId,
+  getUserPurchasesFromUserId,
+  deletePurchase
 }
 
 export default TicketService;
