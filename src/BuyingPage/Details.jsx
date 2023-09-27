@@ -53,7 +53,7 @@ export const Details = ({ onRouteChange }) => {
               </div>
             </div>
           </div>
-        // )}
+        
         
         <div className="text-wrapper-7">
           <button onClick={() => { onRouteChange('SeatingPayment') }}>Next</button>

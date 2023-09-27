@@ -116,13 +116,20 @@ const getUserPurchasesFromUserId = (userId) => {
     (API_URL + `purchases/byUserId/${userId}`, {
     })
     .then((response) => {
-      const userPurchase = response.data;
-      return userPurchase;
+      const userPurchases = response.data;
+      return userPurchases;
     })
     .catch((error) => {
       console.error("Error fetching user's purchases:", error);
       throw error;
     });
+}
+
+const deletePurchase = (purchaseId) => {
+  return axios.delete 
+  (API_URL +`purchases/byUserId/${purchaseId}`, {
+    purchaseId
+  });
 }
 
 
@@ -134,7 +141,8 @@ const TicketService = {
   savePurchaseInfo,
   getCurrentTicket,
   getPurchaseInfoFromTicketId,
-  getUserPurchasesFromUserId
+  getUserPurchasesFromUserId,
+  deletePurchase
 }
 
 export default TicketService;
