@@ -1,3 +1,30 @@
+.events-sports{
+  height: 100%;
+}
+
+img{
+  height: 100%;
+  width: 100%;
+} 
+
+.UFC{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.events-sports .text-wrapper-2{
+  color: #000000;
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+    text-align: center;
+    height: 5px;
+    padding-bottom: 2%;
+}
+
 /* .events-all {
     background-color: #ffffff;
     display: flex;

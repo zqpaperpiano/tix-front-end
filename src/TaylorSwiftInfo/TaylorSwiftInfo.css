@@ -34,12 +34,14 @@ img{
 }
 
   .event-detail-title{
-    margin-left: 15%;
-    width: 75%;
+    margin-top: 1%;
+    margin-left: 10%;
+    width: 80%;
     height: 5%;
     display: grid;
     grid-template-columns: 75% 25%;
     background-color: #d9d9d999;
+    padding-bottom: 1%;
   }
 
   .event-summary{
@@ -74,6 +76,48 @@ img{
     font-family: "Poppins-SemiBold", Helvetica;
     font-size: 32px;
     font-weight: 600;
+  }
+
+  .taylor-swift-info .text-wrapper-4 {
+    color: #000000;
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-size: 25px;
+    font-weight: 500;
+  }
+
+  .event-details{
+    margin-top: 2%;
+    display: flex;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .ticket-sales{
+    margin-top: 2%;
+    display: flex;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .seat-map{
+    margin-top: 2%;
+  }
+
+  .pictures{
+    margin-top: 1%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .category-table{
+    width: 100%;
+    height: auto;
+  }
+
+  .admission-policy{
+    margin: 1% 0% 1% 5%;
   }
 
   /* .taylor-swift-info .title {

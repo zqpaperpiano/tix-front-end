@@ -32,22 +32,11 @@ export const TaylorSwiftInfo = ({onRouteChange, user}) => {
           className="buy-btm text-wrapper-3">
             Buy Now</p>
         </div>
-          {/* <div className="overlap-group">
-            <div className="overlap">
-              <div className="text-wrapper">Taylor Swift Era Tour</div>
-              <p className="p">2 March 2024 (Sat) ~ 9 March 2024 (Sat)</p>
-              <div className="text-wrapper-2">
-                <p onClick={() => {onRouteChange('Seating')}} className="buy-btm">Buy Now</p>
-              </div>
-            </div>
-            <div className="text-wrapper-3">Singapore National Stadium</div>
-          </div> */}
-        </div>
+      </div>
 
         <div className="event-details">
-          <div className="text-wrapper-4">Event Details</div>
           <p className="taylor-swift-2">
-            <span className="span">
+            <span className="span text-wrapper-4">
               Taylor Swift announced additional dates to Taylor Swift | The Eras Tour today. Singapore will be the only
               stop in Southeast Asia. Taylor Swift | The Eras Tour in Singapore is presented by Marina Bay Sands and
               supported by the Singapore Tourism Board, official bank and pre-sale partner UOB, and official experience
@@ -57,11 +46,11 @@ export const TaylorSwiftInfo = ({onRouteChange, user}) => {
             </span>
             <span className="text-wrapper-5">Event Dates:</span>
             <span className="text-wrapper-6">&nbsp;</span>
-            <span className="span">March 2, 3, 4, 7, 8 &amp; 9, 2024</span>
+            <span className="span text-wrapper-5">March 2, 3, 4, 7, 8 &amp; 9, 2024</span>
           </p>
         </div>
 
-        <div className="ticket-sales">
+        <div className="ticket-sales text-wrapper-4">
           <div className="overlap-2">
             <div className="text-wrapper-7">Ticket Sales</div>
             <p className="taylor-swift-the">
@@ -79,9 +68,11 @@ export const TaylorSwiftInfo = ({onRouteChange, user}) => {
         </div>
 
         <div className="seat-map">
-          <p className="seat-map-ticket">Seat Map &amp; Ticket Pricing</p>
-          <img className="seating-picture" alt="Seating picture" src={SeatMapPicture} />
-          <img className="category-table" alt="Category table" src={PricingTable} />
+          <p className="seat-map-ticket text-wrapper-5">Seat Map &amp; Ticket Pricing</p>
+          <div className="pictures">
+            <img className="seating-picture" alt="Seating picture" src={SeatMapPicture} />
+            <img className="category-table" alt="Category table" src={PricingTable} />
+            </div>
         </div>
 
         <div className="admission-policy">
