@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import TicketService from "./ticket.service";
+import AuthService from "../LoginSignUp/services/auth.service";
 
 const Confirmation = ({onRouteChange}) => {
 
+    const  currentUser = AuthService.getCurrentUser();
     const [purchaseInfo, setPurchaseInfo] = useState("");
 
     const getPurchaseInfo = () => {
@@ -10,7 +12,6 @@ const Confirmation = ({onRouteChange}) => {
             TicketService.getPurchaseInfoFromTicketId(currentTicket.id)
             .then((purchaseInfo) => {setPurchaseInfo(purchaseInfo)}
             )
-            .then(console.log(purchaseInfo));
     }
 
     useEffect(() => {
@@ -37,6 +38,8 @@ const Confirmation = ({onRouteChange}) => {
                 <p>{`Ticket ID: ${purchaseInfo.ticketId}`}</p>
                 <p>{`Price: ${purchaseInfo.ticketPrice}`}</p>
                 <p>{`Seat Number: ${purchaseInfo.seatNum}`}</p>
+                <p>{`Name: ${currentUser.fullname}`}</p>
+                <p>{`Email: ${currentUser.email}`}</p>
             </div>
             }
 
