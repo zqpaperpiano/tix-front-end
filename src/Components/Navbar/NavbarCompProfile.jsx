@@ -39,6 +39,11 @@ export const NavbarCompProfile = ({loadUser, onRouteChange}) => {
           href="#profile">Profile</NavDropdown.Item>
           <NavDropdown.Item 
           onClick={() => {
+              onRouteChange('UserPurchases')
+          }}
+          href="#purchase">Purchases</NavDropdown.Item>
+          <NavDropdown.Item 
+          onClick={() => {
             localStorage.removeItem("user");
             loadUser('','','');
             alert("You've successfully logged out");

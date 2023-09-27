@@ -15,6 +15,7 @@ import SeatingPayment from './NewBuyingDetails/SeatingPayment';
 import Profile from './Profile/Profile';
 import Confirmation from './NewBuyingDetails/Confirmation';
 import AuthService from './LoginSignUp/services/auth.service';
+import UserPurchases from './Profile/UserPurchases';
 
 class App extends Component{
   constructor(){
@@ -90,11 +91,13 @@ class App extends Component{
             return <Profile onRouteChange={this.onRouteChange} />
           case 'Confirmation':
             return <Confirmation onRouteChange={this.onRouteChange} />
+          case 'UserPurchases':
+            return <UserPurchases />
         }
   }
 
   render(){
-    // console.log('from state:', this.state.user);
+    console.log('from state:', this.state.user);
     // console.log('from authservice: ', AuthService.getCurrentUser());
     return (
       <div className="main-page">
