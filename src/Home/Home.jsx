@@ -3,10 +3,12 @@ import { Carousel } from 'react-responsive-carousel';
 import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
 import TaylorSwift from '../assets/TaylorSwift.jpeg' 
 import UFC from '../assets/UFC.jpeg'
+import './Home.css'
 
 const HomePage = ({onRouteChange}) => {
     return(
-        <Carousel className="carousel-format" 
+        <div className="carousel">
+          <Carousel className="carousel-format" 
           autoPlay={true}
           infiniteLoop={true}
           showThumbs={false}
@@ -17,7 +19,7 @@ const HomePage = ({onRouteChange}) => {
             }
 
           }}
-          width={1100}>
+          width={1200}>
             <div>
               <img className="taylor-2" alt="Taylor swift" src={TaylorSwift} />
             </div>
@@ -27,6 +29,7 @@ const HomePage = ({onRouteChange}) => {
             </div>
 
           </Carousel>
+        </div>
     );
 }
 

@@ -28,11 +28,11 @@ export const EventsAll = ({onRouteChange}) => {
           </div>
 
       <div className="UFC">
-            <div className="title">
-              <p className="text-wrapper-2">UFC | HOLLOWAY vs THE KOREAN ZOMBIE</p>
-            </div>
             <div className="image">
               <img className="UFC-2" alt="Ufc" src={UFC} />
+            </div>
+            <div className="title">
+              <p className="text-wrapper-2">UFC | HOLLOWAY vs THE KOREAN ZOMBIE</p>
             </div>
           </div>
       </div>

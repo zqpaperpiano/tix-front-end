@@ -5,7 +5,7 @@ import UFC from '../assets/UFC.jpeg'
 
 export const EventsSports = ({onRouteChange}) => {
   return (
-    <div className="events-all">
+    <div className="events-sports">
       <div className="div">
 
         <Button onClick={() => onRouteChange('AllEvents')} variant="light" className="allbutton" href="#EventsAll">All</Button>

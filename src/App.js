@@ -106,7 +106,8 @@ class App extends Component{
         </div>
 
         <div className="other-pages">
-          {this.pageNavigation()}
+          {this.pageNavigation()} 
+          {/* <HomePage onRouteChange={this.onRouteChange} /> */}
 
         </div>
       </div>
