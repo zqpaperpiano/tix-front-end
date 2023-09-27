@@ -18,34 +18,6 @@ class SignUp extends Component{
     })
   }
 
-
-  // handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     console.log('handle submit');
-
-  //     const response = await axios.post('http://localhost:8081/api/v1/auth/signup', {
-  //       fullName: this.state.fullName,
-  //       email: this.state.email,
-  //       mobile: this.state.mobile,
-  //       password: this.state.password,
-  //     });
-     
-  //     alert("Sign Up Successful! Redirecting to the Login Page.");
-  //     setTimeout(() => {
-  //       this.props.onRouteChange('Login'); 
-  //     }, 2000);
-      
-  //   } catch (err) {
-  //     if (err.response && err.response.data && err.response.data.message) {
-  //       this.setState({errorMessage: err.response.data.message});
-  //     } else {
-  //       this.setState({errorMessage: 'There was an error with the Sign Up'});
-  //     }
-  //   }
-  // }
-
   onPasswordChange = (event) => {
     this.setState({
       password: event.target.value
@@ -99,9 +71,8 @@ class SignUp extends Component{
       this.state.password)
       .then(
       (response) => {
-        console.log(response.data.message);
-        // setMessage(response.data.message);
-        // setSuccessful(true);
+        alert('Registration Successul. Please log in');
+        this.props.onRouteChange('Login');
       },
       (error) => {
         const resMessage =

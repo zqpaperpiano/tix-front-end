@@ -8,7 +8,7 @@ const register = (fullname, email, mobile, password) => {
     email,
     mobile,
     password,
-  });
+  })
 };
 
 const login = (email, password) => {
