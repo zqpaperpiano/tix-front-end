@@ -17,32 +17,41 @@ const UserPurchases = () => {
       });
   }, [userID]);
 
-  useEffect(() => {
-    // Create an array to store promises for fetching purchase info
-    const promises = userPurchases.map((purchase) => {
-      return TicketService.getPurchaseInfoByTicketId(purchase.ticketId);
-    });
+  const getTicketDetails = () => {
+    const promises = [];
+    userPurchases.map((purchase) => {
+      console.log(purchase);
+      const id = purchase.ticketId
+      console.log('purchase', id);
+      promises.push(
+        TicketService.getPurchaseInfoFromTicketId(id)
+        .then(data => {return data} )
+      );
+    })
 
-    // const handleCancellation = () => {
-    //     TicketService.deletePurchase(purchaseInfo.purchaseId)
-    // }
-
-    // Use Promise.all to wait for all promises to resolve
-    Promise.all(promises)
+      Promise.all(promises)
       .then((infoList) => {
+        console.log('infolislt: ', infoList )
         setPurchaseInfoList(infoList);
       })
       .catch((error) => {
         console.error("Error fetching purchase info by ticket ID:", error);
       });
+    }
+
+  useEffect(() => {
+    setTimeout(() => {
+      getTicketDetails();
+    }, 1000)
   }, [userPurchases]);
+
 
   return (
     <div>
       <h1>Here are your purchases</h1>
 
       {purchaseInfoList.map((purchaseInfo, index) => (
-        <div key={index}>
+        <div className="purchase-table" key={index}>
           <p>{`Purchase ID: ${purchaseInfo.purchaseId}`}</p>
           <p>{`User ID: ${purchaseInfo.userId}`}</p>
           <p>{`User Fullname: ${purchaseInfo.userFullname}`}</p>
@@ -51,7 +60,7 @@ const UserPurchases = () => {
           <p>{`Event Date: ${purchaseInfo.eventDate}`}</p>
           <p>{`Category: ${purchaseInfo.category}`}</p>
           <p>{`Ticket ID: ${purchaseInfo.ticketId}`}</p>
-          <p>{`Price: ${purchaseInfo.price}`}</p>
+          <p>{`Price: ${purchaseInfo.ticketPrice}`}</p>
           <p>{`Seat Number: ${purchaseInfo.seatNum}`}</p>
         </div>
       ))}

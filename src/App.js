@@ -97,7 +97,7 @@ class App extends Component{
   }
 
   render(){
-    console.log('from state:', this.state.user);
+    // console.log('from state:', this.state.user);
     // console.log('from authservice: ', AuthService.getCurrentUser());
     return (
       <div className="main-page">

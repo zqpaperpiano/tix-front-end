@@ -6,6 +6,7 @@ import AuthService from "../LoginSignUp/services/auth.service";
 
 export const Details = ({ onRouteChange }) => {
   const currentUser = AuthService.getCurrentUser();
+  console.log(currentUser);
 
   return (
     <div className="details">
