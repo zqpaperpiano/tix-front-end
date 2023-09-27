@@ -29,6 +29,7 @@ const Confirmation = ({onRouteChange}) => {
                 purchaseInfo === "" ?
                 <div class="spinner-grow" role="status">
                     <span class="sr-only">Loading...</span>
+                    <p>Please do not exit this page!</p>
                 </div>
                 : 
             <div>
@@ -42,10 +43,16 @@ const Confirmation = ({onRouteChange}) => {
                 <p>{`Ticket ID: ${purchaseInfo.ticketId}`}</p>
                 <p>{`Price: ${purchaseInfo.ticketPrice}`}</p>
                 <p>{`Seat Number: ${purchaseInfo.seatNum}`}</p>
+                <p>{`Name: ${currentUser.fullname}`}</p>
+                <p>{`Email: ${currentUser.email}`}</p>
+                <h3 onClick={() => {onRouteChange('Home')}}>Click here to return to home</h3>
+
             </div>
+
+
             }
 
-            <h3 onClick={() => {onRouteChange('Home')}}>Click here to return to home</h3>
+           
          </div>
     );
 }
