@@ -30,26 +30,24 @@ class Login extends Component{
     this.props.onRouteChange('SignUp');
   }
 
-  onClickLogin(){
+  onClickLogin(e){
+    e.preventDefault();
     if(this.state.loginEmail != ''){
       AuthService.login(this.state.loginEmail, 
         this.state.loginPassword)
         .then(
         () => {
-          console.log('from authsrvice: ', AuthService.getCurrentUser());
           const user = AuthService.getCurrentUser();
           this.props.loadUser(
             user.fullname, user.email, user.mobile
-          );
+          )
           this.props.onRouteChange('Home');
         },
         (error) => {
           const resMessage =
             (error.response &&
               error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+              error.response.data.message) || error.message || error.toString();
           alert(resMessage);
         }
       );
@@ -90,7 +88,7 @@ class Login extends Component{
 
             <div className="login-button-position">
               <button 
-              onClick={() => {this.onClickLogin()}}
+              onClick={(e) => {this.onClickLogin(e)}}
               className="login-btm">Login</button>
             </div>
 

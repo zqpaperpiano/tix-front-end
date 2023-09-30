@@ -1,15 +1,16 @@
 import axios from "axios";
 
 const API_URL = "http://localhost:8081/api/v1/";
-
-
+axios.defaults.withCredentials = true
 
 //returns list of Dates from eventName
 const getDates = (eventName) => {
   return axios.get
     (API_URL + `events/getDatesByName/${eventName}`, {
       eventName
-    })
+    }, 
+    { withCredentials: true,}
+    )
     .then((response) => { 
       const dates = response.data;
       return dates;
@@ -26,7 +27,9 @@ const getCategories = (eventName) => {
   return axios.get
     (API_URL + `events/getCategoriesByName/${eventName}`, {
       eventName
-    })
+    }, 
+    { withCredentials: true,}
+    )
     .then((response) => { 
       const categories = response.data; 
       return categories;
@@ -46,7 +49,9 @@ const getSeatNumbers = (eventName, eventDate, eventCategory) => {
       eventName,
       eventDate,
       eventCategory
-    })
+    },
+        { withCredentials: true,}
+    )
     .then((response) => { 
       const seats = response.data; 
       return seats;
@@ -66,7 +71,9 @@ const getTicketByNameDateCategorySeat = (eventName, eventDate, eventCategory, se
       eventDate,
       eventCategory,
       seatNum
-    })
+    }, 
+        { withCredentials: true,}
+    )
     .then((response) => {
       const ticket = response.data;
       localStorage.setItem("ticket", JSON.stringify(response.data));
@@ -87,8 +94,10 @@ const savePurchaseInfo = (eventName, eventDate, eventCategory, seatNum, userId) 
       eventCategory,
       seatNum,
       userId
-    })
-}
+    }, 
+    // {withCredentials: true }
+    );
+};
 
 //returns the ticket stored in the local Storage
 const getCurrentTicket = () => {
@@ -99,7 +108,9 @@ const getCurrentTicket = () => {
 const getPurchaseInfoFromTicketId = (ticketId) => {
   return axios.get
     (API_URL + `purchases/byTicketId/${ticketId}`, {
-    })
+    }, 
+        { withCredentials: true,}
+    )
     .then((response) => {
       const purchase = response.data;
       return purchase;
@@ -114,7 +125,9 @@ const getPurchaseInfoFromTicketId = (ticketId) => {
 const getUserPurchasesFromUserId = (userId) => {
   return axios.get
     (API_URL + `purchases/byUserId/${userId}`, {
-    })
+    },
+        { withCredentials: true,}
+    )
     .then((response) => {
       const userPurchases = response.data;
       return userPurchases;
@@ -129,7 +142,9 @@ const deletePurchase = (purchaseId) => {
   return axios.delete 
   (API_URL +`purchases/${purchaseId}`, {
     purchaseId
-  });
+  }, 
+      // { withCredentials: true,}
+  );
 }
 
 
