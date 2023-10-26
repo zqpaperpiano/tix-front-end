@@ -1,9 +1,7 @@
 .events-all{
-  /* background-color: blue; */
   display: grid;
   height: 100%;
-  grid-template-rows: 10% 90%;
-  row-gap: 10px;
+  grid-template-rows: 5% 95%;
 }
 
 .sub-nav-buttons{
@@ -12,41 +10,36 @@
 }
 
 .events-overview{
-  margin-top: 5%;
   display: grid;
   height: 100%;
   width: 100%;
-  grid-template-columns: 5% 45% 45% 5%;
+  grid-template-columns: 50% 50%;
 }
 
-.image{
-  grid-row-start:1 ;
+.image-div{
+  width: 75%;
+  height: 75%;
+  margin: auto;
+  background-color: red;
+  align-items: center;
+  border: 1px solid black;
 }
 
 .title{
   grid-row-start: 2;
 }
 
-.taylor-swift {
-  grid-column-start: 2;
-  display: grid;
+.event-card{
+  display:grid;
   grid-template-rows: 75% 25%;
+  justify-items: center;
 }
 
-.UFC{
-  grid-column-start: 3;
+.event-image{
   height: 100%;
-  display: grid;
-  grid-template-rows: 75% 25%;
-}
-
-
-img{
-  height: 100%;
-  width: auto;
+  width: 100%;
   object-fit: fill;
 }
-
 
 /* .events-all {
     background-color: #ffffff;
