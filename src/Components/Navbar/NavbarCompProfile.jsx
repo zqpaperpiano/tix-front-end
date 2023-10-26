@@ -8,7 +8,7 @@ export const NavbarCompProfile = ({loadUser, onRouteChange}) => {
     <Navbar bg="black fixed-top" variant="dark">
       <Container>
       <Navbar.Brand onClick={() => {onRouteChange('Home')}} href="#home" className="logo">TIX</Navbar.Brand>
-      
+
         <Form className="d-flex">
           <Form.Control type="search" placeholder="Search" className="me-2 search-input" aria-label="Search"/>
           <Button variant="outline-success" className='search-button'>Search</Button>
