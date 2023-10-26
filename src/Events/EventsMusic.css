@@ -1,14 +1,15 @@
-
-
 .events-music{
   height: 100%;
+  display: grid;
+  grid-template-rows: 5% 95%;
 }
 
+.music-events-overview{
+  grid-row-start: 2;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
 
-img{
-  height: 100%;
-  width: 100%;
-} 
 
 /* .events-music {
     background-color: #ffffff;

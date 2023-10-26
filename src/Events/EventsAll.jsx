@@ -1,41 +1,41 @@
 import React from "react";
-import './EventsAll.css'
-import { Button } from 'react-bootstrap';
+import './EventsAll.css'  
 import TaylorSwift from '../assets/TaylorSwift.jpeg' 
 import UFC from '../assets/UFC.jpeg'
-import { Carousel } from 'react-responsive-carousel';
-import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { EventNavigation } from "../Components/EventNavigation/EventNavigation";
 
 export const EventsAll = ({onRouteChange}) => {
   return (
     <div className="events-all">
 
-        <div className="sub-nav-buttons">
-          <Button variant="light" className="allbutton" href="#EventsAll">All</Button>
-          <Button onClick={() => onRouteChange('Music')} variant="light" className="musicbutton" href="#EventsMusic">Music</Button>
-          <Button onClick={() => onRouteChange('Sports')} variant="light" className="sportbutton" href="#EventsSports">Sports</Button>
-        </div>
+        <EventNavigation onRouteChange={onRouteChange} />
         
       <div className="events-overview">
-        <div className="taylor-swift">
-        <div className="image">
-              <img onClick={() => {onRouteChange('TSInfo')}} className="taylor-2" alt="Taylor swift" src={TaylorSwift} />
-            </div>
-          <div className="title">
-            <p className="text-wrapper-2">TAYLOR SWIFT | THE ERAS TOUR</p>
-          </div>
-            
-          </div>
+        <div className="event-card">
 
-      <div className="UFC">
-            <div className="image">
-              <img className="UFC-2" alt="Ufc" src={UFC} />
-            </div>
-            <div className="title">
-              <p className="text-wrapper-2">UFC | HOLLOWAY vs THE KOREAN ZOMBIE</p>
-            </div>
-          </div>
-      </div>
+          <div className="image-div">
+                <img onClick={() => {onRouteChange('TSInfo')}} className="event-image" alt="Taylor swift" src={TaylorSwift} />
+          </div> {/*end of div for image */}
+
+          <div className="title">
+              <p className="text-wrapper-2">TAYLOR SWIFT | THE ERAS TOUR</p>
+          </div>{/*end of div for title */}
+
+        </div> {/* end of div for taylor swift  */}
+              
+        <div className="event-card">
+
+          <div className="image-div">
+                <img className="event-image" alt="Ufc" src={UFC} />
+          </div> {/*end of div for image */}
+
+          <div className="title">
+            <p className="text-wrapper-2">UFC | HOLLOWAY vs THE KOREAN ZOMBIE</p>
+          </div>{/*end of div for title */}
+
+        </div> {/* end of div for UFC  */}
+
+      </div> {/*end of div for events-overview */}
 
     </div>
   );

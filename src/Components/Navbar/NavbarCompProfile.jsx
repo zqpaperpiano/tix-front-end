@@ -7,13 +7,14 @@ export const NavbarCompProfile = ({loadUser, onRouteChange}) => {
   return (
     <Navbar bg="black fixed-top" variant="dark">
       <Container>
-        
+      <Navbar.Brand onClick={() => {onRouteChange('Home')}} href="#home" className="logo">TIX</Navbar.Brand>
+      
         <Form className="d-flex">
           <Form.Control type="search" placeholder="Search" className="me-2 search-input" aria-label="Search"/>
           <Button variant="outline-success" className='search-button'>Search</Button>
         </Form>
 
-        <Navbar.Brand onClick={() => {onRouteChange('Home')}} href="#home" className="logo">TIX</Navbar.Brand>
+       
         <Nav className="ms-auto underline-on-hover">
           <Nav.Link onClick={() => {onRouteChange('Home')}} href="#home">Home</Nav.Link>
           <NavDropdown title="Events" id="basic-nav-dropdown">

@@ -70,7 +70,7 @@ class App extends Component{
   pageNavigation(){
     switch(this.state.route){
           case 'Login':
-            return <Login onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
+            return <Login onRouteChange={this.onRouteChange} loadUser={this.loadUser} user={this.state.user}/>
           case 'SignUp':
             return <SignUp onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
           case 'AllEvents':
@@ -97,8 +97,8 @@ class App extends Component{
   }
 
   render(){
-    // console.log('from state:', this.state.user);
-    // console.log('from authservice: ', AuthService.getCurrentUser());
+    console.log('from state:', this.state.user);
+    console.log('from authservice: ', AuthService.getCurrentUser());
     return (
       <div className="main-page">
         <div className='navbar-top'>
@@ -107,7 +107,7 @@ class App extends Component{
 
         <div className="other-pages">
           {this.pageNavigation()} 
-          {/* <HomePage onRouteChange={this.onRouteChange} /> */}
+          {/* <EventsSports onRouteChange={this.onRouteChange} /> */}
 
         </div>
       </div>

@@ -1,11 +1,9 @@
 .events-sports{
   height: 100%;
+  display: grid;
+  grid-template-rows: 5% 95%;
 }
 
-img{
-  height: 100%;
-  width: 100%;
-} 
 
 .UFC{
   height: 100%;
