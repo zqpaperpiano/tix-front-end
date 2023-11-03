@@ -18,9 +18,10 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
     const [chosenCategory, setChosenCategory] = useState("");
 
    
-    const [seatNumbers, setSeatNumbers] = useState([]);
-    const [selectedSeat, setSelectedSeat] = useState("");
-    const [chosenSeat, setChosenSeat] = useState("");
+    const [listOfAvailableSeats, setListOfAvailableSeats] = useState([]);
+    const [listOfAllSeats, setListOfAllSeats] = useState([1, 2, 3, 4, 5]);
+    const [listOfTakenSeats, setListOfTakenSeats] = useState([]);
+    const [chosenSeat, setChosenSeat] = useState([]);
 
     const [ticketDetails, setTicketDetails] = useState(null);
     const [message, setMessage] = useState("");
@@ -40,15 +41,6 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
     const onChangeCVV = (event) => {
       setCVV(event.target.value);
     }
-
-    const onChangeSeat = (event) => {
-      const selectedSeat = event.target.value;
-      if (selectedSeat != "Select a Seat"){
-        setSelectedSeat(selectedSeat);
-      } else {
-        alert("Please select a Seat");
-      }
-    };
 
     const onChangeDate = (e) => {
         const selectedDate = e.target.value;
@@ -82,6 +74,47 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
         });
     }, [eventName]);
 
+
+
+    const findUnavailableSeats = (availableSeats) => {
+      const set = new Set();
+      const unavailableSeats = [];
+
+      // console.log('find unavailable seats');
+      // console.log('all seats: ', listOfAllSeats);
+      // console.log('available seats: ', availableSeats);
+
+      for(const seats of availableSeats){
+        set.add(seats);
+      }
+
+      for(const seats of listOfAllSeats){
+        if(!set.has(seats)){
+          let unavailableSeatId = 'seat' + seats;
+          unavailableSeats.push(unavailableSeatId);
+          set.add(seats);
+        }else{
+          //mark as seen to prevent duplication
+          set.delete(seats);
+        }
+      }
+      // console.log('after filtering: ', unavailableSeats);
+      setListOfTakenSeats(unavailableSeats);
+      return unavailableSeats;
+    }
+
+    const markUnavailableSeats = (unavailableSeats) => {
+      // console.log('unavailable seats: ', unavailableSeats);
+      const allSeats = document.getElementsByClassName("seats-image");
+      for(const seat of allSeats){
+        seat.setAttribute("class", "seats-image");
+      }
+      
+      unavailableSeats.map((seats) => {
+        let correspondingSeat = document.getElementById(seats);
+        correspondingSeat.setAttribute("class", "seats-image occupied");
+      })
+    }
     
     //fetch available seats from name, date and cat
     const handleDateCategorySubmit = () => {
@@ -89,7 +122,8 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
       setChosenCategory(selectedCategory);
       TicketService.getSeatNumbers(eventName, selectedDate, selectedCategory)
       .then((numbers) => {
-        setSeatNumbers(numbers);
+        markUnavailableSeats(findUnavailableSeats(numbers));
+        setListOfAvailableSeats(numbers);
       }, (error) => {
           const resMessage =
             (error.response && error.response.data && error.response.data.message)  
@@ -98,12 +132,15 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
           setMessage(resMessage);
       });
     };
+
+
   
     //fetch ticket based on chosen
     const handleDateCategorySeatSubmit = () => {
-      setChosenSeat(selectedSeat);
-      TicketService.getTicketByNameDateCategorySeat(eventName, selectedDate, selectedCategory, selectedSeat)
-      .then((ticket) => {
+      chosenSeat.map((seat) => {
+        let seatNo = parseInt(seat[4]);
+        TicketService.getTicketByNameDateCategorySeat(eventName, selectedDate, selectedCategory, seatNo)
+        .then((ticket) => {
         console.log(ticket);
         setTicketDetails(ticket);
         }, (error) => {
@@ -111,29 +148,65 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
             (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
             setMessage(resMessage);
         });
+      })
+      // 
     };
 
     // save purchase info 
     const handlePayment = () => {
-        if(cardNumber.length !== 16 || cvv.length !== 3){
-          alert("Invalid card details. Please try again.")
-        }else{
-          TicketService.savePurchaseInfo(eventName, selectedDate, selectedCategory, selectedSeat, currentUser.id)
-        .then (
-          () => {
-          },(error) => {
-            const resMessage =
-              (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
-              error.message ||
-              error.toString();
-            setMessage(resMessage);
-          }
-        )
-        .then(onRouteChange('Confirmation'))
-        }
+        // if(cardNumber.length !== 16 || cvv.length !== 3){
+        //   alert("Invalid card details. Please try again.")
+        // }else{
+        //   TicketService.savePurchaseInfo(eventName, selectedDate, selectedCategory, selectedSeat, currentUser.id)
+        // .then (
+        //   () => {
+        //   },(error) => {
+        //     const resMessage =
+        //       (error.response &&
+        //         error.response.data &&
+        //         error.response.data.message) ||
+        //       error.message ||
+        //       error.toString();
+        //     setMessage(resMessage);
+        //   }
+        // )
+        // .then(onRouteChange('Confirmation'))
+        // }
     };
+
+    const onClickSeats = (event) => {
+      var occupied = false;
+      var currentSeatID = event.currentTarget.id;
+      var listOfChosenSeats = chosenSeat;
+
+      listOfTakenSeats.map((seat) => {
+        if(seat === currentSeatID){
+          occupied = true;
+        }
+      })
+      if(!occupied){
+
+        const currentSeat = document.getElementById(currentSeatID);
+        const currentClass = event.currentTarget.className;
+
+        if(currentClass !== "seats-image selected custom-cursor-on-hover" && currentClass !== "seats-image selected"){
+          if(chosenSeat.length >= 4){
+            alert("You can only choose up to 4 tickets");
+          }else{
+            currentSeat.setAttribute("class", "seats-image selected");
+            listOfChosenSeats.push(currentSeatID);
+          }
+        }else{
+          currentSeat.setAttribute("class", "seats-image");
+          listOfChosenSeats = listOfChosenSeats.filter((seat) => {
+            return seat != currentSeatID;
+          })
+        }
+        // console.log(listOfChosenSeats);
+        setChosenSeat(listOfChosenSeats);
+      }
+    }
+
   
     return (
       <div className="seating-payment">
@@ -164,26 +237,27 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
             </option>
           ))}
         </select>
+
         <button onClick={handleDateCategorySubmit}>Select Seats</button>
 
-        {chosenCategory && chosenDate && (
-        <div>
-            <label htmlFor="seatDropdown">Select a Seat:</label>
-            <select
-            id="seatDropdown"
-            value={selectedSeat}
-            onChange={onChangeSeat}
-            >
-            <option value="">Select a seat</option>
-            {seatNumbers.map((seatNumber) => (
-                <option key={seatNumber} value={seatNumber}>
-                {seatNumber}
-                </option>
-            ))}
-            </select>
-            <button onClick={handleDateCategorySeatSubmit}>Confirm Ticket</button>
+        {chosenCategory !== "" && chosenDate !== "" ?
+        (
+          <div className="seating-map-div">
+          {listOfAllSeats.map((seat, i) => {
+            let seatNo = i + 1;
+            var id = "seat" + seatNo;
+              return(
+                <div id={id} 
+                onClick={onClickSeats}
+                className="seats-image">{`${seat}`}</div>
+              )
+            })}
         </div>
-        )}    
+        )
+      : null
+      }
+
+        <button onClick={handleDateCategorySeatSubmit}>Confirm Ticket</button> 
         
   
         {chosenSeat && (

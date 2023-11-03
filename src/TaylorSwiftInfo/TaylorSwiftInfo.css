@@ -115,10 +115,26 @@ img{
   .category-table{
     width: 100%;
     height: auto;
+    padding-top: 5%;
   }
 
   .admission-policy{
     margin: 1% 0% 1% 5%;
+    text-align: center;
+  }
+
+  .taylor-swift-info .text-wrapper-11 {
+    color: #000000;
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .admission-to-show{
+    padding-top: 1%;
+    text-align: center;
   }
 
   .taylor-swift-info .title {
@@ -299,18 +315,7 @@ img{
     width: 1313px;
   }
   
-  .taylor-swift-info .text-wrapper-11 {
-    color: #000000;
-    font-family: "Poppins-SemiBold", Helvetica;
-    font-size: 30px;
-    font-weight: 600;
-    left: 66px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 31px;
-    width: 1313px;
-  }
+
   
   .taylor-swift-info .admission-to-show {
     color: #000000;

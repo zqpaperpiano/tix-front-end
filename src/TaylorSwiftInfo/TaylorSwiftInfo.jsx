@@ -107,8 +107,8 @@ export const TaylorSwiftInfo = ({onRouteChange, user}) => {
 
         <div className="admission-policy">
           <div className="overlap-3">
-            <div className="text-wrapper-11">Admission Policy</div>
-            <p className="admission-to-show">
+            <p className="admission-policy text-wrapper-11">Admission Policy</p>
+            <p className="admission-to-show text-wrapper-11">
               1. Admission to show/venue by full ticket only. Printed/electronic tickets must be produced for admission.
               <br />
               <br />
@@ -126,7 +126,7 @@ export const TaylorSwiftInfo = ({onRouteChange, user}) => {
               <br />
               6. No outside food and beverage are allowed into the venue.
             </p>
-          </div>
+          </div> 
         </div>
 
       

@@ -1,4 +1,92 @@
-.details {
+.details{
+  display: grid;
+  height: 100%;
+  margin: 1% 0% 0% 2%;
+  grid-template-rows: 50% 50%;
+}
+
+.details-banner{
+  display: grid;
+  grid-template-columns: 60% 40%;
+  margin-bottom: 2%;
+  height: 100%;
+}
+
+/*top right bottom left*/
+
+.details-banner-image{
+  /* border: 2px solid black; */
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10%;
+}
+
+.details-image{
+  /* height: 100%; */
+  width: 100%;
+  object-fit: fill; 
+}
+
+.details-banner-details{
+  align-self:center;
+  justify-self: center;
+}
+
+.details-customer-profile{
+  margin: auto;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  row-gap: 3%;
+  justify-content: center;
+  width: 50%;
+  padding: 1%;
+}
+
+
+
+.profile-title{
+  margin-bottom: 1%;
+}
+
+.details .overlap-group {
+  background-color: #d9d9d999;
+  border-radius: 5px;
+  width: 75%;
+  margin: auto;
+  height: 60%;
+}
+
+.profile-details{
+  text-align: center;
+  padding-top: 7%;
+  color: #000000;
+  font-family: "Poppins-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.button-div{
+  padding-left: 55%;
+}
+
+.details-next-button{
+  display: flex;
+  margin-top: 2px;
+  padding-bottom: 5px;
+  width: 50%;
+  border-radius: 15px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  grid-row-start: 3;
+  justify-content: center;
+}
+
+
+
+/* .details {
     background-color: #ffffff;
     display: flex;
     flex-direction: row;
@@ -90,33 +178,9 @@
     top: 0;
   }
   
-  .details .overlap-group {
-    background-color: #d9d9d999;
-    border-radius: 5px;
-    height: 50px;
-    left: 0;
-    position: absolute;
-    top: 38px;
-    width: 400px;
-  }
+
   
-  .details .name {
-    background-color: transparent;
-    border: 0;
-    color: #000000;
-    font-family: "Poppins-Regular", Helvetica;
-    font-size: 18px;
-    font-weight: 400;
-    height: 26px;
-    left: 15px;
-    letter-spacing: 0;
-    line-height: 26px;
-    padding: 0;
-    position: relative;
-    top: 12px;
-    white-space: nowrap;
-    width: 55px;
-  }
+
   
   .details .profile-id {
     height: 88px;
@@ -228,4 +292,4 @@
     top: 909px;
     white-space: nowrap;
   }
-  
+   */

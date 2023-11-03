@@ -1,6 +1,8 @@
 import './App.css';
 import { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
 import NavbarCompProfile from './Components/Navbar/NavbarCompProfile';
 import SignUp from './SignUp/SignUp';
 import Login from './Login/Login';
@@ -84,7 +86,7 @@ class App extends Component{
           case 'Details':
             return <Details onRouteChange={this.onRouteChange} />
           case 'SeatingPayment':
-            return <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange}/>
+            return  <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange}/>
           case 'TSInfo':
             return <TaylorSwiftInfo onRouteChange={this.onRouteChange} user={this.state.user}/>
           case 'UFCInfo':
@@ -103,8 +105,8 @@ class App extends Component{
   }
 
   render(){
-    console.log('from state:', this.state.user);
-    console.log('from authservice: ', AuthService.getCurrentUser());
+    // console.log('from state:', this.state.user);
+    // console.log('from authservice: ', AuthService.getCurrentUser());
     return (
       <div className="main-page">
         <div className='navbar-top'>
@@ -112,9 +114,9 @@ class App extends Component{
         </div>
 
         <div className="other-pages">
-          {this.pageNavigation()} 
-          {/* <EventsSports onRouteChange={this.onRouteChange} /> */}
-
+          {/* {this.pageNavigation()}  */}
+          <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange}/>
+         
         </div>
       </div>
     );
