@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.2",
+    "@stomp/stompjs": "^7.0.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -19,7 +20,10 @@
     "react-password-strength-bar": "^0.4.1",
     "react-responsive-carousel": "^3.2.23",
     "react-scripts": "^5.0.1",
+    "sockjs-client": "^1.6.1",
+    "stompjs": "^2.3.3",
     "web-vitals": "^2.1.4",
+    "ws": "^8.14.2",
     "yup": "^1.2.0"
   },
   "scripts": {

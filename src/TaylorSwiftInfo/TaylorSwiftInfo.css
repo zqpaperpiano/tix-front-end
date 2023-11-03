@@ -83,6 +83,7 @@ img{
     font-family: "Poppins-SemiBold", Helvetica;
     font-size: 25px;
     font-weight: 500;
+    left: 100px;
   }
 
   .event-details{
@@ -120,7 +121,7 @@ img{
     margin: 1% 0% 1% 5%;
   }
 
-  /* .taylor-swift-info .title {
+  .taylor-swift-info .title {
     height: 225px;
     left: -2px;
     position: absolute;
@@ -143,7 +144,7 @@ img{
     width: 1351px;
   } */
   
-  /* .taylor-swift-info .div {
+  .taylor-swift-info .div {
     background-color: #ffffff;
     height: 3529px;
     overflow: hidden;
@@ -187,7 +188,8 @@ img{
     line-height: normal;
     position: absolute;
     top: 0;
-    width: 1313px;
+    width: 1200px;
+    left: 100px;
   }
   
   .taylor-swift-info .taylor-swift-2 {
@@ -199,7 +201,7 @@ img{
     letter-spacing: 0;
     line-height: 50px;
     position: absolute;
-    top: 60px;
+    top: 0px;
     width: 1313px;
   }
   
@@ -210,16 +212,22 @@ img{
     font-weight: 400;
     letter-spacing: 0;
     line-height: 50px;
+    left: 80px;
+    top: 100px;
   }
   
   .taylor-swift-info .text-wrapper-5 {
     font-family: "Poppins-SemiBold", Helvetica;
     font-weight: 600;
+    left: 100px;
+    top: 30px;
+    position: absolute;
   }
   
   .taylor-swift-info .text-wrapper-6 {
     font-family: "Poppins-Bold", Helvetica;
     font-weight: 700;
+    top: 100px;
   }
   
   .taylor-swift-info .ticket-sales {
@@ -288,7 +296,7 @@ img{
     background-color: #d9d9d999;
     height: 371px;
     position: relative;
-    width: 1440px;
+    width: 1313px;
   }
   
   .taylor-swift-info .text-wrapper-11 {
@@ -355,4 +363,4 @@ img{
     top: 1035px;
     width: 1187px;
   }
-   */
+  

@@ -3,8 +3,40 @@ import "./TaylorSwiftInfo.css";
 import SeatMapPicture from '../assets/SeatMapPicture.png';
 import PricingTable from '../assets/PricingTable.jpg';
 import TaylorSwift from '../assets/TaylorSwift.jpeg'
+import TicketService from "../NewBuyingDetails/ticket.service";
+import AuthService from "../LoginSignUp/services/auth.service";
+import { useState, useEffect } from "react";
 
 export const TaylorSwiftInfo = ({onRouteChange, user}) => {
+
+  const currentUser = AuthService.getCurrentUser();
+  // const [hasAccess, setHasAccess] = useState(false);
+  const [message, setMessage] = useState("");
+  
+  const handleCheck = () => {
+    console.log("Handling Check")
+    console.log(currentUser.id)
+    TicketService.saveSetOrQueue(currentUser.id, "Taylor Swift Concert")
+    .then ((isUserInSet) => {
+      if (isUserInSet == true){
+        console.log("Going to Details");
+        onRouteChange("Details");
+      } 
+      if (isUserInSet == false) {
+        console.log("Going to Queue");
+        onRouteChange("Queue");
+      }
+      
+    }, (error) => {
+      const resMessage =
+        (error.response && error.response.data && error.response.data.message)  
+        || error.message  
+        || error.toString();
+      setMessage(resMessage);
+    });
+
+  }
+
   return (
     <div className="taylor-swift-info">
 
@@ -25,8 +57,8 @@ export const TaylorSwiftInfo = ({onRouteChange, user}) => {
             if(user.email === ''){
               alert('Please log in or sign up first!');
               onRouteChange('Login');
-            }else{
-              onRouteChange('Details');
+            }else {
+              handleCheck();
             }
           }} 
           className="buy-btm text-wrapper-3">
@@ -44,9 +76,7 @@ export const TaylorSwiftInfo = ({onRouteChange, user}) => {
               <br />
               <br />
             </span>
-            <span className="text-wrapper-5">Event Dates:</span>
-            <span className="text-wrapper-6">&nbsp;</span>
-            <span className="span text-wrapper-5">March 2, 3, 4, 7, 8 &amp; 9, 2024</span>
+            <span className="text-wrapper-5">Event Dates: March 2, 3, 4, 7, 8, 9 2024</span>
           </p>
         </div>
 
