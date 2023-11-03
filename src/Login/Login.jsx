@@ -37,7 +37,7 @@ class Login extends Component{
         this.state.loginPassword)
         .then(
         () => {
-          console.log('trying to log in...:: ', AuthService.getCurrentUser());
+          // console.log('trying to log in...:: ', AuthService.getCurrentUser());
           const user = AuthService.getCurrentUser();
           this.props.loadUser(
             user.fullname, user.email, user.mobile

@@ -20,13 +20,13 @@
   width: 75%;
   height: 75%;
   margin: auto;
-  background-color: red;
+  /* background-color: red; */
   align-items: center;
   border: 1px solid black;
 }
 
 .title{
-  grid-row-start: 2;
+  grid-row-start: 2; 
 }
 
 .event-card{

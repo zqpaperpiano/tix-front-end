@@ -34,9 +34,7 @@ const UserPurchases = () => {
   const getTicketDetails = () => {
     const promises = [];
     userPurchases.map((purchase) => {
-      // console.log(purchase);
       const id = purchase.ticketId
-      // console.log('purchase', id);
       promises.push(
         TicketService.getPurchaseInfoFromTicketId(id)
         .then(data => {return data} )
@@ -61,7 +59,7 @@ const UserPurchases = () => {
 
 
   return (
-    <div>
+    <div className="user-purchases">
       <h1>Here are your purchases</h1>
 
       {purchaseInfoList.map((purchaseInfo, index) => (

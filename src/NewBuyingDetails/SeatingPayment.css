@@ -51,4 +51,32 @@
     margin-top: 1%;
   }
 
+  .seating-map-div{
+    display: flex;
+  }
+
+  .seats-image{
+    background-color: black;
+    height: 25px;
+    width: 35px;
+    margin: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: white;
+    padding-left: 5%;
+  }
+
+  .seats-image.selected{
+    background-color: turquoise;
+  }
+
+  .seats-image.occupied{
+    background-color: red;
+  }
+
+  .seats-image:not(.occupied):hover{
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+
   
