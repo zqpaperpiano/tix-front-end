@@ -16,6 +16,8 @@ const HomePage = ({onRouteChange}) => {
           onClickItem={(index) => {
             if(index === 0){
               onRouteChange("TSInfo");
+            } else if (index === 1){
+              onRouteChange("UFCInfo");
             }
 
           }}

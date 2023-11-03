@@ -18,6 +18,8 @@ import Profile from './Profile/Profile';
 import Confirmation from './NewBuyingDetails/Confirmation';
 import AuthService from './LoginSignUp/services/auth.service';
 import UserPurchases from './Profile/UserPurchases';
+import Queue from './Queue/Queue';
+import UFCInfo from './UFC info/UFCInfo';
 
 class App extends Component{
   constructor(){
@@ -87,12 +89,16 @@ class App extends Component{
             return  <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange}/>
           case 'TSInfo':
             return <TaylorSwiftInfo onRouteChange={this.onRouteChange} user={this.state.user}/>
+          case 'UFCInfo':
+            return <UFCInfo onRouteChange={this.onRouteChange} user={this.state.user}/>  
           case 'Home':
             return <HomePage onRouteChange={this.onRouteChange} />
           case 'Profile':
             return <Profile onRouteChange={this.onRouteChange} />
           case 'Confirmation':
             return <Confirmation onRouteChange={this.onRouteChange} />
+          case 'Queue':
+            return <Queue onRouteChange={this.onRouteChange} />
           case 'UserPurchases':
             return <UserPurchases />
         }
