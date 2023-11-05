@@ -4,10 +4,9 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.2",
-
     "@stomp/stompjs": "^7.0.0",
     "@stripe/react-stripe-js": "^2.3.1",
-    "@stripe/stripe-js": "^2.1.10",
+    "@stripe/stripe-js": "^2.1.11",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -24,6 +23,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.17.0",
     "react-scripts": "^5.0.1",
+    "react-stripe-checkout": "^2.6.3",
     "sockjs-client": "^1.6.1",
     "stompjs": "^2.3.3",
     "web-vitals": "^2.1.4",
