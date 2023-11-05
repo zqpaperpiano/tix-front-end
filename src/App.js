@@ -114,8 +114,8 @@ class App extends Component{
         </div>
 
         <div className="other-pages">
-          {this.pageNavigation()} 
-          {/* <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange}/> */}
+          {/* {this.pageNavigation()}  */}
+          <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange}/>
          
         </div>
       </div>

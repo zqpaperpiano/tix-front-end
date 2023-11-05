@@ -19,9 +19,12 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
 
    
     const [listOfAvailableSeats, setListOfAvailableSeats] = useState([]);
-    const [listOfAllSeats, setListOfAllSeats] = useState([1, 2, 3, 4, 5]);
+    const [listOfAllSeats, setListOfAllSeats] = useState([]);
     const [listOfTakenSeats, setListOfTakenSeats] = useState([]);
+
     const [chosenSeat, setChosenSeat] = useState([]);
+    const [detailsOfChosenSeats, setDetailsOfChosenSeats] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     const [ticketDetails, setTicketDetails] = useState(null);
     const [message, setMessage] = useState("");
@@ -29,6 +32,8 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
     const [cardNumber, setCardNumber] = useState("");
     const [expiry, setExpiry] = useState("");
     const [cvv, setCVV] = useState("")
+
+    
 
     const onChangeCardNumber = (event) => {
       setCardNumber(event.target.value);
@@ -45,6 +50,7 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
     const onChangeDate = (e) => {
         const selectedDate = e.target.value;
         if (selectedDate != "Select a Date"){
+            onChangingEventOrCategory();
             setSelectedDate(selectedDate);
         } else {
           alert("Please select a Date");
@@ -54,11 +60,13 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
     const onChangeCategory = (e) => {
         const selectedCategory = e.target.value;
         if (selectedCategory != "Select a Category"){
+            onChangingEventOrCategory();
             setSelectedCategory(selectedCategory);
         } else {
           alert("Please select a Category");
         }
       };
+
       
     //fetch dates upon page load
     useEffect(() => {
@@ -74,55 +82,59 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
         });
     }, [eventName]);
 
-
-
-    const findUnavailableSeats = (availableSeats) => {
+    //calculate which seats r unvailable
+    const findUnavailableSeats = (availableSeats, allSeats) => {
       const set = new Set();
       const unavailableSeats = [];
-
-      // console.log('find unavailable seats');
-      // console.log('all seats: ', listOfAllSeats);
-      // console.log('available seats: ', availableSeats);
+      const dateString = selectedDate.split("-").join("");
 
       for(const seats of availableSeats){
         set.add(seats);
       }
 
-      for(const seats of listOfAllSeats){
+      console.log('allSeats:', allSeats);
+
+      allSeats.map((seats) => {
         if(!set.has(seats)){
-          let unavailableSeatId = 'seat' + seats;
+          let unavailableSeatId = `c${selectedCategory}s${seats}d${dateString}`;
           unavailableSeats.push(unavailableSeatId);
           set.add(seats);
         }else{
-          //mark as seen to prevent duplication
           set.delete(seats);
         }
-      }
-      // console.log('after filtering: ', unavailableSeats);
+      })      
       setListOfTakenSeats(unavailableSeats);
+      // console.log('unavailable seats: ', unavailableSeats)
       return unavailableSeats;
     }
 
+    //mark unavailable seats as red
     const markUnavailableSeats = (unavailableSeats) => {
-      // console.log('unavailable seats: ', unavailableSeats);
+      console.log('unavailable seats: ', unavailableSeats);
       const allSeats = document.getElementsByClassName("seats-image");
       for(const seat of allSeats){
-        seat.setAttribute("class", "seats-image");
+        seat.classList.remove("occupied");
       }
       
       unavailableSeats.map((seats) => {
         let correspondingSeat = document.getElementById(seats);
-        correspondingSeat.setAttribute("class", "seats-image occupied");
+        correspondingSeat.classList.add("occupied");
       })
     }
     
     //fetch available seats from name, date and cat
     const handleDateCategorySubmit = () => {
+      onChangingEventOrCategory();
       setChosenDate(selectedDate);
       setChosenCategory(selectedCategory);
       TicketService.getSeatNumbers(eventName, selectedDate, selectedCategory)
       .then((numbers) => {
-        markUnavailableSeats(findUnavailableSeats(numbers));
+        TicketService.getAllTicketsFromDateCategory(eventName, selectedDate, selectedCategory)
+        .then((tickets) => {
+          setListOfAllSeats(tickets);
+          markUnavailableSeats(findUnavailableSeats(numbers, tickets));
+        })
+        // markUnavailableSeats(findUnavailableSeats(numbers, getAllTickets()));
         setListOfAvailableSeats(numbers);
       }, (error) => {
           const resMessage =
@@ -133,15 +145,101 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
       });
     };
 
+    //add ticket details to an array of currently selected tickets
+    const addTicketDetails = (seat) => {
+      let updatedDetails = detailsOfChosenSeats.slice();
+      let seatNo = parseInt(seat[3]);
+      let ticketPrice = 0;
+      TicketService.getTicketByNameDateCategorySeat(eventName, selectedDate, selectedCategory, seatNo)
+      .then((ticket) => {
+        // console.log(ticket);
+        // console.log(typeof ticket.date);
+        let tixDetails = {
+          "seatID": seat,
+          "cat": ticket.category,
+          "seatNum": ticket.seatNum,
+          "price": ticket.price,
+          "date": selectedDate
+        }
+        ticketPrice = ticket.price;
+        updatedDetails.push(tixDetails);
+        // console.log(updatedDetails);
+        calculateTotalPrice(ticketPrice);
+        setDetailsOfChosenSeats(updatedDetails);
+      })
+    }
+
+    const extractDate = (seatID) => {
+      let date = "";
+      for(var i = 5; i < seatID.length; ++i){
+        date += seatID[i];
+      }
+      return date;
+    }
+
+    //remove ticket details from an array of currently selected tickets
+    const removeTicketDetails = (seatID) => {
+      let updatedDetails = detailsOfChosenSeats.filter((ticket) => {
+        if(ticket.seatID !== seatID){
+          return ticket;
+        }
+      })
+
+      let currentTicket = detailsOfChosenSeats.filter((ticket) => {
+        if(ticket.seatID === seatID){
+          return ticket;
+        }
+      })
+
+      let price = currentTicket[0].price;
+      console.log(price);
+      price = -price;
+      calculateTotalPrice(price);
+      setDetailsOfChosenSeats(updatedDetails);
+    }
+
+    //remove seats that have been selected for a different date and cat
+    const unmarkSelected = () => {
+      // console.log('unmarking...');
+      let seats = document.getElementsByClassName("seats-image");
+      
+      for(let i =0; i < seats.length; ++i){
+        let seat = seats[i];
+        if(checkIfExists(seat.classList, "selected")){
+          seat.classList.remove("selected");
+        }
+      }
+    }
+
+    //remark seats that have been originally selected
+    const markSelected = () => {
+      chosenSeat.map((seat) => {
+        let cat = seat[1];
+        let date = extractDate(seat);
+        console.log('date of selected seat:', date);
+
+        let shortenedSelectedDate = selectedDate.split("-").join("");
+        if(cat === selectedCategory && date === shortenedSelectedDate){
+          console.log('date of current selected date', shortenedSelectedDate);
+          let selectedSeat = document.getElementById(seat);
+          selectedSeat.classList.add("selected");
+        }
+      })
+    }
+
+    const onChangingEventOrCategory = () => {
+      console.log('changed!');
+      unmarkSelected();
+      markSelected();
+    }
 
   
     //fetch ticket based on chosen
     const handleDateCategorySeatSubmit = () => {
       chosenSeat.map((seat) => {
-        let seatNo = parseInt(seat[4]);
+        let seatNo = parseInt(seat[3]);
         TicketService.getTicketByNameDateCategorySeat(eventName, selectedDate, selectedCategory, seatNo)
         .then((ticket) => {
-        console.log(ticket);
         setTicketDetails(ticket);
         }, (error) => {
             const resMessage =
@@ -174,10 +272,31 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
         // }
     };
 
+    //check if a certain value exists within an array
+  const checkIfExists = (list, value) => {
+      for(var i = 0; i < list.length; ++i){
+        if(list[i] === value){
+          return true;
+      }
+    }
+    return false;
+  }
+
+  const calculateTotalPrice = (changeInPrice) => {
+    let price = totalPrice;
+    console.log('current price before addition: ', price);
+    price += changeInPrice;
+    console.log('after addition: ', price);
+    setTotalPrice(price);
+
+  }
+
+  //function to make the seats be selected or unselected
     const onClickSeats = (event) => {
+      // console.log('clicked seats');
       var occupied = false;
       var currentSeatID = event.currentTarget.id;
-      var listOfChosenSeats = chosenSeat;
+      var listOfChosenSeats = chosenSeat.slice();
 
       listOfTakenSeats.map((seat) => {
         if(seat === currentSeatID){
@@ -185,84 +304,113 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
         }
       })
       if(!occupied){
-
+        // console.log('checkpoint 1');
         const currentSeat = document.getElementById(currentSeatID);
-        const currentClass = event.currentTarget.className;
+        const currentClass = currentSeat.classList;
 
-        if(currentClass !== "seats-image selected custom-cursor-on-hover" && currentClass !== "seats-image selected"){
+        if(!checkIfExists(currentClass, "selected")){
+          // console.log('checkpoint 2');
           if(chosenSeat.length >= 4){
             alert("You can only choose up to 4 tickets");
           }else{
-            currentSeat.setAttribute("class", "seats-image selected");
+            // console.log('checkpoint 3');
+            currentSeat.classList.add("selected");
             listOfChosenSeats.push(currentSeatID);
+            addTicketDetails(currentSeatID);
           }
         }else{
-          currentSeat.setAttribute("class", "seats-image");
+          // console.log('checkpoint 4');
+          currentSeat.classList.remove("selected");
+          removeTicketDetails(currentSeatID);
           listOfChosenSeats = listOfChosenSeats.filter((seat) => {
             return seat != currentSeatID;
           })
         }
-        // console.log(listOfChosenSeats);
+        // console.log('checkpoint 5');
         setChosenSeat(listOfChosenSeats);
       }
     }
 
-  
+    // console.log('chosen ticket seat Numbers: ', chosenSeat);
+    // console.log('ticket details: ', detailsOfChosenSeats);
     return (
       <div className="seating-payment">
-        <label htmlFor="dateDropdown">Select an Event Date:</label>
-        <select
-          id="dateDropdown"
-          value={selectedDate}
-          onChange={onChangeDate}
-        >
-          <option value="">Select a Date</option>
-          {eventDates.map((eventDate) => (
-            <option key={eventDate} value={eventDate}>
-              {eventDate}
-            </option>
-          ))}
-        </select>
+        <div className="seat-selection-area">
+          <label htmlFor="dateDropdown">Select an Event Date:</label>
+          <select
+            id="dateDropdown"
+            value={selectedDate}
+            onChange={onChangeDate}
+          >
+            <option value="">Select a Date</option>
+            {eventDates.map((eventDate) => (
+              <option key={eventDate} value={eventDate}>
+                {eventDate}
+              </option>
+            ))}
+          </select>
 
-        <label htmlFor="categoryDropdown">Select a Seating Category:</label>
-        <select
-          id="categoryDropdown"
-          value={selectedCategory}
-          onChange={onChangeCategory}
-        >
-          <option value="">Select a Category</option>
-          {eventCategories.map((eventCategory) => (
-            <option key={eventCategory} value={eventCategory}>
-              {eventCategory}
-            </option>
-          ))}
-        </select>
+          <label htmlFor="categoryDropdown">Select a Seating Category:</label>
+          <select
+            id="categoryDropdown"
+            value={selectedCategory}
+            onChange={onChangeCategory}
+          >
+            <option value="">Select a Category</option>
+            {eventCategories.map((eventCategory) => (
+              <option key={eventCategory} value={eventCategory}>
+                {eventCategory}
+              </option>
+            ))}
+          </select>
 
-        <button onClick={handleDateCategorySubmit}>Select Seats</button>
+          <button onClick={handleDateCategorySubmit}>Select Seats</button>
 
-        {chosenCategory !== "" && chosenDate !== "" ?
-        (
-          <div className="seating-map-div">
-          {listOfAllSeats.map((seat, i) => {
-            let seatNo = i + 1;
-            var id = "seat" + seatNo;
-              return(
-                <div id={id} 
-                onClick={onClickSeats}
-                className="seats-image">{`${seat}`}</div>
-              )
-            })}
+          {chosenCategory !== "" && chosenDate !== "" ?
+          (
+            <div className="seating-map-div">
+            {listOfAllSeats.map((seat, i) => {
+              let seatNo = i + 1;
+              let date = selectedDate.split('-').join("");
+              var id =`c${selectedCategory}s${seatNo}d${date}`;
+                return(
+                  <div id={id} 
+                  onClick={onClickSeats}
+                  className={`seats-image`}>{`${seat}`}</div>
+                )
+              })}
+          </div>
+          )
+        : null
+        }
+
+          <button onClick={handleDateCategorySeatSubmit}>Confirm Ticket</button> 
         </div>
-        )
-      : null
-      }
 
-        <button onClick={handleDateCategorySeatSubmit}>Confirm Ticket</button> 
+        <div className="order-list">
+          <h1>Your Tickets</h1>
+          <div className="ticket-details-area">
+          {
+            detailsOfChosenSeats.map((ticket, i) => {
+              return(
+                <div id={i} className="tickets">
+                  <p>{`Date: ${ticket.date}`}</p>
+                  <p>{`Category: ${ticket.cat}`}</p>
+                  <p>{`Seat No: ${ticket.seatNum}`}</p>
+                  <p>{`Price: ${ticket.price}`}</p>
+                </div>
+              )
+            })
+          }
+          </div>
+          <div className="pricing">
+            <h2>{`Total Price: $${totalPrice}`}</h2>
+          </div>
+        </div>
         
-  
+        {/* <div className="payment">
         {chosenSeat && (
         <div>
-          {/* <p>Chosen Seat: {chosenSeat}</p> */}
           {ticketDetails && (
             <div>
               <p>User Fullname: {currentUser.id}</p>
@@ -274,7 +422,8 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
               <p>Ticket ID: {ticketDetails.id}</p>
               <p>Price: {ticketDetails.price}</p>
               <p>Chosen Seat: {chosenSeat}</p>
-              {/* Add the payment input */}
+
+
               <div className="card-details">
             <div className="credit-card-number">
               <p className="text-wrapper-2">Credit Card Number</p>
@@ -305,6 +454,9 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
           )}
         </div>
       )}
+
+        </div> */}
+        
 
       </div>
     );
