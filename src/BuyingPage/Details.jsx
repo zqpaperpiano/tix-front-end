@@ -3,12 +3,29 @@ import "./Details.css";
 import TaylorSwift from '../assets/TaylorSwift.jpeg';
 import { useState, useEffect } from 'react';
 import AuthService from "../LoginSignUp/services/auth.service";
+import CountdownTimer from "../Components/Timer/CountdownTimer";
+import TicketService from "../NewBuyingDetails/ticket.service";
 
 export const Details = ({ onRouteChange }) => {
   const currentUser = AuthService.getCurrentUser();
 
+  // const handleTimeout = () => {
+  //   const startTime = localStorage.getItem('timerStartTime');
+  //   const currentTime = Date.now();
+  //   if (currentTime - startTime >= durationInSeconds * 1000) {
+  //     // The timer has expired even if the user navigated to a new page
+  //   } else {
+  //     TicketService. //delete user from buy set and call the next one
+  //     alert("Time is Up, return to home page");
+  //     onRouteChange("Home");
+  //   }
+      
+  // };
+
   return (
     <div className="details">
+
+        {/* <CountdownTimer durationInSeconds={600} onTimeout={handleTimeout} /> */}
 
         <div className="details-banner">
           <div className="details-banner-image">
@@ -25,41 +42,35 @@ export const Details = ({ onRouteChange }) => {
           <div className="details-customer-profile">
             <div className="details-left">
               <div className="full-name">
-                <div className="text-wrapper-5 profile-title">Full Name</div>
+                <div className="text-wrapper-5 profile-title">Email</div>
                 <div className="overlap-group">
-                  <p className="name profile-details">{currentUser.fullname}</p>
+                  <p className="name profile-details">{currentUser.email}</p>
                 </div>
               </div>
 
               <div className="email-address">
-                <div className="text-wrapper-5 profile-title">Email Address</div>
+                <div className="text-wrapper-5 profile-title">Full Name</div>
                 <div className="overlap-group">
-                  <p className="email profile-details">{currentUser.email}</p>
+                  <p className="email profile-details">{currentUser.fullname}</p>
                 </div>
               </div>
             </div>
 
             <div className="details-right">
-              <div className="profile-id">
-                <div className="text-wrapper-5 profile-title">Profile</div>
+              <div className="mobile">
+                <div className="text-wrapper-5 profile-title">Mobile</div>
                 <div className="overlap-group">
-                  {/* <div className="text-wrapper-4">Id</div> */}
-                  <p className="id profile-details">{currentUser.id}</p>
+
+                  <p className="email profile-details">{currentUser.mobile}</p>
 
                 </div>
+
               </div>
-
-                <div className="contact">
-                  <div className="text-wrapper-5 profile-title">Mobile</div>
-                  <div className="overlap-group">
-                    <p className="number profile-details">{currentUser.mobile}</p>
-                  </div>
-                </div>
 
                 <div className="button-div">
                   <button 
                 className="details-next-button"
-                onClick={() => { onRouteChange('SeatingPayment') }}>Next</button>
+                onClick={() => { onRouteChange('SeatingPayment') }}> Next </button>
                 </div>
         
               </div>

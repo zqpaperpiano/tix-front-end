@@ -180,6 +180,22 @@ const saveSetOrQueue = (userId, eventName) => {
   });
 }
 
+const timeout = (userId, eventName) => {
+  return axios.put
+  (API_URL + `home/${userId}/${eventName}`, {
+  }, 
+    {withCredentials: true,}
+  )
+  .then((response) => {
+    const inSet = response.data;
+    console.log(inSet)
+    return inSet;
+  }).catch((error) => {
+    console.error("Error fetching information:", error);
+    throw error;
+  });
+}
+
 
 const TicketService = {
   getDates,

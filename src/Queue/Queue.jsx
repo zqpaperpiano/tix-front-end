@@ -57,36 +57,41 @@ export const Queue = ({ onRouteChange }) => {
 
   return (
     <div className="details">
-      <div className="div">
-      <img className="taylor-swift" alt="Taylor swift" src={TaylorSwift} />
-        <div className="taylor-swift-title">
-          <div className="text-wrapper">Taylor Swift Era Tour</div>
-          <p className="p">2 March 2024 (Sat) ~ 9 March 2024 (Sat)</p>
-          <div className="text-wrapper-2">Singapore National Stadium</div>
 
+        <div className="details-banner">
+          <div className="details-banner-image">
+            <img className="details-image" alt="Taylor swift" src={TaylorSwift} />
+          </div>
+
+          <div className="details-banner-details">
+            <p className="text-wrapper-2">Singapore National Stadium</p>
+            <p className="text-wrapper-2">Taylor Swift Era Tour</p>
+            <p className="text-wrapper-2">2 March 2024 (Sat) ~ 9 March 2024 (Sat)</p>
+          </div>
         </div>
           
-          <div>
+        <div className="details-customer-profile">
+          <div className="details-left">
             <div className="full-name">
-              <div className="text-wrapper-3">Full Name</div>
+              <div className="text-wrapper-5 profile-title">Email</div>
               <div className="overlap-group">
-                <div className="name">{currentUser.fullname}</div>
+                <p className="name profile-details">{currentUser.email}</p>
               </div>
             </div>
 
             <div className="email-address">
-              <div className="text-wrapper-5">Email Address</div>
+              <div className="text-wrapper-5 profile-title">Full Name</div>
               <div className="overlap-group">
-                <div className="email">{currentUser.email}</div>
+                <p className="email profile-details">{currentUser.fullname}</p>
               </div>
             </div>
-
-            <div className="queue">
-              <div className="text-wrapper-7">Queue Number</div>
-              <div className="queue-number">{queueNumber}</div>
-            </div>
-
           </div>
+
+          <div className="queue">
+            <div className="text-wrapper-7">Queue Number</div>
+            <div className="queue-number">{queueNumber}</div>
+          </div>
+  
       </div>
     </div>
   );
