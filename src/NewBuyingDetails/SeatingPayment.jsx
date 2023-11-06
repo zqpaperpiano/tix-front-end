@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import TicketService from "./ticket.service";
 import AuthService from "../LoginSignUp/services/auth.service";
 import './SeatingPayment.css';
+import Stripe from "react-stripe-checkout";
+import axios from "axios";
+import StripeButton from "../Components/StripePayment/StripeButton";
 
 
 
@@ -31,7 +34,26 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
 
     const [cardNumber, setCardNumber] = useState("");
     const [expiry, setExpiry] = useState("");
-    const [cvv, setCVV] = useState("")
+    const [cvv, setCVV] = useState("");
+
+
+
+    async function handleToken(token) {
+      console.log(token);
+      await axios
+        .post("http://localhost:8081/api/payment/charge", "", {
+          headers: {
+            token: token.id,
+            amount: 500,
+          },
+        })
+        .then(() => {
+          alert("Payment Success");
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
 
     
 
@@ -423,8 +445,6 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
               <p>Price: {ticketDetails.price}</p>
               <p>Chosen Seat: {chosenSeat}</p>
 
-
-              <div className="card-details">
             <div className="credit-card-number">
               <p className="text-wrapper-2">Credit Card Number</p>
               <div className="card-input-wrapper">
@@ -449,7 +469,12 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
               <button className="payment-button"
                onClick={handlePayment}
                >
-                Pay</button>
+                Pay</button> */}
+                <StripeButton price={648}/>
+                {/* <Stripe
+                  stripeKey="pk_test_51O8PA9HVyHFmFtSnfvMmoHqE3suCMjlQsBy7Ybr0M2NYhTzzaTeWZ0zhPg8FMLHuUPU2My4T5Ogc2Zl9MKQKw2pL00siXGucI1"
+                  token={handleToken}
+                /> */}
             </div>
           )}
         </div>

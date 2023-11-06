@@ -10,6 +10,8 @@
   grid-template-columns: 60% 40%;
   margin-bottom: 2%;
   height: 100%;
+  position: relative;
+  left: 150px;
 }
 
 /*top right bottom left*/
@@ -30,6 +32,7 @@
 }
 
 .details-banner-details{
+  height: 90%;
   align-self:center;
   justify-self: center;
 }
@@ -68,121 +71,28 @@
 }
 
 .button-div{
-  padding-left: 55%;
+  position: absolute;
+  left: 1000px;
+  top: 660px;
 }
 
 .details-next-button{
   display: flex;
   margin-top: 2px;
   padding-bottom: 5px;
-  width: 50%;
+  width: 150%;
   border-radius: 15px;
   background-color: black;
   color: white;
+  font-family: "Poppins-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
   text-align: center;
   grid-row-start: 3;
   justify-content: center;
 }
 
-
-
-/* .details {
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-  }
-  
-  .details .div {
-    background-color: #ffffff;
-    height: 1024px;
-    overflow: hidden;
-    position: relative;
-    width: 1440px;
-  }
-  
-  .details .taylor-swift {
-    height: 320px;
-    left: 75px;
-    position: absolute;
-    top: 70px;
-    width: 602px;
-  }
-  
-  .details .taylor-swift-title {
-    height: 168px;
-    left: 720px;
-    position: absolute;
-    top: 150px;
-    width: 727px;
-  }
-  
-  .details .text-wrapper {
-    color: #000000;
-    font-family: "Poppins-Bold", Helvetica;
-    font-size: 40px;
-    font-weight: 700;
-    height: 72px;
-    left: 0;
-    letter-spacing: 0;
-    line-height: 24px;
-    position: absolute;
-    top: 0;
-    width: 663px;
-  }
-  
-  .details .p {
-    color: #000000;
-    font-family: "Poppins-SemiBold", Helvetica;
-    font-size: 32px;
-    font-weight: 600;
-    left: 3px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 72px;
-    width: 718px;
-  }
-  
-  .details .text-wrapper-2 {
-    color: #000000;
-    font-family: "Poppins-SemiBold", Helvetica;
-    font-size: 32px;
-    font-weight: 600;
-    left: 3px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 120px;
-    width: 570px;
-  }
-  
-  .details .full-name {
-    height: 88px;
-    left: 779px;
-    position: absolute;
-    top: 618px;
-    width: 404px;
-  }
-  
-  .details .text-wrapper-3 {
-    color: #000000;
-    font-family: "Poppins-Medium", Helvetica;
-    font-size: 20px;
-    font-weight: 500;
-    left: 3px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 0;
-  }
-  
-
-  
-
-  
-  .details .profile-id {
+  .details .mobile{
     height: 88px;
     left: 279px;
     position: absolute;
@@ -279,17 +189,3 @@
     top: 539px;
   }
   
-  .details .text-wrapper-7 {
-    color: #000000;
-    font-family: "Poppins-SemiBold", Helvetica;
-    font-size: 20px;
-    font-weight: 600;
-    left: 1111px;
-    letter-spacing: 0;
-    line-height: 24px;
-    position: absolute;
-    text-align: center;
-    top: 909px;
-    white-space: nowrap;
-  }
-   */

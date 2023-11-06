@@ -70,31 +70,29 @@ export const Queue = ({ onRouteChange }) => {
           </div>
         </div>
           
-          <div className="details-customer-profile">
-            <div className="details-left">
-              <div className="full-name">
-                <div className="text-wrapper-5 profile-title">Full Name</div>
-                <div className="overlap-group">
-                  <p className="name profile-details">{currentUser.fullname}</p>
-                </div>
+        <div className="details-customer-profile">
+          <div className="details-left">
+            <div className="full-name">
+              <div className="text-wrapper-5 profile-title">Email</div>
+              <div className="overlap-group">
+                <p className="name profile-details">{currentUser.email}</p>
               </div>
 
-              <div className="email-address">
-                <div className="text-wrapper-5 profile-title">Email Address</div>
-                <div className="overlap-group">
-                  <p className="email profile-details">{currentUser.email}</p>
-                </div>
+            <div className="email-address">
+              <div className="text-wrapper-5 profile-title">Full Name</div>
+              <div className="overlap-group">
+                <p className="email profile-details">{currentUser.fullname}</p>
+
               </div>
             </div>
+          </div>
 
-              <div className="button-div">
-                  <button 
-                className="details-next-button"
-                onClick={() => { onRouteChange('SeatingPayment') }}>Next</button>
-                </div>
-            </div>
-
-         
+          <div className="queue">
+            <div className="text-wrapper-7">Queue Number</div>
+            <div className="queue-number">{queueNumber}</div>
+          </div>
+  
+      </div>
     </div>
     // <div className="details">
     //   <div className="div">

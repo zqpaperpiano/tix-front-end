@@ -20,6 +20,7 @@ import AuthService from './LoginSignUp/services/auth.service';
 import UserPurchases from './Profile/UserPurchases';
 import Queue from './Queue/Queue';
 import UFCInfo from './UFC info/UFCInfo';
+import Stripe from "react-stripe-checkout";
 
 class App extends Component{
   constructor(){
@@ -116,7 +117,6 @@ class App extends Component{
         <div className="other-pages">
           {/* {this.pageNavigation()}  */}
           <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange}/>
-         
         </div>
       </div>
     );
@@ -124,3 +124,4 @@ class App extends Component{
 }
 
 export default App;
+
