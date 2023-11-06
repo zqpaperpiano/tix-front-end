@@ -1,7 +1,7 @@
 import React from "react";
 import './EventsAll.css'  
 import TaylorSwift from '../assets/TaylorSwift.jpeg' 
-import UFC from '../assets/UFC.jpeg'
+import UFC from '../assets/UFC/UFC.jpeg'
 import { EventNavigation } from "../Components/EventNavigation/EventNavigation";
 
 export const EventsAll = ({onRouteChange}) => {

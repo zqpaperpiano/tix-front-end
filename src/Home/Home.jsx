@@ -2,7 +2,7 @@ import React from "react";
 import { Carousel } from 'react-responsive-carousel';
 import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
 import TaylorSwift from '../assets/TaylorSwift.jpeg' 
-import UFC from '../assets/UFC.jpeg'
+import UFC from '../assets/UFC/UFC.jpeg'
 import './Home.css'
 
 const HomePage = ({onRouteChange}) => {

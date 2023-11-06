@@ -52,6 +52,7 @@ class Confirmation extends Component{
                 // console.log('this is a purchase', purchase);
                 purchases.push(purchase);
                 purchaseIDs.push(purchaseInfo.purchaseId);
+                console.log('my purchase IDs', purchaseIDs);
                 // console.log('looking at the list: ', purchases);
                 // console.log('length is: ...', purchases.length);
                 this.setState({

@@ -1,6 +1,6 @@
 import React from "react";
 import "./EventsSports.css";
-import UFC from '../assets/UFC.jpeg'
+import UFC from '../assets/UFC/UFC.jpeg'
 import { EventNavigation } from "../Components/EventNavigation/EventNavigation";
 
 export const EventsSports = ({onRouteChange}) => {
