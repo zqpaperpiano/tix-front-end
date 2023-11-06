@@ -247,7 +247,10 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
   
     return (
       <div className="seating-payment">
-        <CountdownTimer durationInSeconds={10} onTimeout={handleTimeout} />
+        <div className="Timer">
+          <CountdownTimer durationInSeconds={600} onTimeout={handleTimeout} />
+        </div>
+        
 
         <label htmlFor="dateDropdown">Select an Event Date:</label>
         <select

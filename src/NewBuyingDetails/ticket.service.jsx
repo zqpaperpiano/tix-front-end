@@ -196,6 +196,19 @@ const timeout = (eventName, userId) => {
   });
 }
 
+// const generatePDF = (purchaseId) => {
+//   return axios.post
+//   (API_URL + `"purchases/${purchaseId}/pdf"`, {
+//   }, 
+//     {withCredentials: true,}
+//   )
+//   .then(() => {
+//   }).catch((error) => {
+//     console.error("generatePDF", error);
+//     throw error;
+//   });
+// }
+
 
 const TicketService = {
   getDates,
@@ -209,7 +222,8 @@ const TicketService = {
   deletePurchase,
   getQueueNumber,
   saveSetOrQueue,
-  timeout
+  timeout,
+  generatePDF
 }
 
 export default TicketService;
