@@ -45,7 +45,7 @@ const getCategories = (eventName) => {
 const getSeatNumbers = (eventName, eventDate, eventCategory) => {
   // console.log(API_URL + `events/getEventByNameDate/${eventName}/${eventDate}/ticketByCategory/${eventCategory}/allSeats`);
   return axios.get
-    (API_URL + `events/getEventByNameDate/${eventName}/${eventDate}/ticketByCategory/${eventCategory}/allSeats`, {
+    (API_URL + `events/getEventByNameDate/${eventName}/${eventDate}/ticketByCategory/${eventCategory}/allAvailableSeats`, {
       eventName,
       eventDate,
       eventCategory
@@ -83,6 +83,25 @@ const getTicketByNameDateCategorySeat = (eventName, eventDate, eventCategory, se
       console.error("Error fetching ticket:", error);
       throw error;
     });
+};
+
+const getAllTicketsFromDateCategory = (eventName, eventDate, eventCategory) => {
+  return axios.get
+  (API_URL + `events/getEventByNameDate/${eventName}/${eventDate}/ticketByCategory/${eventCategory}/allSeatNumbers`, {
+    eventName,
+    eventDate,
+    eventCategory
+  },
+    {withCredentials: true,}
+  )
+  .then((response) => {
+    const ticket = response.data;
+    return ticket;
+  })
+  .catch((error) => {
+    console.error("Error fetching ticket:", error);
+    throw error;
+  })
 };
 
 //save new purchase info
@@ -146,7 +165,7 @@ const deletePurchase = (purchaseId) => {
   }, 
       // { withCredentials: true,}
   );
-}
+} 
 
 const getQueueNumber = (eventName, userId) => {
   return axios.get
@@ -208,6 +227,7 @@ const TicketService = {
   getUserPurchasesFromUserId,
   deletePurchase,
   getQueueNumber,
+  getAllTicketsFromDateCategory,
   saveSetOrQueue
 }
 

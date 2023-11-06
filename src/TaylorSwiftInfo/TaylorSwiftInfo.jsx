@@ -45,7 +45,7 @@ export const TaylorSwiftInfo = ({onRouteChange, user}) => {
       </div>
 
         <div className="event-detail-title">
-          <div className="event-summary">
+          <div className="event-summary"> 
             <p className="text-wrapper">Taylor Swift Era Tour</p>
             <p className="text-wrapper-2">2 March 2024 (Sat) ~ 9 March 2024 (Sat)</p>
             <p className="text-wrapper-2">Singapore National Stadium</p>

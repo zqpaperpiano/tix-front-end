@@ -1,8 +1,31 @@
 .seating-payment{
-    display: flex;  
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    height: 100%;
+}
+
+.seat-selection-area{
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  width: 55%;
+}
+
+.order-list{
+  display: grid;
+  grid-template-rows: 10% 70% 20%;
+  justify-content: center;
+  height: 100%;
+  overflow-x: auto;
+}
+
+.tickets{
+  padding-top: 5%;
+  border: 1px solid black;
+}
+
+.pricing{
+  grid-row-start: 3;
 }
 
 .seating-payment select{
