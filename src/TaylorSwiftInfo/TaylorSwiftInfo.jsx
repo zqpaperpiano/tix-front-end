@@ -7,7 +7,7 @@ import TicketService from "../NewBuyingDetails/ticket.service";
 import AuthService from "../LoginSignUp/services/auth.service";
 import { useState, useEffect } from "react";
 
-export const TaylorSwiftInfo = ({onRouteChange, user}) => {
+export const TaylorSwiftInfo = ({onRouteChange, user, setCurrentEvent}) => {
 
   const currentUser = AuthService.getCurrentUser();
   // const [hasAccess, setHasAccess] = useState(false);
@@ -19,8 +19,9 @@ export const TaylorSwiftInfo = ({onRouteChange, user}) => {
     TicketService.saveSetOrQueue(currentUser.id, "Taylor Swift Concert")
     .then ((isUserInSet) => {
       if (isUserInSet == true){
-        console.log("Going to Details");
-        onRouteChange("Details");
+        // console.log("Going to Details");
+        setCurrentEvent("Taylor Swift Concert");
+        onRouteChange("SeatingPayment");
       } 
       if (isUserInSet == false) {
         console.log("Going to Queue");
@@ -45,7 +46,7 @@ export const TaylorSwiftInfo = ({onRouteChange, user}) => {
       </div>
 
         <div className="event-detail-title">
-          <div className="event-summary">
+          <div className="event-summary"> 
             <p className="text-wrapper">Taylor Swift Era Tour</p>
             <p className="text-wrapper-2">2 March 2024 (Sat) ~ 9 March 2024 (Sat)</p>
             <p className="text-wrapper-2">Singapore National Stadium</p>

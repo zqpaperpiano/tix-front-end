@@ -1,8 +1,62 @@
 .seating-payment{
-    display: flex;  
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    height: 100%;
+}
+
+.seat-selection-area{
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  width: 55%;
+}
+
+.customer-order-div{
+display: grid;
+grid-template-rows: 35% 65%;
+}
+
+.customer-particulars{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.overlap-group {
+  background-color: #d9d9d999;
+  border-radius: 5px;
+  width: 75%;
+  margin: auto;
+  height: 60%;
+  text-align: center;
+}
+
+.text-wrapper-5 {
+  color: #000000;
+  font-family: "Poppins-Medium", Helvetica;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+
+.order-list{
+  display: grid;
+  grid-template-rows: 80% 20%;
+  justify-content: center;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.tickets{
+  padding-top: 5%;
+  border: 1px solid black;
+}
+
+
+.pricing{
+  grid-row-start: 3;
 }
 
 .seating-payment select{

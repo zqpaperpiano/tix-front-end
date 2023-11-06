@@ -1,6 +1,7 @@
 import React from "react";
 import "./Queue.css";
 import TaylorSwift from '../assets/TaylorSwift.jpeg';
+import UFC from '../assets/UFC/UFC.jpeg'
 import { useState, useEffect } from 'react'
 import TicketService from "../NewBuyingDetails/ticket.service";
 import { Client } from '@stomp/stompjs';
@@ -8,16 +9,16 @@ import SockJS from 'sockjs-client';
 import AuthService from "../LoginSignUp/services/auth.service";
 
 
-export const Queue = ({ onRouteChange }) => {
+export const Queue = ({ onRouteChange, currentEvent }) => {
   const currentUser = AuthService.getCurrentUser();
   const [queueNumber, setQueueNumber] = useState(null);
-  const [eventName, setName] = useState("Taylor Swift Concert");
-  // const [accessToBuy, setAccessToBuy] = useState(false);
-  const stompClient = new Client(); // Initialize the stompClient
+  const [eventName, setName] = useState(currentEvent);
+  const [accessToBuy, setAccessToBuy] = useState(false);
+  const stompClient = new Client();   //Initialize the stompClient
 
   const connect = () => {
     stompClient.webSocketFactory = () => {
-      return new SockJS('http://localhost:8081/ws');
+      return new SockJS('http: localhost:8081/ws');
     };
 
     stompClient.activate();
@@ -60,40 +61,37 @@ export const Queue = ({ onRouteChange }) => {
 
         <div className="details-banner">
           <div className="details-banner-image">
+            {currentEvent === "Taylor Swift Concert" ?
             <img className="details-image" alt="Taylor swift" src={TaylorSwift} />
+            :
+            <img className="details-image" alt="UFC" src={UFC} />
+          }
           </div>
 
-          <div className="details-banner-details">
-            <p className="text-wrapper-2">Singapore National Stadium</p>
-            <p className="text-wrapper-2">Taylor Swift Era Tour</p>
-            <p className="text-wrapper-2">2 March 2024 (Sat) ~ 9 March 2024 (Sat)</p>
+          <div>
+          {
+            currentEvent === "Taylor Swift Concert" ?
+            <div className="details-banner-details">
+              <p className="text-wrapper-2">Singapore National Stadium</p>
+              <p className="text-wrapper-2">Taylor Swift Era Tour</p>
+              <p className="text-wrapper-2">2 March 2024 (Sat) ~ 9 March 2024 (Sat)</p>
+            </div>
+            :
+            <div className="details-banner-details">
+            <p className="text-wrapper-2">The Octogon</p>
+            <p className="text-wrapper-2">UFC</p>
+            <p className="text-wrapper-2">2 March 2024 (Sat) & 4 March 2024 (Sun)</p>
           </div>
+          }
+          </div>
+
         </div>
-          
-        <div className="details-customer-profile">
-          <div className="details-left">
-            <div className="full-name">
-              <div className="text-wrapper-5 profile-title">Email</div>
-              <div className="overlap-group">
-                <p className="name profile-details">{currentUser.email}</p>
-              </div>
-            </div>
-
-            <div className="email-address">
-              <div className="text-wrapper-5 profile-title">Full Name</div>
-              <div className="overlap-group">
-                <p className="email profile-details">{currentUser.fullname}</p>
-              </div>
-            </div>
-          </div>
 
           <div className="queue">
             <div className="text-wrapper-7">Queue Number</div>
             <div className="queue-number">{queueNumber}</div>
           </div>
-  
       </div>
-    </div>
   );
 };
 

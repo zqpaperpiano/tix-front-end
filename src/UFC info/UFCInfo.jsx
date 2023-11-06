@@ -1,15 +1,13 @@
 import React from "react";
 import "./UFCInfo.css";
-//import ufc price table
-//import ufc seat mapping
-import UFC from '../assets/UFC.jpeg'
+import UFC from '../assets/UFC/UFC.jpeg'
 import SeatMapPicture from '../assets/SeatMapPicture.png';
 import PricingTable from '../assets/PricingTable.jpg';
 import TicketService from "../NewBuyingDetails/ticket.service";
 import AuthService from "../LoginSignUp/services/auth.service";
 import { useState } from "react";
 
-export const UFCInfo = ({onRouteChange, user}) => {
+export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
 
   const currentUser = AuthService.getCurrentUser();
   const [isInSet, setIsInSet] = useState(false);
@@ -22,7 +20,7 @@ export const UFCInfo = ({onRouteChange, user}) => {
     .then ((isUserInSet) => {
       console.log(isUserInSet);
       if (isUserInSet == true){
-        onRouteChange("Details");
+        onRouteChange("SeatingPayment");
       } 
       // if (isUserInSet == false) {
       //   onRouteChange("Queue");
@@ -35,9 +33,10 @@ export const UFCInfo = ({onRouteChange, user}) => {
         || error.toString();
       setMessage(resMessage);
     });
+  }
 
   return (
-    <div className="taylor-swift-info">
+    <div className="ufc-info">
 
       <div className="event-banner">
         <img className="taylor-swift-banner" alt="Taylor swift" src={UFC} />
@@ -59,7 +58,8 @@ export const UFCInfo = ({onRouteChange, user}) => {
             }else {
               handleCheck();
               if (isInSet === true){
-                onRouteChange("Details");
+                setCurrentEvent("UFC");
+                onRouteChange("SeatingPayment");
               } else {
                 onRouteChange("Queue");
               }
@@ -134,7 +134,6 @@ export const UFCInfo = ({onRouteChange, user}) => {
       
     </div>
   );
-};
 }
 
 export default UFCInfo;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, Container, Form, Button, NavDropdown} from 'react-bootstrap';
 import './NavbarComp.css'
+import { SearchBar } from '../SearchBar';
 
 
 export const NavbarComp = ({onRouteChange}) => {
@@ -12,10 +13,7 @@ export const NavbarComp = ({onRouteChange}) => {
         onClick={() => {onRouteChange('Home')}}
         href="#home" className='Company'>TIX</Navbar.Brand>
   
-        <Form className="d-flex">
-          <Form.Control type="search" placeholder="Search" className="me-2" aria-label="Search"/>
-          <Button variant="outline-success" className='search-button'>Search</Button>
-        </Form>
+        <SearchBar />
 
         
         <Nav className="ms-auto underline-on-hover">

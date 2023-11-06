@@ -45,7 +45,7 @@ const getCategories = (eventName) => {
 const getSeatNumbers = (eventName, eventDate, eventCategory) => {
   // console.log(API_URL + `events/getEventByNameDate/${eventName}/${eventDate}/ticketByCategory/${eventCategory}/allSeats`);
   return axios.get
-    (API_URL + `events/getEventByNameDate/${eventName}/${eventDate}/ticketByCategory/${eventCategory}/allSeats`, {
+    (API_URL + `events/getEventByNameDate/${eventName}/${eventDate}/ticketByCategory/${eventCategory}/allAvailableSeats`, {
       eventName,
       eventDate,
       eventCategory
@@ -76,7 +76,7 @@ const getTicketByNameDateCategorySeat = (eventName, eventDate, eventCategory, se
     )
     .then((response) => {
       const ticket = response.data;
-      localStorage.setItem("ticket", JSON.stringify(response.data));
+      // localStorage.setItem("ticket", JSON.stringify(response.data));
       return ticket;
     })
     .catch((error) => {
@@ -85,10 +85,29 @@ const getTicketByNameDateCategorySeat = (eventName, eventDate, eventCategory, se
     });
 };
 
+const getAllTicketsFromDateCategory = (eventName, eventDate, eventCategory) => {
+  return axios.get
+  (API_URL + `events/getEventByNameDate/${eventName}/${eventDate}/ticketByCategory/${eventCategory}/allSeatNumbers`, {
+    eventName,
+    eventDate,
+    eventCategory
+  },
+    {withCredentials: true,}
+  )
+  .then((response) => {
+    const ticket = response.data;
+    return ticket;
+  })
+  .catch((error) => {
+    console.error("Error fetching ticket:", error);
+    throw error;
+  })
+};
+
 //save new purchase info
 const savePurchaseInfo = (eventName, eventDate, eventCategory, seatNum, userId) => {
   return axios.post
-    (API_URL + `events/${eventName}/${eventDate}/${eventCategory}/${seatNum}/${userId}/purchaseTicket`, {
+    (API_URL + `events/${eventName}/${eventDate}/${eventCategory}/${seatNum}/${userId}`, {
       eventName,
       eventDate,
       eventCategory,
@@ -146,7 +165,7 @@ const deletePurchase = (purchaseId) => {
   }, 
       // { withCredentials: true,}
   );
-}
+} 
 
 const getQueueNumber = (eventName, userId) => {
   return axios.get
@@ -196,18 +215,6 @@ const timeout = (eventName, userId) => {
   });
 }
 
-// const generatePDF = (purchaseId) => {
-//   return axios.post
-//   (API_URL + `"purchases/${purchaseId}/pdf"`, {
-//   }, 
-//     {withCredentials: true,}
-//   )
-//   .then(() => {
-//   }).catch((error) => {
-//     console.error("generatePDF", error);
-//     throw error;
-//   });
-// }
 
 
 const TicketService = {
@@ -221,9 +228,9 @@ const TicketService = {
   getUserPurchasesFromUserId,
   deletePurchase,
   getQueueNumber,
-  saveSetOrQueue,
-  timeout,
-  generatePDF
+  getAllTicketsFromDateCategory,
+  generatePDF,
+  saveSetOrQueue
 }
 
 export default TicketService;
