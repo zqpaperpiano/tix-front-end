@@ -153,6 +153,7 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
       .then((numbers) => {
         TicketService.getAllTicketsFromDateCategory(eventName, selectedDate, selectedCategory)
         .then((tickets) => {
+          // console.log(`events/getEventByNameDate/${eventName}/${selectedDate}/ticketByCategory/${selectedCategory}/allSeatNumbers`);
           setListOfAllSeats(tickets);
           markUnavailableSeats(findUnavailableSeats(numbers, tickets));
         })
@@ -235,14 +236,15 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
 
     //remark seats that have been originally selected
     const markSelected = () => {
+      // console.log('marking');
       chosenSeat.map((seat) => {
         let cat = seat[1];
         let date = extractDate(seat);
-        console.log('date of selected seat:', date);
+        // console.log('date of selected seat:', date);
 
         let shortenedSelectedDate = selectedDate.split("-").join("");
         if(cat === selectedCategory && date === shortenedSelectedDate){
-          console.log('date of current selected date', shortenedSelectedDate);
+          // console.log('date of current selected date', shortenedSelectedDate);
           let selectedSeat = document.getElementById(seat);
           selectedSeat.classList.add("selected");
         }
@@ -250,7 +252,7 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
     }
 
     const onChangingEventOrCategory = () => {
-      console.log('changed!');
+      // console.log('changed!');
       unmarkSelected();
       markSelected();
     }
@@ -259,8 +261,10 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
     //fetch ticket based on chosen
     const handleDateCategorySeatSubmit = () => {
       chosenSeat.map((seat) => {
+        let ticketCat = parseInt(seat[1]);
         let seatNo = parseInt(seat[3]);
-        TicketService.getTicketByNameDateCategorySeat(eventName, selectedDate, selectedCategory, seatNo)
+        let ticketDate = parseInt(extractDate(seat));
+        TicketService.getTicketByNameDateCategorySeat(eventName, ticketDate, ticketCat, seatNo)
         .then((ticket) => {
         setTicketDetails(ticket);
         }, (error) => {
@@ -416,10 +420,11 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
             detailsOfChosenSeats.map((ticket, i) => {
               return(
                 <div id={i} className="tickets">
-                  <p>{`Date: ${ticket.date}`}</p>
-                  <p>{`Category: ${ticket.cat}`}</p>
-                  <p>{`Seat No: ${ticket.seatNum}`}</p>
-                  <p>{`Price: ${ticket.price}`}</p>
+                    <p>{`Date: ${ticket.date}`}</p>
+                    <p>{`Category: ${ticket.cat}`}</p>
+                    <p>{`Seat No: ${ticket.seatNum}`}</p>
+                    <p>{`Price: ${ticket.price}`}</p>
+                    <p onClick={() => console.log('clicked')}>Remove</p>
                 </div>
               )
             })
@@ -477,14 +482,5 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
                 /> */}
             </div>
           )}
-        </div>
-      )}
-
-        </div> */}
-        
-
-      </div>
-    );
-  }
   
   export default SeatingPayment;
