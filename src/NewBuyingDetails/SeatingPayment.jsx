@@ -8,9 +8,9 @@ import StripeButton from "../Components/StripePayment/StripeButton";
 
 
 
-export const SeatingPayment = ({purchase, onRouteChange}) => {
+export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
     const currentUser = AuthService.getCurrentUser();
-    const [eventName, setName] = useState("Taylor Swift Concert");
+    const [eventName, setName] = useState(currentEvent);
 
     const [eventDates, setEventDates] = useState([]);
     const [selectedDate, setSelectedDate] = useState("");
@@ -20,7 +20,6 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [chosenCategory, setChosenCategory] = useState("");
 
-   
     const [listOfAvailableSeats, setListOfAvailableSeats] = useState([]);
     const [listOfAllSeats, setListOfAllSeats] = useState([]);
     const [listOfTakenSeats, setListOfTakenSeats] = useState([]);
@@ -32,10 +31,7 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
     const [ticketDetails, setTicketDetails] = useState(null);
     const [message, setMessage] = useState("");
 
-    const [cardNumber, setCardNumber] = useState("");
-    const [expiry, setExpiry] = useState("");
-    const [cvv, setCVV] = useState("");
-
+    const [userPurchases, setUserPurchases] = useState([]);
 
 
     async function handleToken(token) {
@@ -53,20 +49,6 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
         .catch((error) => {
           alert(error);
         });
-    }
-
-    
-
-    const onChangeCardNumber = (event) => {
-      setCardNumber(event.target.value);
-    }
-
-    const onChangeExpiry = (event) => {
-      setExpiry(event.target.value);
-    }
-
-    const onChangeCVV = (event) => {
-      setCVV(event.target.value);
     }
 
     const onChangeDate = (e) => {
@@ -126,13 +108,11 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
         }
       })      
       setListOfTakenSeats(unavailableSeats);
-      // console.log('unavailable seats: ', unavailableSeats)
       return unavailableSeats;
     }
 
     //mark unavailable seats as red
     const markUnavailableSeats = (unavailableSeats) => {
-      console.log('unavailable seats: ', unavailableSeats);
       const allSeats = document.getElementsByClassName("seats-image");
       for(const seat of allSeats){
         seat.classList.remove("occupied");
@@ -154,9 +134,10 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
         TicketService.getAllTicketsFromDateCategory(eventName, selectedDate, selectedCategory)
         .then((tickets) => {
           setListOfAllSeats(tickets);
-          markUnavailableSeats(findUnavailableSeats(numbers, tickets));
+          setTimeout(() => {
+            markUnavailableSeats(findUnavailableSeats(numbers, tickets));
+          }, 300);
         })
-        // markUnavailableSeats(findUnavailableSeats(numbers, getAllTickets()));
         setListOfAvailableSeats(numbers);
       }, (error) => {
           const resMessage =
@@ -172,20 +153,20 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
       let updatedDetails = detailsOfChosenSeats.slice();
       let seatNo = parseInt(seat[3]);
       let ticketPrice = 0;
+      let date = extractDate(seat);
+
       TicketService.getTicketByNameDateCategorySeat(eventName, selectedDate, selectedCategory, seatNo)
       .then((ticket) => {
-        // console.log(ticket);
-        // console.log(typeof ticket.date);
         let tixDetails = {
-          "seatID": seat,
+          "ticketID": ticket.id,
+          "date": selectedDate,
+          "price": ticket.price,
           "cat": ticket.category,
           "seatNum": ticket.seatNum,
-          "price": ticket.price,
-          "date": selectedDate
+          "seatID": `c${selectedCategory}s${seatNo}d${date}`
         }
         ticketPrice = ticket.price;
         updatedDetails.push(tixDetails);
-        // console.log(updatedDetails);
         calculateTotalPrice(ticketPrice);
         setDetailsOfChosenSeats(updatedDetails);
       })
@@ -222,7 +203,6 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
 
     //remove seats that have been selected for a different date and cat
     const unmarkSelected = () => {
-      // console.log('unmarking...');
       let seats = document.getElementsByClassName("seats-image");
       
       for(let i =0; i < seats.length; ++i){
@@ -238,11 +218,9 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
       chosenSeat.map((seat) => {
         let cat = seat[1];
         let date = extractDate(seat);
-        console.log('date of selected seat:', date);
 
         let shortenedSelectedDate = selectedDate.split("-").join("");
         if(cat === selectedCategory && date === shortenedSelectedDate){
-          console.log('date of current selected date', shortenedSelectedDate);
           let selectedSeat = document.getElementById(seat);
           selectedSeat.classList.add("selected");
         }
@@ -250,48 +228,34 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
     }
 
     const onChangingEventOrCategory = () => {
-      console.log('changed!');
       unmarkSelected();
       markSelected();
     }
 
-  
-    //fetch ticket based on chosen
-    const handleDateCategorySeatSubmit = () => {
-      chosenSeat.map((seat) => {
-        let seatNo = parseInt(seat[3]);
-        TicketService.getTicketByNameDateCategorySeat(eventName, selectedDate, selectedCategory, seatNo)
-        .then((ticket) => {
-        setTicketDetails(ticket);
-        }, (error) => {
-            const resMessage =
-            (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-            setMessage(resMessage);
-        });
-      })
-      // 
-    };
-
     // save purchase info 
-    const handlePayment = () => {
-        // if(cardNumber.length !== 16 || cvv.length !== 3){
-        //   alert("Invalid card details. Please try again.")
-        // }else{
-        //   TicketService.savePurchaseInfo(eventName, selectedDate, selectedCategory, selectedSeat, currentUser.id)
-        // .then (
-        //   () => {
-        //   },(error) => {
-        //     const resMessage =
-        //       (error.response &&
-        //         error.response.data &&
-        //         error.response.data.message) ||
-        //       error.message ||
-        //       error.toString();
-        //     setMessage(resMessage);
-        //   }
-        // )
-        // .then(onRouteChange('Confirmation'))
-        // }
+    const handlePayment = (listOfDetailedTickets, ticketEventName, userID) => {
+      let noOfTix = listOfDetailedTickets.length;
+      localStorage.setItem("noOfTickets", JSON.stringify(noOfTix));
+
+      listOfDetailedTickets.map((ticket, i) => {
+        let storageNumber = i + 1;
+        let ticketCat = ticket.cat
+        let seatNo = ticket.seatNum;
+        let ticketDate = ticket.date
+        TicketService.savePurchaseInfo(ticketEventName, ticketDate, ticketCat, seatNo, userID)
+        .then (
+          () => {
+            localStorage.setItem(`ticket${storageNumber}`, ticket.ticketID);
+          },(error) => {
+            const resMessage =
+              (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+              error.message ||
+              error.toString();
+            setMessage(resMessage);
+            })
+          })
     };
 
     //check if a certain value exists within an array
@@ -306,16 +270,21 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
 
   const calculateTotalPrice = (changeInPrice) => {
     let price = totalPrice;
-    console.log('current price before addition: ', price);
     price += changeInPrice;
-    console.log('after addition: ', price);
     setTotalPrice(price);
 
   }
 
-  //function to make the seats be selected or unselected
+  const removeSeatNoFromChosenList = (currentSeatID, listOfChosenSeats) => {
+    let currentSeat = document.getElementById(currentSeatID);
+    currentSeat.classList.remove("selected");
+    listOfChosenSeats = listOfChosenSeats.filter((seat) => {
+      return seat != currentSeatID;
+    })
+    return listOfChosenSeats;
+  }
+
     const onClickSeats = (event) => {
-      // console.log('clicked seats');
       var occupied = false;
       var currentSeatID = event.currentTarget.id;
       var listOfChosenSeats = chosenSeat.slice();
@@ -326,35 +295,26 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
         }
       })
       if(!occupied){
-        // console.log('checkpoint 1');
         const currentSeat = document.getElementById(currentSeatID);
         const currentClass = currentSeat.classList;
 
         if(!checkIfExists(currentClass, "selected")){
-          // console.log('checkpoint 2');
           if(chosenSeat.length >= 4){
             alert("You can only choose up to 4 tickets");
           }else{
-            // console.log('checkpoint 3');
             currentSeat.classList.add("selected");
             listOfChosenSeats.push(currentSeatID);
             addTicketDetails(currentSeatID);
           }
         }else{
-          // console.log('checkpoint 4');
-          currentSeat.classList.remove("selected");
           removeTicketDetails(currentSeatID);
-          listOfChosenSeats = listOfChosenSeats.filter((seat) => {
-            return seat != currentSeatID;
-          })
+          listOfChosenSeats = removeSeatNoFromChosenList(currentSeatID, listOfChosenSeats);
         }
-        // console.log('checkpoint 5');
         setChosenSeat(listOfChosenSeats);
       }
     }
 
-    // console.log('chosen ticket seat Numbers: ', chosenSeat);
-    // console.log('ticket details: ', detailsOfChosenSeats);
+    console.log('eventName:', eventName);
     return (
       <div className="seating-payment">
         <div className="seat-selection-area">
@@ -406,85 +366,57 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
         : null
         }
 
-          <button onClick={handleDateCategorySeatSubmit}>Confirm Ticket</button> 
+            <StripeButton price={totalPrice} onRouteChange={onRouteChange} 
+            listOfDetailedTickets = {detailsOfChosenSeats}
+            userID={currentUser.id}
+            eventName = {eventName}
+            handlePayment={handlePayment} /> 
         </div>
 
-        <div className="order-list">
-          <h1>Your Tickets</h1>
-          <div className="ticket-details-area">
-          {
-            detailsOfChosenSeats.map((ticket, i) => {
-              return(
-                <div id={i} className="tickets">
-                  <p>{`Date: ${ticket.date}`}</p>
-                  <p>{`Category: ${ticket.cat}`}</p>
-                  <p>{`Seat No: ${ticket.seatNum}`}</p>
-                  <p>{`Price: ${ticket.price}`}</p>
-                </div>
-              )
-            })
-          }
-          </div>
-          <div className="pricing">
-            <h2>{`Total Price: $${totalPrice}`}</h2>
-          </div>
-        </div>
-        
-        {/* <div className="payment">
-        {chosenSeat && (
-        <div>
-          {ticketDetails && (
-            <div>
-              <p>User Fullname: {currentUser.id}</p>
-              <p>User Fullname: {currentUser.fullname}</p>
-              <p>User Email: {currentUser.email}</p>
-              <p>Event Name: {eventName}</p>
-              <p>Event Date: {selectedDate}</p>
-              <p>Category: {selectedCategory}</p>
-              <p>Ticket ID: {ticketDetails.id}</p>
-              <p>Price: {ticketDetails.price}</p>
-              <p>Chosen Seat: {chosenSeat}</p>
+        <div className="customer-order-div">
+          <div className="customer-particulars">
+            <div className="customer-name">
+              <p className="text-wrapper-5">Name</p>
+              <div className="overlap-group">
+              <p>{currentUser.fullname}</p>
+              </div>
+            </div>
 
-            <div className="credit-card-number">
-              <p className="text-wrapper-2">Credit Card Number</p>
-              <div className="card-input-wrapper">
-                <input onChange={onChangeCardNumber} className="number" />
-              </div>
-            </div>
-  
-            <div className="dateof-expiry">
-              <p className="text-wrapper-2">Date of Expiry</p>
-              <div className="card-input-wrapper">
-                <input onChange={onChangeExpiry} className="date" placeholder={"mm/yy"} />
-              </div>
-            </div>
-  
-            <div className="CVV">
-              <p className="text-wrapper-2">CVV</p>
-              <div className="card-input-wrapper">
-                <input onChange={onChangeCVV} className="cvv-input" />
+            <div className="customer-email">
+              <p className="text-wrapper-5">Email</p>
+              <div className="overlap-group">
+                <p>{currentUser.email}</p>
               </div>
             </div>
           </div>
-              <button className="payment-button"
-               onClick={handlePayment}
-               >
-                Pay</button> */}
-                <StripeButton price={648}/>
-                {/* <Stripe
-                  stripeKey="pk_test_51O8PA9HVyHFmFtSnfvMmoHqE3suCMjlQsBy7Ybr0M2NYhTzzaTeWZ0zhPg8FMLHuUPU2My4T5Ogc2Zl9MKQKw2pL00siXGucI1"
-                  token={handleToken}
-                /> */}
+
+          <div className="order-list">
+            <div className="ticket-details-area">
+            {
+              detailsOfChosenSeats.map((ticket, i) => {
+                // console.log('ticket:', ticket);
+                return(
+                  <div id={i} className="tickets">
+                      <p>{`Date: ${ticket.date}`}</p>
+                      <p>{`Category: ${ticket.cat}`}</p>
+                      <p>{`Seat No: ${ticket.seatNum}`}</p>
+                      <p>{`Price: ${ticket.price}`}</p>
+                      <p onClick={() => {
+                        removeTicketDetails(ticket.seatID);
+                        let listOfChosenSeats = removeSeatNoFromChosenList(ticket.seatID, chosenSeat);
+                        setChosenSeat(listOfChosenSeats);
+                      }}>Remove</p>
+                  </div>
+                )
+              })
+            }
             </div>
-          )}
+            <div className="pricing">
+              <h2>{`Total Price: $${totalPrice}`}</h2>
+            </div>
+          </div>
         </div>
-      )}
-
-        </div> */}
-        
-
       </div>
-    );
-  }
+    )}
   
   export default SeatingPayment;
