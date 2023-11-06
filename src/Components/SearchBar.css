@@ -1,7 +1,6 @@
-.search-bar{
-    color: white;
+.search-results{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
 }
 
-input{
-    color: white;
-}

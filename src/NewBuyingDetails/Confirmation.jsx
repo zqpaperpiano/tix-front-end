@@ -65,8 +65,6 @@ class Confirmation extends Component{
 
     componentDidMount(){
         this.getPurchaseInfo();
-        TicketService.generatePDF(this.state.purchaseIDs)
-        .then(() => {})
     }
 
     render(){

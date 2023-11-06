@@ -21,6 +21,8 @@ import UserPurchases from './Profile/UserPurchases';
 import Queue from './Queue/Queue';
 import UFCInfo from './UFC info/UFCInfo';
 import Stripe from "react-stripe-checkout";
+import TicketService from './NewBuyingDetails/ticket.service';
+import { SearchResults } from './SearchResults/SearchResults';
 
 class App extends Component{
   constructor(){
@@ -28,6 +30,8 @@ class App extends Component{
     this.state=({
       route: 'Home',
       currentEvent: '',
+      eventList: [],
+      filteredEvents: [],
       user: {
         fullName: '',
         email: '',
@@ -64,13 +68,47 @@ class App extends Component{
     })
   }
 
+  setFilteredEvents = (filteredEvents) => {
+    this.setState({
+      filteredEvents: filteredEvents
+    })
+  }
+
+  getAllEvents = () => {
+    let eventList = [];
+    let set = new Set();
+    TicketService.getAllEvents()
+    .then((resp) => {
+      let eventObject = resp.data;
+      eventObject.map((event) => {
+        let eventName = event.name;
+        set.add(eventName);
+      })
+    })
+    .then(() => {
+      for(const eventName of set){
+        eventList.push(eventName);
+      }
+      this.setState({
+        eventList: eventList
+      })
+    })
+
+    
+    
+  }
+
+  componentDidMount(){
+    this.getAllEvents();
+  }
+
 
 
   onUserLogin(){
     if(this.state.user.email != ''){
-      return <NavbarCompProfile onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
+      return <NavbarCompProfile onRouteChange={this.onRouteChange} loadUser={this.loadUser} setFilteredEvents={this.setFilteredEvents} eventsList={this.state.eventList}/>
     }else{ 
-      return <NavbarComp onRouteChange={this.onRouteChange} />
+      return <NavbarComp onRouteChange={this.onRouteChange} setFilteredEvents={this.setFilteredEvents} eventsList={this.state.eventList}/>
     }
   }
 
@@ -108,11 +146,14 @@ class App extends Component{
             return <Queue onRouteChange={this.onRouteChange} currentEvent={this.state.currentEvent}/>
           case 'UserPurchases':
             return <UserPurchases />
+          case 'SearchResult':
+            return <SearchResults filteredEvents={this.state.filteredEvents} />
         }
   }
 
   
   render(){
+    // console.log(this.state.eventList);
     return (
       <div className="main-page">
         <div className='navbar-top'>
@@ -121,7 +162,7 @@ class App extends Component{
 
         <div className="other-pages">
           {this.pageNavigation()} 
-          {/* <UFCInfo onRouteChange={this.onRouteChange} user={this.state.user}/>  */}
+          {/* <SearchResults eventList={this.state.eventList} /> */}
          
         </div>
       </div>

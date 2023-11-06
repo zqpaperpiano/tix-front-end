@@ -2,17 +2,15 @@ import React from 'react';
 import { Navbar, Nav, Container, NavDropdown, Form, Button } from 'react-bootstrap';
 import './NavbarComp.css'
 import AuthService from '../../LoginSignUp/services/auth.service';
+import { SearchBar } from '../SearchBar';
 
-export const NavbarCompProfile = ({loadUser, onRouteChange}) => {
+export const NavbarCompProfile = ({loadUser, onRouteChange, setFilteredEvents, eventsList}) => {
   return (
     <Navbar bg="black fixed-top" variant="dark">
       <Container>
       <Navbar.Brand onClick={() => {onRouteChange('Home')}} href="#home" className="logo">TIX</Navbar.Brand>
 
-        <Form className="d-flex">
-          <Form.Control type="search" placeholder="Search" className="me-2 search-input" aria-label="Search"/>
-          <Button variant="outline-success" className='search-button'>Search</Button>
-        </Form>
+        <SearchBar onRouteChange={onRouteChange} setFilteredEvents={setFilteredEvents} eventsList={eventsList}/>
 
        
         <Nav className="ms-auto underline-on-hover">
