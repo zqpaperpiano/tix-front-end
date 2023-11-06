@@ -1,8 +1,6 @@
 import React from "react";
 import "./UFCInfo.css";
-//import ufc price table
-//import ufc seat mapping
-import UFC from '../assets/UFC.jpeg'
+import UFC from '../assets/UFC/UFC.jpeg'
 import SeatMapPicture from '../assets/SeatMapPicture.png';
 import PricingTable from '../assets/PricingTable.jpg';
 import TicketService from "../NewBuyingDetails/ticket.service";

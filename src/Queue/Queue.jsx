@@ -1,6 +1,7 @@
 import React from "react";
 import "./Queue.css";
 import TaylorSwift from '../assets/TaylorSwift.jpeg';
+import UFC from '../assets/UFC/UFC.jpeg'
 import { useState, useEffect } from 'react'
 import TicketService from "../NewBuyingDetails/ticket.service";
 import { Client } from '@stomp/stompjs';
@@ -60,14 +61,30 @@ export const Queue = ({ onRouteChange, currentEvent }) => {
 
         <div className="details-banner">
           <div className="details-banner-image">
+            {currentEvent === "Taylor Swift Concert" ?
             <img className="details-image" alt="Taylor swift" src={TaylorSwift} />
+            :
+            <img className="details-image" alt="UFC" src={UFC} />
+          }
           </div>
 
-          <div className="details-banner-details">
-            <p className="text-wrapper-2">Singapore National Stadium</p>
-            <p className="text-wrapper-2">Taylor Swift Era Tour</p>
-            <p className="text-wrapper-2">2 March 2024 (Sat) ~ 9 March 2024 (Sat)</p>
+          <div>
+          {
+            currentEvent === "Taylor Swift Concert" ?
+            <div className="details-banner-details">
+              <p className="text-wrapper-2">Singapore National Stadium</p>
+              <p className="text-wrapper-2">Taylor Swift Era Tour</p>
+              <p className="text-wrapper-2">2 March 2024 (Sat) ~ 9 March 2024 (Sat)</p>
+            </div>
+            :
+            <div className="details-banner-details">
+            <p className="text-wrapper-2">The Octogon</p>
+            <p className="text-wrapper-2">UFC</p>
+            <p className="text-wrapper-2">2 March 2024 (Sat) & 4 March 2024 (Sun)</p>
           </div>
+          }
+          </div>
+
         </div>
 
           <div className="queue">
