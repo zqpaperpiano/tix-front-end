@@ -22,6 +22,18 @@ const getDates = (eventName) => {
     
 }
 
+const getAllEvents = () => {
+  return axios.get
+  (API_URL + 'events')
+  .then((response => {
+    return response;
+  }))
+  .catch((error) => {
+    console.log('error getting all events', error);
+    throw error;
+  })
+}
+
 //returns list of categories from eventName
 const getCategories = (eventName) => {
   return axios.get
@@ -230,6 +242,7 @@ const timeout = (userId, eventName) => {
 
 
 const TicketService = {
+  getAllEvents,
   getDates,
   getCategories,
   getSeatNumbers,
