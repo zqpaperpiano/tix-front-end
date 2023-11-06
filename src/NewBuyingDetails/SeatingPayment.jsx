@@ -5,6 +5,7 @@ import './SeatingPayment.css';
 import Stripe from "react-stripe-checkout";
 import axios from "axios";
 import StripeButton from "../Components/StripePayment/StripeButton";
+import CountdownTimer from "../Components/Timer/CountdownTimer";
 
 
 
@@ -229,9 +230,25 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
       }
     }
 
+    const handleTimeout = () => {
+        alert("Time is Up, Returning to Home");
+        TicketService.timeout(eventName, currentUser.id)
+        .then(() => {
+          onRouteChange("Home");
+      }, (error) => {
+          const resMessage =
+            (error.response && error.response.data && error.response.data.message)  
+            || error.message  
+            || error.toString();
+          setMessage(resMessage);
+      });
+    }
+
   
     return (
       <div className="seating-payment">
+        <CountdownTimer durationInSeconds={10} onTimeout={handleTimeout} />
+
         <label htmlFor="dateDropdown">Select an Event Date:</label>
         <select
           id="dateDropdown"
@@ -296,38 +313,7 @@ export const SeatingPayment = ({purchase, onRouteChange}) => {
               <p>Ticket ID: {ticketDetails.id}</p>
               <p>Price: {ticketDetails.price}</p>
               <p>Chosen Seat: {chosenSeat}</p>
-              {/* Add the payment input */}
-              {/* <div className="card-details">
-            <div className="credit-card-number">
-              <p className="text-wrapper-2">Credit Card Number</p>
-              <div className="card-input-wrapper">
-                <input onChange={onChangeCardNumber} className="number" />
-              </div>
-            </div>
-  
-            <div className="dateof-expiry">
-              <p className="text-wrapper-2">Date of Expiry</p>
-              <div className="card-input-wrapper">
-                <input onChange={onChangeExpiry} className="date" placeholder={"mm/yy"} />
-              </div>
-            </div>
-  
-            <div className="CVV">
-              <p className="text-wrapper-2">CVV</p>
-              <div className="card-input-wrapper">
-                <input onChange={onChangeCVV} className="cvv-input" />
-              </div>
-            </div>
-          </div>
-              <button className="payment-button"
-               onClick={handlePayment}
-               >
-                Pay</button> */}
                 <StripeButton price={648}/>
-                {/* <Stripe
-                  stripeKey="pk_test_51O8PA9HVyHFmFtSnfvMmoHqE3suCMjlQsBy7Ybr0M2NYhTzzaTeWZ0zhPg8FMLHuUPU2My4T5Ogc2Zl9MKQKw2pL00siXGucI1"
-                  token={handleToken}
-                /> */}
             </div>
           )}
         </div>

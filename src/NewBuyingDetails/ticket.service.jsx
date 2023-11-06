@@ -180,9 +180,9 @@ const saveSetOrQueue = (userId, eventName) => {
   });
 }
 
-const timeout = (userId, eventName) => {
+const timeout = (eventName, userId) => {
   return axios.put
-  (API_URL + `home/${userId}/${eventName}`, {
+  (API_URL + `home/${eventName}/${userId}/deleteAndNotify`, {
   }, 
     {withCredentials: true,}
   )
@@ -191,7 +191,7 @@ const timeout = (userId, eventName) => {
     console.log(inSet)
     return inSet;
   }).catch((error) => {
-    console.error("Error fetching information:", error);
+    console.error("Error", error);
     throw error;
   });
 }
@@ -208,7 +208,8 @@ const TicketService = {
   getUserPurchasesFromUserId,
   deletePurchase,
   getQueueNumber,
-  saveSetOrQueue
+  saveSetOrQueue,
+  timeout
 }
 
 export default TicketService;
