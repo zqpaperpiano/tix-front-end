@@ -12,11 +12,11 @@ export const EventsSports = ({onRouteChange}) => {
       <div className="events-overview">
         <div className="event-card">
           <div className="image-div">
-            <img className="event-image" alt="Ufc" src={UFC} />
+            <img onClick={() => {onRouteChange("UFCInfo")}} className="event-image" alt="Ufc" src={UFC} />
           </div>
           
           <div className="title">
-            <p className="text-wrapper-2">UFC | HOLLOWAY vs THE KOREAN ZOMBIE</p>
+            <p onClick={() => {onRouteChange("UFCInfo")}} className="text-wrapper-2">UFC | HOLLOWAY vs THE KOREAN ZOMBIE</p>
           </div>
             
           </div>

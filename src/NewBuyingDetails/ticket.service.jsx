@@ -76,7 +76,7 @@ const getTicketByNameDateCategorySeat = (eventName, eventDate, eventCategory, se
     )
     .then((response) => {
       const ticket = response.data;
-      localStorage.setItem("ticket", JSON.stringify(response.data));
+      // localStorage.setItem("ticket", JSON.stringify(response.data));
       return ticket;
     })
     .catch((error) => {
@@ -107,7 +107,7 @@ const getAllTicketsFromDateCategory = (eventName, eventDate, eventCategory) => {
 //save new purchase info
 const savePurchaseInfo = (eventName, eventDate, eventCategory, seatNum, userId) => {
   return axios.post
-    (API_URL + `events/${eventName}/${eventDate}/${eventCategory}/${seatNum}/${userId}/purchaseTicket`, {
+    (API_URL + `events/${eventName}/${eventDate}/${eventCategory}/${seatNum}/${userId}`, {
       eventName,
       eventDate,
       eventCategory,
@@ -139,6 +139,19 @@ const getPurchaseInfoFromTicketId = (ticketId) => {
       throw error;
     });
     
+}
+
+const generatePDF = (purchaseId) => {
+  return axios.post
+  (API_URL + "purchases/${purchaseId}/pdf", {
+  }, 
+    {withCredentials: true,}
+  )
+  .then(() => {
+  }).catch((error) => {
+    console.error("generatePDF", error);
+    throw error;
+  });
 }
 
 //retruns the list of purchases user made
@@ -228,6 +241,7 @@ const TicketService = {
   deletePurchase,
   getQueueNumber,
   getAllTicketsFromDateCategory,
+  generatePDF,
   saveSetOrQueue
 }
 

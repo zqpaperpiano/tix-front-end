@@ -1,62 +1,112 @@
 import React, { useState, useEffect } from "react";
+import { Component } from "react";
 import TicketService from "./ticket.service";
 import AuthService from "../LoginSignUp/services/auth.service";
 import './Confirmation.css';
 
-const Confirmation = ({onRouteChange}) => {
-
-    const  currentUser = AuthService.getCurrentUser();
-    const [purchaseInfo, setPurchaseInfo] = useState("");
-
-    const getPurchaseInfo = () => {
-        const currentTicket = TicketService.getCurrentTicket();
-            TicketService.getPurchaseInfoFromTicketId(currentTicket.id)
-            .then((purchaseInfo) => {
-                console.log(purchaseInfo)
-                setPurchaseInfo(purchaseInfo)}
-            )
+class Confirmation extends Component{
+    constructor(){
+        super();
+        this.state=({
+            user: AuthService.getCurrentUser(),
+            purchaseInfo: [ ],
+            ticketIDs: [],
+            purchaseIDs: [],
+        })
     }
 
-    useEffect(() => {
-        setTimeout(() => {
-            getPurchaseInfo();
-        }, 3000)
-    }, []);
+    getTicketIds = () => {
+        let noOfTickets = parseInt(localStorage.getItem("noOfTickets"));
+        let tickets = [];
 
-    return(
-         <div className="confirmation">
-            <h1>Thank you for your purchase!</h1>
-            <h2>Your ticket details are as follows:</h2>
+        for(let i = 1; i <= noOfTickets; ++i){
+            tickets.push(localStorage.getItem(`ticket${i}`));
+        }
 
-            {
-                purchaseInfo === "" ?
-                <div className="spinner-grow" role="status">
-                    <span className="sr-only">Loading...</span>
-                </div>
-                : 
+        // console.log('these r my ticketids: ', tickets);
+        return tickets;
+    }
+
+    getPurchaseInfo = () => {
+        let tickets = this.getTicketIds();
+        let purchases = [ ]
+        let purchaseIDs = [];
+
+        tickets.map((ticket, i) => {
+            // console.log('one ticket coming through...: ', ticket);
+            TicketService.getPurchaseInfoFromTicketId(ticket)
+            .then((purchaseInfo) => {
+                // console.log('retried purchase info here: ', purchaseInfo);
+                let purchase = {
+                    "purchaseId": purchaseInfo.purchaseId,
+                    "userId": purchaseInfo.userId,
+                    "userFullname": purchaseInfo.userFullname,
+                    "userEmail": purchaseInfo.userEmail,
+                    "eventName": purchaseInfo.eventName,
+                    "eventDate": purchaseInfo.eventDate,
+                    "ticketId": purchaseInfo.ticketId,
+                    "ticketPrice": purchaseInfo.ticketPrice,
+                    "seatNum": purchaseInfo.seatNum,
+                    "category": purchaseInfo.category
+                }
+                // console.log('this is a purchase', purchase);
+                purchases.push(purchase);
+                purchaseIDs.push(purchaseInfo.purchaseId);
+                // console.log('looking at the list: ', purchases);
+                // console.log('length is: ...', purchases.length);
+                this.setState({
+                    purchaseInfo: purchases,
+                    purchaseIDs: purchaseIDs
+                })
+            })
+        })
+    }
+
+    componentDidMount(){
+        this.getPurchaseInfo();
+        TicketService.generatePDF(this.state.purchaseIDs)
+        .then(() => {})
+    }
+
+    render(){
+        const {onRouteChange} = this.props;
+        // console.log('rendered');
+        // console.log(this.state.purchaseIDs);
+        return(
             <div>
-                <p>{`Purchase ID: ${purchaseInfo.purchaseId}`}</p>
-                <p>{`User ID: ${purchaseInfo.userId}`}</p>
-                <p>{`User Fullname: ${purchaseInfo.userFullname}`}</p>
-                <p>{`User Email: ${purchaseInfo.userEmail}`}</p>
-                <p>{`Event Name: ${purchaseInfo.eventName}`}</p>
-                <p>{`Event Date: ${purchaseInfo.eventDate}`}</p>
-                <p>{`Category: ${purchaseInfo.category}`}</p>
-                <p>{`Ticket ID: ${purchaseInfo.ticketId}`}</p>
-                <p>{`Price: ${purchaseInfo.ticketPrice}`}</p>
-                <p>{`Seat Number: ${purchaseInfo.seatNum}`}</p>
-                <p>{`Name: ${currentUser.fullname}`}</p>
-                <p>{`Email: ${currentUser.email}`}</p>
-                <h3 onClick={() => {onRouteChange('Home')}}>Click here to return to home</h3>
-
+                <h1>Thank you for your purchase!</h1>
+               <h2>Your ticket details are as follows:</h2>
+                {
+                    this.state.purchaseInfo.length === 0 ? 
+                        <div className="spinner-grow" role="status">
+                        <span className="sr-only">Loading...</span>
+                        </div>
+                        : 
+                        <div>
+                            {
+                                this.state.purchaseInfo .map((purchase, i) => {
+                                    return(
+                                        <div className="purchases" key={i}>
+                                      <p>{`Purchase ID: ${ purchase.purchaseId}`}</p>
+                                      <p>{`User ID: ${ purchase.userId}`}</p>
+                                      <p>{`User Fullname: ${ purchase.userFullname}`}</p>
+                                      <p>{`User Email: ${ purchase.userEmail}`}</p>
+                                      <p>{`Event Name: ${ purchase.eventName}`}</p>
+                                      <p>{`Event Date: ${ purchase.eventDate}`}</p>
+                                      <p>{`Category: ${ purchase.category}`}</p>
+                                      <p>{`Ticket ID: ${ purchase.ticketId}`}</p>
+                                      <p>{`Price: ${ purchase.ticketPrice}`}</p>
+                                      <p>{`Seat Number: ${ purchase.seatNum}`}</p>
+                                  </div>
+                                    )
+                                })
+                            }
+                        </div>
+                }
+                <h3 onClick={() => onRouteChange("Home")}>Click here to return to home</h3>
             </div>
-
-
-            }
-
-           
-         </div>
-    );
+        );
+    }
 }
 
 export default Confirmation;

@@ -27,6 +27,7 @@ class App extends Component{
     super();
     this.state=({
       route: 'Home',
+      currentEvent: '',
       user: {
         fullName: '',
         email: '',
@@ -55,8 +56,15 @@ class App extends Component{
         price: price,
       }
     })
-
   }
+
+  setCurrentEvent = (eventName) => {
+    this.setState({
+      currentEvent: eventName
+    })
+  }
+
+
 
   onUserLogin(){
     if(this.state.user.email != ''){
@@ -84,14 +92,12 @@ class App extends Component{
             return <EventsMusic onRouteChange={this.onRouteChange} />  
           case 'Sports':
             return <EventsSports onRouteChange={this.onRouteChange} />
-          case 'Details':
-            return <Details onRouteChange={this.onRouteChange} />
           case 'SeatingPayment':
-            return  <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange}/>
+            return  <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange} currentEvent={this.state.currentEvent}/>
           case 'TSInfo':
-            return <TaylorSwiftInfo onRouteChange={this.onRouteChange} user={this.state.user}/>
+            return <TaylorSwiftInfo onRouteChange={this.onRouteChange} user={this.state.user} setCurrentEvent={this.setCurrentEvent}/>
           case 'UFCInfo':
-            return <UFCInfo onRouteChange={this.onRouteChange} user={this.state.user}/>  
+            return <UFCInfo onRouteChange={this.onRouteChange} user={this.state.user} setCurrentEvent={this.setCurrentEvent}/>  
           case 'Home':
             return <HomePage onRouteChange={this.onRouteChange} />
           case 'Profile':
@@ -99,15 +105,14 @@ class App extends Component{
           case 'Confirmation':
             return <Confirmation onRouteChange={this.onRouteChange} />
           case 'Queue':
-            return <Queue onRouteChange={this.onRouteChange} />
+            return <Queue onRouteChange={this.onRouteChange} currentEvent={this.state.currentEvent}/>
           case 'UserPurchases':
             return <UserPurchases />
         }
   }
 
+  
   render(){
-    // console.log('from state:', this.state.user);
-    // console.log('from authservice: ', AuthService.getCurrentUser());
     return (
       <div className="main-page">
         <div className='navbar-top'>
@@ -115,14 +120,9 @@ class App extends Component{
         </div>
 
         <div className="other-pages">
-<<<<<<< HEAD
-          {/* {this.pageNavigation()}  */}
-          <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange}/>
-=======
           {this.pageNavigation()} 
-          {/* <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange}/> */}
+          {/* <UFCInfo onRouteChange={this.onRouteChange} user={this.state.user}/>  */}
          
->>>>>>> ziqing
         </div>
       </div>
     );
