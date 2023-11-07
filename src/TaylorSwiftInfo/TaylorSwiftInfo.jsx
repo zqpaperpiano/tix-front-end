@@ -18,9 +18,9 @@ export const TaylorSwiftInfo = ({onRouteChange, user, setCurrentEvent}) => {
     console.log(currentUser.id)
     TicketService.saveSetOrQueue(currentUser.id, "Taylor Swift Concert")
     .then ((isUserInSet) => {
+      setCurrentEvent("Taylor Swift Concert");
       if (isUserInSet == true){
         // console.log("Going to Details");
-        setCurrentEvent("Taylor Swift Concert");
         onRouteChange("SeatingPayment");
       } 
       if (isUserInSet == false) {
@@ -31,8 +31,8 @@ export const TaylorSwiftInfo = ({onRouteChange, user, setCurrentEvent}) => {
     }, (error) => {
       const resMessage =
         (error.response && error.response.data && error.response.data.message)  
-        || error.message  
-        || error.toString();
+        ||error.message  
+        ||error.toString();
       setMessage(resMessage);
     });
 
@@ -97,7 +97,6 @@ export const TaylorSwiftInfo = ({onRouteChange, user, setCurrentEvent}) => {
             </p>
           </div>
         </div>
-
         <div className="seat-map">
           <p className="seat-map-ticket text-wrapper-5">Seat Map &amp; Ticket Pricing</p>
           <div className="pictures">

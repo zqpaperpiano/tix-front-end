@@ -97,7 +97,7 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
         set.add(seats);
       }
 
-      console.log('allSeats:', allSeats);
+      // console.log('allSeats:', allSeats);
 
       allSeats.map((seats) => {
         if(!set.has(seats)){
@@ -329,7 +329,7 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
       });
     }
 
-    console.log('eventName:', eventName);
+    // console.log('eventName:', eventName);
     return (
       <div className="seating-payment">
         <div className="Timer">

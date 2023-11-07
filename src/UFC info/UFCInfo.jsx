@@ -29,8 +29,8 @@ export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
     }, (error) => {
       const resMessage =
         (error.response && error.response.data && error.response.data.message)  
-        || error.message  
-        || error.toString();
+        || error.message 
+         ||error.toString();
       setMessage(resMessage);
     });
   }
@@ -56,9 +56,9 @@ export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
               alert('Please log in or sign up first!');
               onRouteChange('Login');
             }else {
+              setCurrentEvent("UFC");
               handleCheck();
               if (isInSet === true){
-                setCurrentEvent("UFC");
                 onRouteChange("SeatingPayment");
               } else {
                 onRouteChange("Queue");
@@ -106,7 +106,6 @@ export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
             <img className="category-table" alt="Category table" src={PricingTable} />
             </div>
         </div>
-
         <div className="admission-policy">
           <div className="overlap-3">
             <div className="text-wrapper-11">Admission Policy</div>

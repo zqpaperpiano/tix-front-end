@@ -18,7 +18,7 @@ export const Queue = ({ onRouteChange, currentEvent }) => {
 
   const connect = () => {
     stompClient.webSocketFactory = () => {
-      return new SockJS('http: localhost:8081/ws');
+      return new SockJS('http://localhost:8081/ws');
     };
 
     stompClient.activate();
@@ -50,6 +50,7 @@ export const Queue = ({ onRouteChange, currentEvent }) => {
   }
 
   useEffect(() => {
+    console.log(eventName)
     TicketService.getQueueNumber(eventName, currentUser.id).then((queueNumber) => {
       setQueueNumber(queueNumber);
       connect();

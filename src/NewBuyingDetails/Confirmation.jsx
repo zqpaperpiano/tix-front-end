@@ -63,6 +63,10 @@ class Confirmation extends Component{
         })
     }
 
+    componentDidMount(){
+        this.getPurchaseInfo();
+    }
+
     render(){
         const {onRouteChange} = this.props;
         // console.log('rendered');
