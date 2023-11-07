@@ -9,7 +9,7 @@ class Confirmation extends Component{
         super();
         this.state=({
             user: AuthService.getCurrentUser(),
-            purchaseInfo: [ ],
+            purchaseInfo: [],
             ticketIDs: [],
             purchaseIDs: [],
         })
@@ -21,11 +21,12 @@ class Confirmation extends Component{
 
         for(let i = 1; i <= noOfTickets; ++i){
             tickets.push(localStorage.getItem(`ticket${i}`));
+            // localStorage.removeItem(`ticket${i}`);
         }
-
-        // console.log('these r my ticketids: ', tickets);
+        console.log('these r my ticketids: ', tickets);
         return tickets;
     }
+
 
     getPurchaseInfo = () => {
         let tickets = this.getTicketIds();
@@ -33,10 +34,10 @@ class Confirmation extends Component{
         let purchaseIDs = [];
 
         tickets.map((ticket, i) => {
-            // console.log('one ticket coming through...: ', ticket);
+            console.log('one ticket coming through...: ', ticket);
             TicketService.getPurchaseInfoFromTicketId(ticket)
             .then((purchaseInfo) => {
-                // console.log('retried purchase info here: ', purchaseInfo);
+                console.log('retrived purchase info here: ', purchaseInfo);
                 let purchase = {
                     "purchaseId": purchaseInfo.purchaseId,
                     "userId": purchaseInfo.userId,
@@ -52,7 +53,7 @@ class Confirmation extends Component{
                 // console.log('this is a purchase', purchase);
                 purchases.push(purchase);
                 purchaseIDs.push(purchaseInfo.purchaseId);
-                console.log('my purchase IDs', purchaseIDs);
+                // console.log('my purchase IDs', purchaseIDs);
                 // console.log('looking at the list: ', purchases);
                 // console.log('length is: ...', purchases.length);
                 this.setState({
@@ -64,7 +65,9 @@ class Confirmation extends Component{
     }
 
     componentDidMount(){
-        this.getPurchaseInfo();
+        setTimeout(() => {
+            this.getPurchaseInfo();
+        }, 3000);
     }
 
     render(){
@@ -81,7 +84,7 @@ class Confirmation extends Component{
                         <span className="sr-only">Loading...</span>
                         </div>
                         : 
-                        <div>
+                        <div className="purchase-item-area">
                             {
                                 this.state.purchaseInfo .map((purchase, i) => {
                                     return(

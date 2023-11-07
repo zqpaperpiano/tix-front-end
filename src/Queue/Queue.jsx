@@ -58,27 +58,27 @@ export const Queue = ({ onRouteChange, currentEvent }) => {
   }, [queueNumber]);
 
   return (
-    <div className="details">
+    <div className="queue">
 
-        <div className="details-banner">
-          <div className="details-banner-image">
+        <div className="queue-banner">
+          <div className="queue-banner-image">
             {currentEvent === "Taylor Swift Concert" ?
-            <img className="details-image" alt="Taylor swift" src={TaylorSwift} />
+            <img className="queue-image" alt="Taylor swift" src={TaylorSwift} />
             :
-            <img className="details-image" alt="UFC" src={UFC} />
+            <img className="queue-image" alt="UFC" src={UFC} />
           }
           </div>
 
           <div>
           {
             currentEvent === "Taylor Swift Concert" ?
-            <div className="details-banner-details">
+            <div className="queue-banner-details">
               <p className="text-wrapper-2">Singapore National Stadium</p>
               <p className="text-wrapper-2">Taylor Swift Era Tour</p>
               <p className="text-wrapper-2">2 March 2024 (Sat) ~ 9 March 2024 (Sat)</p>
             </div>
             :
-            <div className="details-banner-details">
+            <div className="queue-banner-details">
             <p className="text-wrapper-2">The Octogon</p>
             <p className="text-wrapper-2">UFC</p>
             <p className="text-wrapper-2">2 March 2024 (Sat) & 4 March 2024 (Sun)</p>
@@ -88,9 +88,8 @@ export const Queue = ({ onRouteChange, currentEvent }) => {
 
         </div>
 
-          <div className="queue">
-            <div className="text-wrapper-7">Queue Number</div>
-            <div className="queue-number">{queueNumber}</div>
+          <div className="queue-status">
+            <div className="text-wrapper-7">Queue Number: {queueNumber}</div>
           </div>
       </div>
   );

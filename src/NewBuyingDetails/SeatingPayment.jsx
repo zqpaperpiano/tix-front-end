@@ -149,10 +149,25 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
       });
     };
 
+    //isNaN(3) = false
+    const getSeatNumber = (seatID) => {
+      let i = 3;
+      let seatNum = ""
+      while (!isNaN(seatID[i])){
+        // console.log(seatID[i])
+        seatNum += seatID[i];
+        ++i;
+        // console.log(seatNum);
+      }
+      // console.log('calculated seat number:');
+      seatNum = parseInt(seatNum);
+      return seatNum;
+    }
+
     //add ticket details to an array of currently selected tickets
     const addTicketDetails = (seat) => {
       let updatedDetails = detailsOfChosenSeats.slice();
-      let seatNo = parseInt(seat[3]);
+      let seatNo = getSeatNumber(seat);
       let ticketPrice = 0;
       let date = extractDate(seat);
 
@@ -173,11 +188,14 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
       })
     }
 
+
     const extractDate = (seatID) => {
       let date = "";
-      for(var i = 5; i < seatID.length; ++i){
+      let seatIDlength = seatID.length;
+      for(var i = seatIDlength - 8; i < seatID.length; ++i){
         date += seatID[i];
       }
+      // console.log(date);
       return date;
     }
 
@@ -196,7 +214,7 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
       })
 
       let price = currentTicket[0].price;
-      console.log(price);
+      // console.log(price);
       price = -price;
       calculateTotalPrice(price);
       setDetailsOfChosenSeats(updatedDetails);
@@ -247,6 +265,7 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
         .then (
           () => {
             localStorage.setItem(`ticket${storageNumber}`, ticket.ticketID);
+            console.log(localStorage.getItem(`ticket${storageNumber}`));
           },(error) => {
             const resMessage =
               (error.response &&
@@ -277,7 +296,9 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
   }
 
   const removeSeatNoFromChosenList = (currentSeatID, listOfChosenSeats) => {
+    console.log(currentSeatID);
     let currentSeat = document.getElementById(currentSeatID);
+    // console.log('seatto be removed:', currentSeat);
     currentSeat.classList.remove("selected");
     listOfChosenSeats = listOfChosenSeats.filter((seat) => {
       return seat != currentSeatID;
@@ -369,6 +390,20 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
           </select>
 
           <button onClick={handleDateCategorySubmit}>Select Seats</button>
+          <ul className="seating-map-legend">
+            <li className="legend">
+              <div className="seating-legend legend-occupied"></div>
+              Occupied
+            </li>
+            <li className="legend">
+              <div className="seating-legend legend-available"></div>
+              Avilable
+            </li>
+            <li className="legend">
+              <div className="seating-legend legend-selected"></div>
+              Selected
+            </li>
+          </ul>
 
           {chosenCategory !== "" && chosenDate !== "" ?
           (
@@ -423,7 +458,9 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
                       <p>{`Category: ${ticket.cat}`}</p>
                       <p>{`Seat No: ${ticket.seatNum}`}</p>
                       <p>{`Price: ${ticket.price}`}</p>
-                      <p onClick={() => {
+                      <p 
+                      className="remove-ticket-button"
+                      onClick={() => {
                         removeTicketDetails(ticket.seatID);
                         let listOfChosenSeats = removeSeatNoFromChosenList(ticket.seatID, chosenSeat);
                         setChosenSeat(listOfChosenSeats);
@@ -433,10 +470,10 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
               })
             }
             </div>
-            <div className="pricing">
+          </div>
+          <div className="pricing">
               <h2>{`Total Price: $${totalPrice}`}</h2>
             </div>
-          </div>
         </div>
       </div>
     )}

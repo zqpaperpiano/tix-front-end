@@ -199,7 +199,7 @@ const saveSetOrQueue = (userId, eventName) => {
   return axios.post
   (API_URL + `buy/${userId}/${eventName}`, {
   }, 
-    {withCredentials: true,}
+    {withCredentials: true }
   )
   .then((response) => {
     const inSet = response.data;

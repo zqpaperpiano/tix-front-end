@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AuthService from "../LoginSignUp/services/auth.service";
 import TicketService from "../NewBuyingDetails/ticket.service";
+import './UserPurchases.css';
 
 const UserPurchases = () => {
     const userID = AuthService.getCurrentUser().id;

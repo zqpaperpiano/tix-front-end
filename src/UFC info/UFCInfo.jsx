@@ -44,7 +44,7 @@ export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
 
         <div className="event-detail-title">
           <div className="event-summary">
-            <p className="text-wrapper">UFC</p>
+            {/* <p className="text-wrapper">UFC</p> */}
             <p className="text-wrapper-2">2 March 2024 (Sat) & 4 March 2024 (Sun)</p>
             <p className="text-wrapper-2">The Octogon</p>
           </div>
