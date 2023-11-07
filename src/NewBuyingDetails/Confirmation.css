@@ -8,22 +8,44 @@ p{
     margin: 0;
 }
 
+.loading-icons{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
 .purchase-item-area{
     margin-left: 2%;
     margin-right: 2%;
+    margin-bottom: 3%;
+    margin-top: 3%;
 }
 
 .purchases{
-    margin-top: 2%;
+    margin-top: 5%;
     border: 1px solid black;
     display: flex;
     justify-content: space-around;
+    width: 55%;
+    align-items: center;
+    margin: auto;
+    margin-top: 2%;
 }
 
 h2{
     text-align: center;
+    padding-top: 1%;
 }
 
 h3{
     text-align: center;
+    /* padding-bottom: 3%; */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-top: 3%;
+}
+
+.return-home{
+    cursor: pointer;
 }

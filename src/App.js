@@ -25,6 +25,7 @@ class App extends Component{
     this.state=({
       route: 'Home',
       currentEvent: '',
+      listOfTicketIds: [],
       user: {
         fullName: '',
         email: '',
@@ -52,6 +53,12 @@ class App extends Component{
         ticketID: ticketID,
         price: price,
       }
+    })
+  }
+
+  setListOfTicketIds = (ticketIDs) => {
+    this.setState({
+      listOfTicketIds: ticketIDs,
     })
   }
 
@@ -90,7 +97,7 @@ class App extends Component{
           case 'Sports':
             return <EventsSports onRouteChange={this.onRouteChange} />
           case 'SeatingPayment':
-            return  <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange} currentEvent={this.state.currentEvent}/>
+            return  <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange} currentEvent={this.state.currentEvent} setListOfTicketIds={this.setListOfTicketIds} listOfTicketIds={this.state.listOfTicketIds}/>
           case 'TSInfo':
             return <TaylorSwiftInfo onRouteChange={this.onRouteChange} user={this.state.user} setCurrentEvent={this.setCurrentEvent}/>
           case 'UFCInfo':
@@ -100,7 +107,7 @@ class App extends Component{
           case 'Profile':
             return <Profile onRouteChange={this.onRouteChange} />
           case 'Confirmation':
-            return <Confirmation onRouteChange={this.onRouteChange} />
+            return <Confirmation onRouteChange={this.onRouteChange} listOfTicketIds={this.state.listOfTicketIds}/>
           case 'Queue':
             return <Queue onRouteChange={this.onRouteChange} currentEvent={this.state.currentEvent}/>
           case 'UserPurchases':
@@ -114,7 +121,7 @@ class App extends Component{
 
   
   render(){
-    // console.log('from main app: ', this.state.currentEvent);
+    // console.log('from main app: ',  this.state.listOfTicketIds);
     return (
       <div className="main-page">
         <div className='navbar-top'>
@@ -123,7 +130,7 @@ class App extends Component{
 
         <div className="other-pages">
           {this.pageNavigation()} 
-          {/* <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange} currentEvent={this.state.currentEvent}/> */}
+          {/* <Confirmation onRouteChange={this.onRouteChange} /> */}
         </div>
       </div>
     );
