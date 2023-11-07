@@ -17,6 +17,7 @@ import UserPurchases from './Profile/UserPurchases';
 import Queue from './Queue/Queue';
 import UFCInfo from './UFC info/UFCInfo';
 import { FAQ } from './FAQ/FAQ';
+import { AlternateConfirmation } from './alternateConfirmationPage/AlternateConfirmation';
 
 class App extends Component{
   constructor(){
@@ -106,6 +107,8 @@ class App extends Component{
             return <UserPurchases />
           case 'FAQ':
             return <FAQ />
+          case 'AlternateConfirmation':
+            return <AlternateConfirmation onRouteChange={this.onRouteChange}/>
         }
   }
 
