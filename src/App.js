@@ -115,14 +115,9 @@ class App extends Component{
         </div>
 
         <div className="other-pages">
-<<<<<<< HEAD
-          {/* {this.pageNavigation()}  */}
-          <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange}/>
-=======
           {this.pageNavigation()} 
           {/* <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange}/> */}
          
->>>>>>> ziqing
         </div>
       </div>
     );
