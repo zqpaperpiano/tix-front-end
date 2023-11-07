@@ -242,7 +242,8 @@ const TicketService = {
   deletePurchase,
   getQueueNumber,
   getAllTicketsFromDateCategory,
-  saveSetOrQueue
+  saveSetOrQueue,
+  timeout
 }
 
 export default TicketService;

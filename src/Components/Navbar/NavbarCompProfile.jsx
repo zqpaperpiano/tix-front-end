@@ -2,7 +2,6 @@ import React from 'react';
 import { Navbar, Nav, Container, NavDropdown, Form, Button } from 'react-bootstrap';
 import './NavbarComp.css'
 import AuthService from '../../LoginSignUp/services/auth.service';
-import { SearchBar } from '../SearchBar';
 
 export const NavbarCompProfile = ({loadUser, onRouteChange}) => {
   return (

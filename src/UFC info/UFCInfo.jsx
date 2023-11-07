@@ -10,7 +10,6 @@ import { useState } from "react";
 export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
 
   const currentUser = AuthService.getCurrentUser();
-  const [isInSet, setIsInSet] = useState(false);
   const [message, setMessage] = useState("");
 
   const handleCheck = () => {
@@ -20,11 +19,13 @@ export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
     .then ((isUserInSet) => {
       console.log(isUserInSet);
       if (isUserInSet == true){
+        setCurrentEvent("UFC");
         onRouteChange("SeatingPayment");
       } 
-      // if (isUserInSet == false) {
-      //   onRouteChange("Queue");
-      // }
+      if (isUserInSet == false) {
+        console.log("UFC");
+        onRouteChange("Queue");
+      }
       
     }, (error) => {
       const resMessage =
@@ -56,13 +57,7 @@ export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
               alert('Please log in or sign up first!');
               onRouteChange('Login');
             }else {
-              setCurrentEvent("UFC");
               handleCheck();
-              if (isInSet === true){
-                onRouteChange("SeatingPayment");
-              } else {
-                onRouteChange("Queue");
-              }
             }
           }} 
           className="buy-btm text-wrapper-3">

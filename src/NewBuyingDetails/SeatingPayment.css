@@ -61,7 +61,7 @@ grid-template-rows: 10% 15% 75%;
 .overlap-group {
   background-color: #d9d9d999;
   border-radius: 5px;
-  width: 55%;
+  width: 90%;
   margin: auto;
   height: 35%;
   text-align: center;
@@ -73,9 +73,10 @@ grid-template-rows: 10% 15% 75%;
   color: #000000;
   font-family: "Poppins-Medium", Helvetica;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0;
   line-height: normal;
+  align-content: center;
 }
 
 

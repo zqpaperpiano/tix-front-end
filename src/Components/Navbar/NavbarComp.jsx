@@ -1,7 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, Container, Form, Button, NavDropdown} from 'react-bootstrap';
 import './NavbarComp.css'
-import { SearchBar } from '../SearchBar';
 
 
 export const NavbarComp = ({onRouteChange}) => {

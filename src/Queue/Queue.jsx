@@ -20,7 +20,7 @@ export const Queue = ({ onRouteChange, currentEvent }) => {
     stompClient.webSocketFactory = () => {
       return new SockJS('http://localhost:8081/ws');
     };
-
+  
     stompClient.activate();
     stompClient.onConnect = () => {
       onConnected();

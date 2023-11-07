@@ -353,9 +353,6 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
     // console.log('eventName:', eventName);
     return (
       <div className="seating-payment">
-        <div className="Timer">
-          <CountdownTimer durationInSeconds={600} onTimeout={handleTimeout} />
-          </div>
           
         <div className="seat-selection-area">
           <div className="initial-selection-options">
