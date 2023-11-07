@@ -1,0 +1,13 @@
+.alternate-page{
+    background-color: green;
+    height: 100vh;
+}
+
+.confirmation-arrangement{
+    /* background-color: blue; */
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center
+}

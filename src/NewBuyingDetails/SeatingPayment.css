@@ -4,31 +4,69 @@
     height: 100%;
 }
 
+.seat-selection-button{
+  margin-top: 15px;
+  color: white;
+  background-color: black;
+  border-radius: 15px;
+}
+
 .seat-selection-area{
+  display: grid;
+  grid-template-rows: 30% 50% 20%;
+}
+
+.initial-selection-options{
   display: flex;
   flex-direction: column;
-  justify-self: center;
-  width: 55%;
+  width: 75%;
+  margin: auto;
+}
+
+.payment-button-stripe{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.seats-map-div{
+  width: 75%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }
 
 .customer-order-div{
 display: grid;
-grid-template-rows: 35% 65%;
+grid-template-rows: 10% 15% 75%;
 }
 
 .customer-particulars{
+  grid-row-start: 2;
+  margin-top: 2%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  column-gap: 1%;
+}
+
+.countdown-timer{
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 25px;
+  font-weight: 500;
 }
 
 .overlap-group {
   background-color: #d9d9d999;
   border-radius: 5px;
-  width: 75%;
+  width: 55%;
   margin: auto;
-  height: 60%;
+  height: 35%;
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .text-wrapper-5 {
@@ -46,6 +84,7 @@ grid-template-rows: 35% 65%;
   justify-content: center;
   height: 100%;
   overflow-x: hidden;
+  grid-row-start: 3;
 }
 
 .tickets{
@@ -59,10 +98,11 @@ grid-template-rows: 35% 65%;
 .remove-ticket-button{
   font-size: 15px;
   cursor: pointer;
+  color: blue;
 }
 
 .remove-ticket-button:hover{
-  color: blue;
+  color: red;
   text-decoration: underline;
 }
 
