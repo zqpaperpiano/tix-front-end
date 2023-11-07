@@ -257,17 +257,19 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
     const handlePayment = (listOfDetailedTickets, ticketEventName, userID) => {
       let noOfTix = listOfDetailedTickets.length;
       localStorage.setItem("noOfTickets", JSON.stringify(noOfTix));
+      let listOfTix = [];
 
       listOfDetailedTickets.map((ticket, i) => {
+        // console.log('from handling payment:', ticket);
         let storageNumber = i + 1;
         let ticketCat = ticket.cat
         let seatNo = ticket.seatNum;
         let ticketDate = ticket.date
+        localStorage.setItem(`ticket${storageNumber}`, ticket.ticketID);
+
         TicketService.savePurchaseInfo(ticketEventName, ticketDate, ticketCat, seatNo, userID)
         .then (
           () => {
-            localStorage.setItem(`ticket${storageNumber}`, ticket.ticketID);
-            console.log(localStorage.getItem(`ticket${storageNumber}`));
           },(error) => {
             const resMessage =
               (error.response &&

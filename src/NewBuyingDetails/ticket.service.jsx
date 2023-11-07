@@ -255,7 +255,8 @@ const TicketService = {
   getQueueNumber,
   getAllTicketsFromDateCategory,
   generatePDF,
-  saveSetOrQueue
+  saveSetOrQueue,
+  timeout
 }
 
 export default TicketService;

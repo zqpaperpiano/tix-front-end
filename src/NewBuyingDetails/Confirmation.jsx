@@ -4,6 +4,8 @@ import TicketService from "./ticket.service";
 import AuthService from "../LoginSignUp/services/auth.service";
 import './Confirmation.css';
 
+
+//this.props.listOfTicketIds
 class Confirmation extends Component{
     constructor(){
         super();
@@ -30,6 +32,7 @@ class Confirmation extends Component{
 
     getPurchaseInfo = () => {
         let tickets = this.getTicketIds();
+        // console.log('from confirmation:', tickets);
         let purchases = [ ]
         let purchaseIDs = [];
 
@@ -50,12 +53,9 @@ class Confirmation extends Component{
                     "seatNum": purchaseInfo.seatNum,
                     "category": purchaseInfo.category
                 }
-                // console.log('this is a purchase', purchase);
+                console.log('this is a purchase', purchase);
                 purchases.push(purchase);
                 purchaseIDs.push(purchaseInfo.purchaseId);
-                // console.log('my purchase IDs', purchaseIDs);
-                // console.log('looking at the list: ', purchases);
-                // console.log('length is: ...', purchases.length);
                 this.setState({
                     purchaseInfo: purchases,
                     purchaseIDs: purchaseIDs
@@ -72,40 +72,47 @@ class Confirmation extends Component{
 
     render(){
         const {onRouteChange} = this.props;
-        // console.log('rendered');
-        // console.log(this.state.purchaseIDs);
         return(
             <div>
                 <h1>Thank you for your purchase!</h1>
                <h2>Your ticket details are as follows:</h2>
                 {
                     this.state.purchaseInfo.length === 0 ? 
-                        <div className="spinner-grow" role="status">
-                        <span className="sr-only">Loading...</span>
+                        <div className="loading-icons">
+                            <div className="spinner-grow" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
                         </div>
                         : 
                         <div className="purchase-item-area">
                             {
                                 this.state.purchaseInfo .map((purchase, i) => {
                                     return(
-                                        <div className="purchases" key={i}>
+                                <div className="purchases" key={i}>
+                                    <div className="left-half">
                                       <p>{`Purchase ID: ${ purchase.purchaseId}`}</p>
-                                      <p>{`User ID: ${ purchase.userId}`}</p>
-                                      <p>{`User Fullname: ${ purchase.userFullname}`}</p>
-                                      <p>{`User Email: ${ purchase.userEmail}`}</p>
                                       <p>{`Event Name: ${ purchase.eventName}`}</p>
                                       <p>{`Event Date: ${ purchase.eventDate}`}</p>
-                                      <p>{`Category: ${ purchase.category}`}</p>
                                       <p>{`Ticket ID: ${ purchase.ticketId}`}</p>
-                                      <p>{`Price: ${ purchase.ticketPrice}`}</p>
+                                      
+                                    </div>
+                                    
+                                    <div className="right-half">
+                                      <p>{`Category: ${ purchase.category}`}</p>
                                       <p>{`Seat Number: ${ purchase.seatNum}`}</p>
+                                      <p>{`User Fullname: ${ purchase.userFullname}`}</p>
+                                      <p>{`Price: ${ purchase.ticketPrice}`}</p>
+                                    </div>
+                                      
                                   </div>
                                     )
                                 })
                             }
+                            <h3>Your ticket has been sent to your email</h3>
+                            <h3 className="return-home" onClick={() => onRouteChange("Home")}>Click here to return to home</h3>
                         </div>
                 }
-                <h3 onClick={() => onRouteChange("Home")}>Click here to return to home</h3>
+                
             </div>
         );
     }
