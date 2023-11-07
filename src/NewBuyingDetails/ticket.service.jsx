@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8081/api/v1/";
+const API_URL = "https://cs203back.azurewebsites.net/api/v1/";
 axios.defaults.withCredentials = true
 
 //returns list of Dates from eventName

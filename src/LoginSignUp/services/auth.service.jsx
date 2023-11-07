@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8081/api/v1/auth/";
+const API_URL = "https://cs203back.azurewebsites.net/api/v1/auth/";
 axios.defaults.withCredentials = true
 
 const register = (fullname, email, mobile, password) => {

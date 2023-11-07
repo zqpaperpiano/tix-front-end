@@ -18,7 +18,7 @@ export const Queue = ({ onRouteChange, currentEvent }) => {
 
   const connect = () => {
     stompClient.webSocketFactory = () => {
-      return new SockJS('http: localhost:8081/ws');
+      return new SockJS('https://cs203back.azurewebsites.net/api/v1/ws');
     };
 
     stompClient.activate();
