@@ -358,10 +358,8 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
           </div>
           
         <div className="seat-selection-area">
-          
-        
-
-        <label htmlFor="dateDropdown">Select an Event Date:</label>
+          <div className="initial-selection-options">
+          <label htmlFor="dateDropdown">Select an Event Date:</label>
           <select
             id="dateDropdown"
             value={selectedDate}
@@ -389,7 +387,7 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
             ))}
           </select>
 
-          <button onClick={handleDateCategorySubmit}>Select Seats</button>
+          <button className="seat-selection-button" onClick={handleDateCategorySubmit}>Select Seats</button>
           <ul className="seating-map-legend">
             <li className="legend">
               <div className="seating-legend legend-occupied"></div>
@@ -404,33 +402,44 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
               Selected
             </li>
           </ul>
-
-          {chosenCategory !== "" && chosenDate !== "" ?
-          (
-            <div className="seating-map-div">
-            {listOfAllSeats.map((seat, i) => {
-              let seatNo = i + 1;
-              let date = selectedDate.split('-').join("");
-              var id =`c${selectedCategory}s${seatNo}d${date}`;
-                return(
-                  <div id={id} 
-                  onClick={onClickSeats}
-                  className={`seats-image`}>{`${seat}`}</div>
-                )
-              })}
           </div>
-          )
-        : null
-        }
 
+          
+          <div className="seats-map-div">
+            {chosenCategory !== "" && chosenDate !== "" ?
+            (
+              <div className="seating-map-div">
+              {listOfAllSeats.map((seat, i) => {
+                let seatNo = i + 1;
+                let date = selectedDate.split('-').join("");
+                var id =`c${selectedCategory}s${seatNo}d${date}`;
+                  return(
+                    <div id={id} 
+                    onClick={onClickSeats}
+                    className={`seats-image`}>{`${seat}`}</div>
+                  )
+                })}
+            </div>
+            )
+          : null
+          }
+          </div>
+
+            <div className="payment-button-stripe">
             <StripeButton price={totalPrice} onRouteChange={onRouteChange} 
+            className="payment-button-stripe"
             listOfDetailedTickets = {detailsOfChosenSeats}
             userID={currentUser.id}
             eventName = {eventName}
             handlePayment={handlePayment} /> 
+            </div>
         </div>
 
         <div className="customer-order-div">
+          <div className="countdown-timer">
+            <CountdownTimer durationInSeconds={600} onTimeout={handleTimeout}/>
+          </div>
+
           <div className="customer-particulars">
             <div className="customer-name">
               <p className="text-wrapper-5">Name</p>
@@ -470,10 +479,11 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
               })
             }
             </div>
-          </div>
-          <div className="pricing">
+            <div className="pricing">
               <h2>{`Total Price: $${totalPrice}`}</h2>
             </div>
+          </div>
+          
         </div>
       </div>
     )}

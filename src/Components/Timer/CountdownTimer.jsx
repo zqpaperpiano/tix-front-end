@@ -27,5 +27,9 @@ const CountdownTimer = ({ durationInSeconds, onTimeout }) => {
   );
 };
 
+<<<<<<< HEAD
 export default CountdownTimer;
 
+=======
+export default CountdownTimer;
+>>>>>>> d9f4a1da3604deddca3da015e450c47d7ed25d2d
