@@ -90,8 +90,8 @@ img{
   .event-details{
     margin-top: 2%;
     display: flex;
-    padding-left: 5%;
-    padding-right: 5%;
+    justify-content: center;
+    text-align: center;
   }
 
   .ticket-sales{

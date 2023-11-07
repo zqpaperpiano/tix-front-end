@@ -1,8 +1,6 @@
 import './App.css';
 import { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Elements} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
 import NavbarCompProfile from './Components/Navbar/NavbarCompProfile';
 import SignUp from './SignUp/SignUp';
 import Login from './Login/Login';
@@ -10,19 +8,15 @@ import EventsAll from './Events/EventsAll';
 import NavbarComp from './Components/Navbar/NavbarComp';
 import EventsMusic from './Events/EventsMusic';
 import EventsSports from './Events/EventsSports';
-import Details from './BuyingPage/Details';
 import TaylorSwiftInfo from './TaylorSwiftInfo/TaylorSwiftInfo';
 import HomePage from './Home/Home';
 import SeatingPayment from './NewBuyingDetails/SeatingPayment';
 import Profile from './Profile/Profile';
 import Confirmation from './NewBuyingDetails/Confirmation';
-import AuthService from './LoginSignUp/services/auth.service';
 import UserPurchases from './Profile/UserPurchases';
 import Queue from './Queue/Queue';
 import UFCInfo from './UFC info/UFCInfo';
-import Stripe from "react-stripe-checkout";
-import TicketService from './NewBuyingDetails/ticket.service';
-import { SearchResults } from './SearchResults/SearchResults';
+import { FAQ } from './FAQ/FAQ';
 
 class App extends Component{
   constructor(){
@@ -30,8 +24,6 @@ class App extends Component{
     this.state=({
       route: 'Home',
       currentEvent: '',
-      eventList: [],
-      filteredEvents: [],
       user: {
         fullName: '',
         email: '',
@@ -62,53 +54,19 @@ class App extends Component{
     })
   }
 
-  setCurrentEvent = (eventName) => {
+  setCurrentEvent = (eventName) =>{
+    console.log('setting...');
     this.setState({
-      currentEvent: eventName
+      currentEvent: eventName,
     })
   }
-
-  setFilteredEvents = (filteredEvents) => {
-    this.setState({
-      filteredEvents: filteredEvents
-    })
-  }
-
-  getAllEvents = () => {
-    let eventList = [];
-    let set = new Set();
-    TicketService.getAllEvents()
-    .then((resp) => {
-      let eventObject = resp.data;
-      eventObject.map((event) => {
-        let eventName = event.name;
-        set.add(eventName);
-      })
-    })
-    .then(() => {
-      for(const eventName of set){
-        eventList.push(eventName);
-      }
-      this.setState({
-        eventList: eventList
-      })
-    })
-
-    
-    
-  }
-
-  componentDidMount(){
-    this.getAllEvents();
-  }
-
 
 
   onUserLogin(){
     if(this.state.user.email != ''){
-      return <NavbarCompProfile onRouteChange={this.onRouteChange} loadUser={this.loadUser} setFilteredEvents={this.setFilteredEvents} eventsList={this.state.eventList}/>
+      return <NavbarCompProfile onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
     }else{ 
-      return <NavbarComp onRouteChange={this.onRouteChange} setFilteredEvents={this.setFilteredEvents} eventsList={this.state.eventList}/>
+      return <NavbarComp onRouteChange={this.onRouteChange}/>
     }
   }
 
@@ -146,14 +104,14 @@ class App extends Component{
             return <Queue onRouteChange={this.onRouteChange} currentEvent={this.state.currentEvent}/>
           case 'UserPurchases':
             return <UserPurchases />
-          case 'SearchResult':
-            return <SearchResults filteredEvents={this.state.filteredEvents} />
+          case 'FAQ':
+            return <FAQ />
         }
   }
 
   
   render(){
-    // console.log(this.state.eventList);
+    // console.log('from main app: ', this.state.currentEvent);
     return (
       <div className="main-page">
         <div className='navbar-top'>
@@ -162,8 +120,6 @@ class App extends Component{
 
         <div className="other-pages">
           {this.pageNavigation()} 
-          {/* <SearchResults eventList={this.state.eventList} /> */}
-         
         </div>
       </div>
     );
