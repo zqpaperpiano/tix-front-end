@@ -1,7 +1,14 @@
 .seating-payment{
     display: grid;
     grid-template-columns: 50% 50%;
-    height: 100%;
+    height: 100vh;
+}
+
+.seat-map-area{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .seat-selection-button{
@@ -61,7 +68,7 @@ grid-template-rows: 10% 15% 75%;
 .overlap-group {
   background-color: #d9d9d999;
   border-radius: 5px;
-  width: 55%;
+  width: 65%;
   margin: auto;
   height: 35%;
   text-align: center;

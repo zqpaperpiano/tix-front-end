@@ -6,6 +6,8 @@ import Stripe from "react-stripe-checkout";
 import axios from "axios";
 import StripeButton from "../Components/StripePayment/StripeButton";
 import CountdownTimer from "../Components/Timer/CountdownTimer";
+import UFCSeatMap from '../assets/UFC/UFC-Seat-Map.jpeg';
+import TSSeatMap from '../assets/SeatMapPicture.png';
 
 
 
@@ -352,134 +354,144 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
 
     // console.log('eventName:', eventName);
     return (
-      <div className="seating-payment">
-        <div className="seat-selection-area">
-          <div className="initial-selection-options">
-          <label htmlFor="dateDropdown">Select an Event Date:</label>
-          <select
-            id="dateDropdown"
-            value={selectedDate}
-            onChange={onChangeDate}
-          >
-            <option value="">Select a Date</option>
-            {eventDates.map((eventDate) => (
-              <option key={eventDate} value={eventDate}>
-                {eventDate}
-              </option>
-            ))}
-          </select>
+      <div>
+          <div className="seating-payment">
+          <div className="seat-selection-area">
+            <div className="initial-selection-options">
+            <label htmlFor="dateDropdown">Select an Event Date:</label>
+            <select
+              id="dateDropdown"
+              value={selectedDate}
+              onChange={onChangeDate}
+            >
+              <option value="">Select a Date</option>
+              {eventDates.map((eventDate) => (
+                <option key={eventDate} value={eventDate}>
+                  {eventDate}
+                </option>
+              ))}
+            </select>
 
-          <label htmlFor="categoryDropdown">Select a Seating Category:</label>
-          <select
-            id="categoryDropdown"
-            value={selectedCategory}
-            onChange={onChangeCategory}
-          >
-            <option value="">Select a Category</option>
-            {eventCategories.map((eventCategory) => (
-              <option key={eventCategory} value={eventCategory}>
-                {eventCategory}
-              </option>
-            ))}
-          </select>
+            <label htmlFor="categoryDropdown">Select a Seating Category:</label>
+            <select
+              id="categoryDropdown"
+              value={selectedCategory}
+              onChange={onChangeCategory}
+            >
+              <option value="">Select a Category</option>
+              {eventCategories.map((eventCategory) => (
+                <option key={eventCategory} value={eventCategory}>
+                  {eventCategory}
+                </option>
+              ))}
+            </select>
 
-          <button className="seat-selection-button" onClick={handleDateCategorySubmit}>Select Seats</button>
-          <ul className="seating-map-legend">
-            <li className="legend">
-              <div className="seating-legend legend-occupied"></div>
-              Occupied
-            </li>
-            <li className="legend">
-              <div className="seating-legend legend-available"></div>
-              Avilable
-            </li>
-            <li className="legend">
-              <div className="seating-legend legend-selected"></div>
-              Selected
-            </li>
-          </ul>
-          </div>
-
-          
-          <div className="seats-map-div">
-            {chosenCategory !== "" && chosenDate !== "" ?
-            (
-              <div className="seating-map-div">
-              {listOfAllSeats.map((seat, i) => {
-                let seatNo = i + 1;
-                let date = selectedDate.split('-').join("");
-                var id =`c${selectedCategory}s${seatNo}d${date}`;
-                  return(
-                    <div id={id} 
-                    onClick={onClickSeats}
-                    className={`seats-image`}>{`${seat}`}</div>
-                  )
-                })}
+            <button className="seat-selection-button" onClick={handleDateCategorySubmit}>Select Seats</button>
+            <ul className="seating-map-legend">
+              <li className="legend">
+                <div className="seating-legend legend-occupied"></div>
+                Occupied
+              </li>
+              <li className="legend">
+                <div className="seating-legend legend-available"></div>
+                Avilable
+              </li>
+              <li className="legend">
+                <div className="seating-legend legend-selected"></div>
+                Selected
+              </li>
+            </ul>
             </div>
-            )
-          : null
-          }
-          </div>
 
-            <div className="payment-button-stripe">
-            <StripeButton price={totalPrice} onRouteChange={onRouteChange} 
-            className="payment-button-stripe"
-            listOfDetailedTickets = {detailsOfChosenSeats}
-            userID={currentUser.id}
-            eventName = {eventName}
-            handlePayment={handlePayment} /> 
-            </div>
-        </div>
-
-        <div className="customer-order-div">
-          <div className="countdown-timer">
-            <CountdownTimer durationInSeconds={600} onTimeout={handleTimeout}/>
-          </div>
-
-          <div className="customer-particulars">
-            <div className="customer-name">
-              <p className="text-wrapper-5">Name</p>
-              <div className="overlap-group">
-              <p>{currentUser.fullname}</p>
+            
+            <div className="seats-map-div">
+              {chosenCategory !== "" && chosenDate !== "" ?
+              (
+                <div className="seating-map-div">
+                {listOfAllSeats.map((seat, i) => {
+                  let seatNo = i + 1;
+                  let date = selectedDate.split('-').join("");
+                  var id =`c${selectedCategory}s${seatNo}d${date}`;
+                    return(
+                      <div id={id} 
+                      onClick={onClickSeats}
+                      className={`seats-image`}>{`${seat}`}</div>
+                    )
+                  })}
               </div>
-            </div>
-
-            <div className="customer-email">
-              <p className="text-wrapper-5">Email</p>
-              <div className="overlap-group">
-                <p>{currentUser.email}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="order-list">
-            <div className="ticket-details-area">
-            {
-              detailsOfChosenSeats.map((ticket, i) => {
-                // console.log('ticket:', ticket);
-                return(
-                  <div id={i} className="tickets">
-                      <p>{`Date: ${ticket.date}`}</p>
-                      <p>{`Category: ${ticket.cat}`}</p>
-                      <p>{`Seat No: ${ticket.seatNum}`}</p>
-                      <p>{`Price: ${ticket.price}`}</p>
-                      <p 
-                      className="remove-ticket-button"
-                      onClick={() => {
-                        removeTicketDetails(ticket.seatID);
-                        let listOfChosenSeats = removeSeatNoFromChosenList(ticket.seatID, chosenSeat);
-                        setChosenSeat(listOfChosenSeats);
-                      }}>Remove</p>
-                  </div>
-                )
-              })
+              )
+            : null
             }
             </div>
-            <div className="pricing">
-              <h2>{`Total Price: $${totalPrice}`}</h2>
-            </div>
+
+              <div className="payment-button-stripe">
+              <StripeButton price={totalPrice} onRouteChange={onRouteChange} 
+              className="payment-button-stripe"
+              listOfDetailedTickets = {detailsOfChosenSeats}
+              userID={currentUser.id}
+              eventName = {eventName}
+              handlePayment={handlePayment} /> 
+              </div>
           </div>
-          
+
+          <div className="customer-order-div">
+            <div className="countdown-timer">
+              <CountdownTimer durationInSeconds={600} onTimeout={handleTimeout}/>
+            </div>
+
+            <div className="customer-particulars">
+              <div className="customer-name">
+                <p className="text-wrapper-5">Name</p>
+                <div className="overlap-group">
+                <p>{currentUser.fullname}</p>
+                </div>
+              </div>
+
+              <div className="customer-email">
+                <p className="text-wrapper-5">Email</p>
+                <div className="overlap-group">
+                  <p>{currentUser.email}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="order-list">
+              <div className="ticket-details-area">
+              {
+                detailsOfChosenSeats.map((ticket, i) => {
+                  // console.log('ticket:', ticket);
+                  return(
+                    <div id={i} className="tickets">
+                        <p>{`Date: ${ticket.date}`}</p>
+                        <p>{`Category: ${ticket.cat}`}</p>
+                        <p>{`Seat No: ${ticket.seatNum}`}</p>
+                        <p>{`Price: ${ticket.price}`}</p>
+                        <p 
+                        className="remove-ticket-button"
+                        onClick={() => {
+                          removeTicketDetails(ticket.seatID);
+                          let listOfChosenSeats = removeSeatNoFromChosenList(ticket.seatID, chosenSeat);
+                          setChosenSeat(listOfChosenSeats);
+                        }}>Remove</p>
+                    </div>
+                  )
+                })
+              }
+              </div>
+              <div className="pricing">
+                <h2>{`Total Price: $${totalPrice}`}</h2>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        <div className="seat-map-area">
+          <h3>Seat Map: </h3>
+          {
+            currentEvent === "UFC" ? 
+            <img src={UFCSeatMap} />
+            : <img src={TSSeatMap} />
+          }
         </div>
       </div>
     )}

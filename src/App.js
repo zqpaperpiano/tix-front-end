@@ -24,7 +24,7 @@ class App extends Component{
     super();
     this.state=({
       route: 'Home',
-      currentEvent: '',
+      currentEvent: 'Taylor Swift Concert',
       user: {
         fullName: '',
         email: '',
@@ -122,7 +122,8 @@ class App extends Component{
         </div>
 
         <div className="other-pages">
-          {this.pageNavigation()} 
+          {/* {this.pageNavigation()}  */}
+          <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange} currentEvent={this.state.currentEvent}/>
         </div>
       </div>
     );
