@@ -4,15 +4,12 @@ import './NavbarComp.css'
 import AuthService from '../../LoginSignUp/services/auth.service';
 import { SearchBar } from '../SearchBar';
 
-export const NavbarCompProfile = ({loadUser, onRouteChange, setFilteredEvents, eventsList}) => {
+export const NavbarCompProfile = ({loadUser, onRouteChange}) => {
   return (
     <Navbar bg="black fixed-top" variant="dark">
       <Container>
       <Navbar.Brand onClick={() => {onRouteChange('Home')}} href="#home" className="logo">TIX</Navbar.Brand>
 
-        <SearchBar onRouteChange={onRouteChange} setFilteredEvents={setFilteredEvents} eventsList={eventsList}/>
-
-       
         <Nav className="ms-auto underline-on-hover">
           <Nav.Link onClick={() => {onRouteChange('Home')}} href="#home">Home</Nav.Link>
           <NavDropdown title="Events" id="basic-nav-dropdown">

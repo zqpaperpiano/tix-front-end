@@ -314,7 +314,7 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
       }
     }
 
-    // console.log('eventName:', eventName);
+    console.log('eventName:', eventName);
     return (
       <div className="seating-payment">
         <div className="seat-selection-area">

@@ -1,4 +1,14 @@
+.user-purchase{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
 .purchase-table{
     display: flex;
     border: 1px solid black;
+}
+
+h1{
+    text-align: center;
 }

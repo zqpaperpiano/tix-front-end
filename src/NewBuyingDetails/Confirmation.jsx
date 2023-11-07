@@ -23,7 +23,7 @@ class Confirmation extends Component{
             tickets.push(localStorage.getItem(`ticket${i}`));
         }
 
-        // console.log('these r my ticketids: ', tickets);
+        console.log('these r my ticketids: ', tickets);
         return tickets;
     }
 

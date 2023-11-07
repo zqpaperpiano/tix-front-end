@@ -7,35 +7,21 @@ import TicketService from '../NewBuyingDetails/ticket.service';
 
 export const SearchBar = ({onRouteChange, eventsList, setFilteredEvents}) => {
     const [searchInput, setSearchInput] = useState("");
-    const [listOfEvents, setListOfEvents] = useState([]);
-    const [filterEvents, setFilterEvents] = useState([]);
-
-    useEffect(() => {
-        setListOfEvents(eventsList);
-    }, {})
 
     const onSearchChange = (event) => {
+        console.log(eventsList);
         setSearchInput(event.target.value)
-        let updatedList = listOfEvents.filter((event) => {
-            console.log('event:', event);
-            return event;
-        })
-        console.log(updatedList);
-    }
+        console.log('searchinput:', searchInput);
 
-    const filterSearch = (event) => {
-        console.log('hi');
-        let updatedList = listOfEvents.filter((event) => {
-            // console.log('hi');
-            // console.log('event:', event);
-            // return event.toLowerCase().includes(searchInput.toLowerCase());
+        let updatedList = eventsList;
+        console.log('updatedList:', updatedList);
+        updatedList = updatedList.filter((eventName) => {
+            return eventName.toLowerCase().includes(searchInput.toLowerCase());
         })
-        setFilterEvents(updatedList);
-        // setFilteredEvents(eventsList);
-    }
 
-    // console.log('filterEvents:', filterEvents);
-    // console.log('event list:', eventsList);
+        console.log('list:', updatedList);
+        setFilteredEvents(updatedList)
+    }
 
     return(
         <div>
