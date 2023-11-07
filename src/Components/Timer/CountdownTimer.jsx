@@ -1,21 +1,30 @@
 import React, { useState, useEffect } from 'react';
 
 const CountdownTimer = ({ durationInSeconds, onTimeout }) => {
-  const [seconds, setSeconds] = useState(durationInSeconds);
+  const [remainingTime, setRemainingTime] = useState(durationInSeconds);
 
   useEffect(() => {
-    if (seconds <= 0) {
+    if (remainingTime <= 0) {
       onTimeout(); // Callback function when the timer reaches zero
     } else {
       const timer = setInterval(() => {
-        setSeconds((prevSeconds) => prevSeconds - 1);
+        setRemainingTime((prevTime) => prevTime - 1);
       }, 1000);
 
       return () => clearInterval(timer);
     }
-  }, [seconds, onTimeout]);
+  }, [remainingTime, onTimeout]);
 
-  return <div>{seconds} seconds remaining</div>;
+  const minutes = Math.floor(remainingTime / 60);
+  const seconds = remainingTime % 60;
+
+  return (
+    <div>
+      {minutes < 10 ? '0' : ''}
+      {minutes}:{seconds < 10 ? '0' : ''}
+      {seconds} remaining
+    </div>
+  );
 };
 
 export default CountdownTimer;

@@ -18,9 +18,9 @@ export const TaylorSwiftInfo = ({onRouteChange, user, setCurrentEvent}) => {
     console.log(currentUser.id)
     TicketService.saveSetOrQueue(currentUser.id, "Taylor Swift Concert")
     .then ((isUserInSet) => {
+      setCurrentEvent("Taylor Swift Concert");
       if (isUserInSet == true){
         // console.log("Going to Details");
-        setCurrentEvent("Taylor Swift Concert");
         onRouteChange("SeatingPayment");
       } 
       if (isUserInSet == false) {

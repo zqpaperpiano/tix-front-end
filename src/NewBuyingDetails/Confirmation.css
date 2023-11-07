@@ -8,6 +8,22 @@ p{
     margin: 0;
 }
 
+.purchase-item-area{
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
 .purchases{
+    margin-top: 2%;
     border: 1px solid black;
+    display: flex;
+    justify-content: space-around;
+}
+
+h2{
+    text-align: center;
+}
+
+h3{
+    text-align: center;
 }

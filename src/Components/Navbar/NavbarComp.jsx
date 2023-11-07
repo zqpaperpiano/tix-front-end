@@ -4,7 +4,7 @@ import './NavbarComp.css'
 import { SearchBar } from '../SearchBar';
 
 
-export const NavbarComp = ({onRouteChange, setFilteredEvents, eventsList}) => {
+export const NavbarComp = ({onRouteChange}) => {
 
   return (
     <Navbar bg="black fixed-top" variant="dark" className='navbar'>
@@ -12,9 +12,6 @@ export const NavbarComp = ({onRouteChange, setFilteredEvents, eventsList}) => {
         <Navbar.Brand
         onClick={() => {onRouteChange('Home')}}
         href="#home" className='Company'>TIX</Navbar.Brand>
-  
-        <SearchBar onRouteChange={onRouteChange} setFilteredEvents={setFilteredEvents} eventsList={eventsList}/>
-
         
         <Nav className="ms-auto underline-on-hover">
           <Nav.Link onClick={() => {onRouteChange('Home')}} href="#home">Home</Nav.Link>
@@ -31,7 +28,7 @@ export const NavbarComp = ({onRouteChange, setFilteredEvents, eventsList}) => {
             className="dropdownitem" href="#events-sports">Sports</NavDropdown.Item>
           </NavDropdown>
 
-          <Nav.Link href="#FAQ">FAQ</Nav.Link>
+          <Nav.Link onClick={() => {onRouteChange('FAQ')}}href="#FAQ">FAQ</Nav.Link>
           <Nav.Link 
           onClick={() => {onRouteChange('Login')}}
           href="#login">Login</Nav.Link>
