@@ -10,12 +10,11 @@ import { useState } from "react";
 export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
 
   const currentUser = AuthService.getCurrentUser();
-  const [isInSet, setIsInSet] = useState(false);
   const [message, setMessage] = useState("");
 
 //check if user needs to enter queue or can buy immediately
   const handleCheck = () => {
-    TicketService.saveSetOrQueue(currentUser.id, "UFC")
+    TicketService.addToWaitingList(currentUser.id, "UFC")
     .then ((isUserInSet) => {
       if (isUserInSet == true){
         onRouteChange("SeatingPayment");

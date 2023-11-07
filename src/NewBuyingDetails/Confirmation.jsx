@@ -35,7 +35,7 @@ class Confirmation extends Component{
         let purchases = []
 
         tickets.map((ticket, i) => {
-            TicketService.getPurchaseInfoFromTicketId(ticket)
+            TicketService.getSinglePurchaseByTicketId(ticket)
             .then((purchaseInfo) => {
                 let purchase = {
                     "purchaseId": purchaseInfo.purchaseId,
