@@ -20,6 +20,12 @@ export const StripeButton = ({ price, onRouteChange, listOfDetailedTickets, user
       })
       .then(() => {
         handlePayment(listOfDetailedTickets, eventName, userID);
+
+        // let noOfTix = localStorage.getItem("noOfTickets");
+        // for(let i = 1; i <= noOfTix; ++i){
+        //   console.log('this is from local storage:', localStorage.getItem(`ticket${i}`));
+        // }
+
         alert("Payment Success");
         onRouteChange('Confirmation')
 

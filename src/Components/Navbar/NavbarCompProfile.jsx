@@ -23,7 +23,7 @@ export const NavbarCompProfile = ({loadUser, onRouteChange}) => {
             onClick={() => {onRouteChange('Sports')}}
             className="dropdownitem" href="#events-sports">Sports</NavDropdown.Item>
           </NavDropdown>
-          <Nav.Link href="#FAQ">FAQ</Nav.Link>
+          <Nav.Link onClick={() => {onRouteChange('FAQ')}} href="#FAQ">FAQ</Nav.Link>
         </Nav>
 
         <Nav className="ml-auto">

@@ -16,6 +16,7 @@ import Confirmation from './NewBuyingDetails/Confirmation';
 import UserPurchases from './Profile/UserPurchases';
 import Queue from './Queue/Queue';
 import UFCInfo from './UFC info/UFCInfo';
+import { FAQ } from './FAQ/FAQ';
 
 class App extends Component{
   constructor(){
@@ -103,6 +104,8 @@ class App extends Component{
             return <Queue onRouteChange={this.onRouteChange} currentEvent={this.state.currentEvent}/>
           case 'UserPurchases':
             return <UserPurchases />
+          case 'FAQ':
+            return <FAQ />
         }
   }
 
@@ -117,8 +120,6 @@ class App extends Component{
 
         <div className="other-pages">
           {this.pageNavigation()} 
-          {/* <TaylorSwiftInfo onRouteChange={this.onRouteChange} user={this.state.user} setCurrentEvent={this.setCurrentEvent}/> */}
-         
         </div>
       </div>
     );

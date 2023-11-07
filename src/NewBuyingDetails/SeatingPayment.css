@@ -43,15 +43,27 @@ grid-template-rows: 35% 65%;
 
 .order-list{
   display: grid;
-  grid-template-rows: 80% 20%;
   justify-content: center;
   height: 100%;
   overflow-x: hidden;
 }
 
 .tickets{
-  padding-top: 5%;
+  margin-top: 2%;
   border: 1px solid black;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding-left: 2%;
+}
+
+.remove-ticket-button{
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.remove-ticket-button:hover{
+  color: blue;
+  text-decoration: underline;
 }
 
 
@@ -107,6 +119,7 @@ grid-template-rows: 35% 65%;
 
   .seating-map-div{
     display: flex;
+    flex-wrap: wrap;
   }
 
   .seats-image{
@@ -117,7 +130,8 @@ grid-template-rows: 35% 65%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     color: white;
-    padding-left: 5%;
+    display: flex;
+    justify-content: center;
   }
 
   .seats-image.selected{
@@ -131,6 +145,35 @@ grid-template-rows: 35% 65%;
   .seats-image:not(.occupied):hover{
     cursor: pointer;
     transform: scale(1.2);
+  }
+
+  .seating-map-legend{
+    margin-top: 2%;
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+  }
+
+  .legend{
+    display: flex;
+    align-items: center;
+  }
+
+  .seating-legend{
+    background-color: black;
+    height: 25px;
+    width: 35px;
+    margin: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .legend-occupied{
+    background-color: red;
+  }
+
+  .legend-selected{
+    background-color: turquoise;
   }
 
   

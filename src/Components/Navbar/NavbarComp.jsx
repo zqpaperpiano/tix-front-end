@@ -28,7 +28,7 @@ export const NavbarComp = ({onRouteChange}) => {
             className="dropdownitem" href="#events-sports">Sports</NavDropdown.Item>
           </NavDropdown>
 
-          <Nav.Link href="#FAQ">FAQ</Nav.Link>
+          <Nav.Link onClick={() => {onRouteChange('FAQ')}}href="#FAQ">FAQ</Nav.Link>
           <Nav.Link 
           onClick={() => {onRouteChange('Login')}}
           href="#login">Login</Nav.Link>
