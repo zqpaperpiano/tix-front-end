@@ -9,7 +9,7 @@ import { useState } from "react";
 
 export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
 
-  const currentUser = AuthService.getCurrentUser();
+  const currentUser = AuthService.getUser();
   const [message, setMessage] = useState("");
 
 //check if user needs to enter queue or can buy immediately

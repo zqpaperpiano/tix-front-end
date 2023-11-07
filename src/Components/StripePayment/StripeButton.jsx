@@ -5,7 +5,7 @@ import AuthService from "../../LoginSignUp/services/auth.service";
 
 export const StripeButton = ({ price, onRouteChange, listOfDetailedTickets, userID, eventName, handlePayment }) => {
   axios.defaults.withCredentials = true
-  const currentUser = AuthService.getCurrentUser();
+  const currentUser = AuthService.getUser();
   const publishableKey = "pk_test_51O8PA9HVyHFmFtSnfvMmoHqE3suCMjlQsBy7Ybr0M2NYhTzzaTeWZ0zhPg8FMLHuUPU2My4T5Ogc2Zl9MKQKw2pL00siXGucI1";
   const stripePrice = price * 100;
 

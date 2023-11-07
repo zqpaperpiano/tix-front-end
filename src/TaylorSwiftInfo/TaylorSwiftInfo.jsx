@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 
 export const TaylorSwiftInfo = ({onRouteChange, user, setCurrentEvent}) => {
 
-  const currentUser = AuthService.getCurrentUser();
+  const currentUser = AuthService.getUser();
   const [message, setMessage] = useState("");
   
   const handleCheck = () => {

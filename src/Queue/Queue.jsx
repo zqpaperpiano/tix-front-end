@@ -10,7 +10,7 @@ import AuthService from "../LoginSignUp/services/auth.service";
 
 
 export const Queue = ({ onRouteChange, currentEvent }) => {
-  const currentUser = AuthService.getCurrentUser();
+  const currentUser = AuthService.getUser();
   const [queueNumber, setQueueNumber] = useState(null);
   const [eventName, setName] = useState("Taylor Swift Concert");
   const stompClient = new Client();   //Initialize the stompClient

@@ -4,7 +4,7 @@ import AuthService from "../LoginSignUp/services/auth.service";
 import './Profile.css';
 
 //get current user 
-const user = AuthService.getCurrentUser();
+const user = AuthService.getUser();
 
 const Profile = () => {
     return(

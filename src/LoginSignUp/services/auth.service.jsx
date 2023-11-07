@@ -39,11 +39,7 @@ const logout = () => {
 
 //edited
 const getUser = () => {
-  return axios.get
-  (API_URL + "profile")
-  .then((resp) => {
-    return resp;
-  })
+  return JSON.parse(localStorage.getItem("user"));
 };
 
 const AuthService = {

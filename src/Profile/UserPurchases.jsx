@@ -4,7 +4,7 @@ import TicketService from "../NewBuyingDetails/ticket.service";
 import './UserPurchases.css';
 
 const UserPurchases = () => {
-    const userID = AuthService.getCurrentUser().id;
+    const userID = AuthService.getUser().id;
     const [userPurchases, setUserPurchases] = useState([]);
     const [purchaseInfoList, setPurchaseInfoList] = useState([]);
 

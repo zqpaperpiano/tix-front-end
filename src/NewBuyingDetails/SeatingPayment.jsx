@@ -10,7 +10,7 @@ import TSSeatMap from '../assets/SeatMapPicture.png';
 
 
 export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
-    const currentUser = AuthService.getCurrentUser();
+    const currentUser = AuthService.getUser();
     const [eventName, setName] = useState(currentEvent);
 
     const [eventDates, setEventDates] = useState([]);
@@ -414,7 +414,7 @@ export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
 
           <div className="customer-order-div">
             <div className="countdown-timer">
-              <CountdownTimer durationInSeconds={10} onTimeout={handleTimeout}/>
+              <CountdownTimer durationInSeconds={300} onTimeout={handleTimeout}/>
             </div>
 
             <div className="customer-particulars">
