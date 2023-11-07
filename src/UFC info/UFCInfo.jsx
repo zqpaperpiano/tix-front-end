@@ -21,6 +21,7 @@ export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
         onRouteChange("SeatingPayment");
       } 
       if (isUserInSet == false) {
+        setCurrentEvent("UFC");
         onRouteChange("Queue");
       }
       
@@ -42,7 +43,7 @@ export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
 
         <div className="event-detail-title">
           <div className="event-summary">
-            <p className="text-wrapper-2">2 March 2024 (Sat) & 4 March 2024 (Sun)</p>
+            <p className="text-wrapper-2">6 March 2024 (Sat) - 8 March 2024 (Mon)</p>
             <p className="text-wrapper-2">The Octogon</p>
           </div>
 
@@ -69,7 +70,7 @@ export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
               <br />
               <br />
             </span>
-            <span className="text-wrapper-5">Event Dates: 5th & 6th March 2024</span>
+            <span className="text-wrapper-5">Event Dates: 6th - 8th March 2024</span>
           </p>
         </div>
 

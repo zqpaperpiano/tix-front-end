@@ -10,9 +10,11 @@ const UserPurchases = () => {
 
     //upon load up, load all of the purchases under the userID stored in local storage
   useEffect(() => {
+    console.log("getting user purchases")
     TicketService.getUserPurchasesFromUserId(userID)
       .then((userPurchases) => {
         setUserPurchases(userPurchases);
+        console.log(userPurchases[0])
       })
       .catch((error) => {
         console.error("Error fetching user's purchases:", error);

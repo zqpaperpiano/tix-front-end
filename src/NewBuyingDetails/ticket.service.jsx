@@ -203,7 +203,7 @@ const saveSetOrQueue = (userId, eventName) => {
 }
 
 //set a timeout for users, within which they must complete their purchase
-const timeout = (userId, eventName) => {
+const timeout = (eventName, userId) => {
   return axios.put
   (API_URL + `home/${eventName}/${userId}/deleteAndNotify`, {
   }, 

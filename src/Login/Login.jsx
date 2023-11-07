@@ -35,7 +35,6 @@ class Login extends Component{
   //call function to check username and password to allow log in
   onClickLogin(e){
     e.preventDefault();
-    console.log('email:')
     //validation to ensure that both email and password is filled in
     if(this.state.loginEmail !== '' && this.state.loginPassword !== ''){
 

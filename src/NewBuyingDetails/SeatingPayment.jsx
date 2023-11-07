@@ -45,24 +45,6 @@ export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
         });
     }, [eventName]);
 
-    //handle stripe payment
-    async function handleToken(token) {
-      console.log(token);
-      await axios
-        .post("http://localhost:8081/api/payment/charge", "", {
-          headers: {
-            token: token.id,
-            amount: 500,
-          },
-        })
-        .then(() => {
-          alert("Payment Success");
-        })
-        .catch((error) => {
-          alert(error);
-        });
-    }
-
     //changes selected date to user's input date
     const onChangeDate = (e) => {
         const selectedDate = e.target.value;
@@ -349,20 +331,6 @@ export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
       });
     }
 
-    const handleTimeout = () => {
-        alert("Time is Up, Returning to Home");
-        TicketService.timeout(eventName, currentUser.id)
-        .then(() => {
-          onRouteChange("Home");
-      }, (error) => {
-          const resMessage =
-            (error.response && error.response.data && error.response.data.message)  
-            || error.message  
-            || error.toString();
-          setMessage(resMessage);
-      });
-    }
-
     return (
       <div>
         <h1>{currentEvent}</h1>
@@ -447,7 +415,7 @@ export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
 
           <div className="customer-order-div">
             <div className="countdown-timer">
-              <CountdownTimer durationInSeconds={600} onTimeout={handleTimeout}/>
+              <CountdownTimer durationInSeconds={10} onTimeout={handleTimeout}/>
             </div>
 
             <div className="customer-particulars">
