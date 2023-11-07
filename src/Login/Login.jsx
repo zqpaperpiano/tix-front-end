@@ -3,44 +3,54 @@ import { Component } from "react";
 import "./Login.css";
 import AuthService from "../LoginSignUp/services/auth.service";
 
-
 class Login extends Component{
   constructor(){
     super();
     this.state = ({
-      email: '',
-      password: '',
+      loginEmail: '',
+      loginPassword: '',
       errorMessage: '',
     })
   }
   
+  //changes this.state.email to user's input
   onEmailChange = (event) => {
     this.setState({
       loginEmail: event.target.value
     })
   }
 
+  //changes this.state.password to user's input
   onPasswordChange = (event) => {
     this.setState({
       loginPassword: event.target.value
     })
   }
 
+  //redirects the user to the signup page
   onClickSignup(){
     this.props.onRouteChange('SignUp');
   }
 
+  //call function to check username and password to allow log in
   onClickLogin(e){
     e.preventDefault();
-    if(this.state.loginEmail != ''){
+    console.log('email:')
+    //validation to ensure that both email and password is filled in
+    if(this.state.loginEmail !== '' && this.state.loginPassword !== ''){
+
+      //API call to validate username and password against database
+      //user is also saved into localStorage in this api method call
       AuthService.login(this.state.loginEmail, 
         this.state.loginPassword)
         .then(
         () => {
           const user = AuthService.getCurrentUser();
+          //load user into state so system knows that user has logged in
           this.props.loadUser(
             user.fullname, user.email, user.mobile
           )
+          //upon successful login, redirects logged in user back to home page
           this.props.onRouteChange('Home');
         },
         (error) => {
@@ -51,6 +61,8 @@ class Login extends Component{
           alert(resMessage);
         }
       );
+    }else{
+      alert("Please ensure that both username and passwords are filled in!");
     }
   }
 

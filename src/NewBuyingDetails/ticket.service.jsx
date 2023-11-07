@@ -22,18 +22,6 @@ const getDates = (eventName) => {
     
 }
 
-const getAllEvents = () => {
-  return axios.get
-  (API_URL + 'events')
-  .then((response => {
-    return response;
-  }))
-  .catch((error) => {
-    console.log('error getting all events', error);
-    throw error;
-  })
-}
-
 //returns list of categories from eventName
 const getCategories = (eventName) => {
   return axios.get
@@ -97,6 +85,7 @@ const getTicketByNameDateCategorySeat = (eventName, eventDate, eventCategory, se
     });
 };
 
+//get all tickets regarrdless of availability, from each category
 const getAllTicketsFromDateCategory = (eventName, eventDate, eventCategory) => {
   return axios.get
   (API_URL + `events/getEventByNameDate/${eventName}/${eventDate}/ticketByCategory/${eventCategory}/allSeatNumbers`, {
@@ -153,6 +142,7 @@ const getPurchaseInfoFromTicketId = (ticketId) => {
     
 }
 
+
 //retruns the list of purchases user made
 const getUserPurchasesFromUserId = (userId) => {
   return axios.get
@@ -179,6 +169,7 @@ const deletePurchase = (purchaseId) => {
   );
 } 
 
+//get queue number of current user
 const getQueueNumber = (eventName, userId) => {
   return axios.get
   (API_URL + `queueNum/${eventName}/${userId}`, {
@@ -211,7 +202,8 @@ const saveSetOrQueue = (userId, eventName) => {
   });
 }
 
-const timeout = (eventName, userId) => {
+//set a timeout for users, within which they must complete their purchase
+const timeout = (userId, eventName) => {
   return axios.put
   (API_URL + `home/${eventName}/${userId}/deleteAndNotify`, {
   }, 
@@ -230,7 +222,6 @@ const timeout = (eventName, userId) => {
 
 
 const TicketService = {
-  getAllEvents,
   getDates,
   getCategories,
   getSeatNumbers,

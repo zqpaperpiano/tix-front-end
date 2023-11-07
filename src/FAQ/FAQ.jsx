@@ -30,11 +30,7 @@ export const FAQ = () => {
                 What is the refund and exchange policy
             </div>
             <div className='answer'>
-                {`While we do not accept exhanges, in the event that you are unable to attend the concert due to any reason, you are able to re-sell the ticket back onto our website
-                via the 'sell ticket' button in your profile, next to the corresponding ticket. Do ensure that you are selling the correct ticket, as we cannot guarantee that you 
-                will be able to get the same ticket back in the event of selling the wrong ticket.
-                The full amount you paid for the ticket will also be credited into your bank account within 7 working days. 
-                For more information, feel free to contact our staff  `}
+                {`We do not accept any exchanges or refunds. `}
             </div>
 
             <div className='question'>

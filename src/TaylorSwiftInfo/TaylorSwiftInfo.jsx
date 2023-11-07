@@ -100,38 +100,38 @@ export const TaylorSwiftInfo = ({onRouteChange, user, setCurrentEvent}) => {
         <div className="seat-map">
           <p className="seat-map-ticket text-wrapper-5">Seat Map &amp; Ticket Pricing</p>
           <div className="pictures">
-            <img className="seating-picture" alt="Seating picture" src={SeatMapPicture} />
-            <img className="category-table" alt="Category table" src={PricingTable} />
-            </div>
-        </div>
-
-        <div className="admission-policy">
-          <div className="overlap-3">
-            <p className="admission-policy text-wrapper-11">Admission Policy</p>
-            <p className="admission-to-show text-wrapper-11">
-              1. Admission to show/venue by full ticket only. Printed/electronic tickets must be produced for admission.
-              <br />
-              <br />
-              2. There will be no admission for infants in arms and children below 3 years old.
-              <br />
-              <br />
-              3. Individuals aged 3 years old and above will be required to purchase a ticket for admission.
-              <br />
-              <br />
-              4. No professional photo or video cameras allowed.
-              <br />
-              <br />
-              5. STRICTLY No Social Media Live Streaming is allowed.
-              <br />
-              <br />
-              6. No outside food and beverage are allowed into the venue.
-            </p>
-          </div> 
-        </div>
-
-      
-    </div>
-  );
-};
-
+          <img className="seating-picture" alt="Seating picture" src={SeatMapPicture} /> 
+            <img className="category-table" alt="Category table" src={PricingTable} /> 
+            </div> 
+        </div> 
+ 
+        <div className="admission-policy"> 
+          <div className="overlap-3"> 
+            <p className="admission-policy text-wrapper-11">Admission Policy</p> 
+            <p className="admission-to-show text-wrapper-11"> 
+              1. Admission to show/venue by full ticket only. Printed/electronic tickets must be produced for admission. 
+              <br /> 
+              <br /> 
+              2. There will be no admission for infants in arms and children below 3 years old. 
+              <br /> 
+              <br /> 
+              3. Individuals aged 3 years old and above will be required to purchase a ticket for admission. 
+              <br /> 
+              <br /> 
+              4. No professional photo or video cameras allowed. 
+              <br /> 
+              <br /> 
+              5. STRICTLY No Social Media Live Streaming is allowed. 
+              <br /> 
+              <br /> 
+              6. No outside food and beverage are allowed into the venue. 
+            </p> 
+          </div>  
+        </div> 
+ 
+       
+    </div> 
+  ); 
+}; 
+ 
 export default TaylorSwiftInfo

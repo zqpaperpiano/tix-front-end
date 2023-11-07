@@ -33,6 +33,7 @@ class App extends Component{
     })
   }
 
+  //load User into state to ensure that user is logged in. 
   loadUser = (fullName, email, mobile) => {
     this.setState({
       user: {
@@ -43,26 +44,14 @@ class App extends Component{
     })
   }
 
-  onMadePurchase = (eventName, date, cat, ticketID, price) => {
-    this.setState({
-      ticket:{
-        eventName: eventName,
-        date: date,
-        cat: cat,
-        ticketID: ticketID,
-        price: price,
-      }
-    })
-  }
-
+  //set the current event that the user is buying tickets for 
   setCurrentEvent = (eventName) =>{
-    console.log('setting...');
     this.setState({
       currentEvent: eventName,
     })
   }
 
-
+  //loads navbar to show user profile if the user is successfully logged in
   onUserLogin(){
     if(this.state.user.email != ''){
       return <NavbarCompProfile onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
@@ -71,41 +60,43 @@ class App extends Component{
     }
   }
 
+  //change the route of the system for the user to navigate between pages
   onRouteChange = (route) => {
     this.setState({
       route: route,
     })
   }
 
+  //function to show different pages depending on the current route in the state
   pageNavigation(){
     switch(this.state.route){
-          case 'Login':
+          case 'Login': //checked
             return <Login onRouteChange={this.onRouteChange} loadUser={this.loadUser} user={this.state.user}/>
-          case 'SignUp':
+          case 'SignUp': //checked
             return <SignUp onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
-          case 'AllEvents':
+          case 'AllEvents': //checked
             return <EventsAll onRouteChange={this.onRouteChange} />
-          case 'Music':
+          case 'Music': //checked
             return <EventsMusic onRouteChange={this.onRouteChange} />  
-          case 'Sports':
+          case 'Sports': //checked
             return <EventsSports onRouteChange={this.onRouteChange} />
-          case 'SeatingPayment':
-            return  <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange} currentEvent={this.state.currentEvent}/>
-          case 'TSInfo':
+          case 'SeatingPayment': //checked
+            return  <SeatingPayment onRouteChange={this.onRouteChange} currentEvent={this.state.currentEvent} setListOfTicketIds={this.setListOfTicketIds} listOfTicketIds={this.state.listOfTicketIds}/>
+          case 'TSInfo': //checked
             return <TaylorSwiftInfo onRouteChange={this.onRouteChange} user={this.state.user} setCurrentEvent={this.setCurrentEvent}/>
-          case 'UFCInfo':
+          case 'UFCInfo': //pending
             return <UFCInfo onRouteChange={this.onRouteChange} user={this.state.user} setCurrentEvent={this.setCurrentEvent}/>  
-          case 'Home':
+          case 'Home': //checked
             return <HomePage onRouteChange={this.onRouteChange} />
-          case 'Profile':
+          case 'Profile': //checked
             return <Profile onRouteChange={this.onRouteChange} />
-          case 'Confirmation':
-            return <Confirmation onRouteChange={this.onRouteChange} />
+          case 'Confirmation': //checked
+            return <Confirmation onRouteChange={this.onRouteChange} listOfTicketIds={this.state.listOfTicketIds}/>
           case 'Queue':
             return <Queue onRouteChange={this.onRouteChange} currentEvent={this.state.currentEvent}/>
-          case 'UserPurchases':
+          case 'UserPurchases': //checked
             return <UserPurchases />
-          case 'FAQ':
+          case 'FAQ': //checked
             return <FAQ />
           case 'AlternateConfirmation':
             return <AlternateConfirmation onRouteChange={this.onRouteChange}/>
@@ -114,7 +105,6 @@ class App extends Component{
 
   
   render(){
-    // console.log('from main app: ', this.state.currentEvent);
     return (
       <div className="main-page">
         <div className='navbar-top'>
