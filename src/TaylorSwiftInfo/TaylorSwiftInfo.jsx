@@ -15,7 +15,7 @@ export const TaylorSwiftInfo = ({onRouteChange, user, setCurrentEvent}) => {
   const handleCheck = () => {
     console.log("Handling Check")
     console.log(currentUser.id)
-    TicketService.saveSetOrQueue(currentUser.id, "Taylor Swift Concert")
+    TicketService.addToWaitingList(currentUser.id, "Taylor Swift Concert")
     .then ((isUserInSet) => {
       if (isUserInSet == true){
         setCurrentEvent("Taylor Swift Concert");

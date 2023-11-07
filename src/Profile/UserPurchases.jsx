@@ -11,7 +11,7 @@ const UserPurchases = () => {
     //upon load up, load all of the purchases under the userID stored in local storage
   useEffect(() => {
     console.log("getting user purchases")
-    TicketService.getUserPurchasesFromUserId(userID)
+    TicketService.userPurchase(userID)
       .then((userPurchases) => {
         setUserPurchases(userPurchases);
         console.log(userPurchases[0])
@@ -35,7 +35,7 @@ const UserPurchases = () => {
     userPurchases.map((purchase) => {
       const id = purchase.ticketId
       promises.push(
-        TicketService.getPurchaseInfoFromTicketId(id)
+        TicketService.getSinglePurchaseByTicketId(id)
         .then(data => {return data} )
       );
     })

@@ -3,8 +3,9 @@ import axios from "axios";
 const API_URL = "http://localhost:8081/api/v1/auth/";
 axios.defaults.withCredentials = true
 
-const register = (fullname, email, mobile, password) => {
-  return axios.post(API_URL + "signup", {
+//edited  
+const registerUser = (fullname, email, mobile, password) => {
+  return axios.post(API_URL + "signUp", {
     fullname,
     email,
     mobile,
@@ -12,7 +13,8 @@ const register = (fullname, email, mobile, password) => {
   })
 };
 
-const login = (email, password) => {
+//edited
+const authenticateUser = (email, password) => {
   return axios
     .post(API_URL + "login", {
       email,
@@ -35,16 +37,20 @@ const logout = () => {
   });
 };
 
-const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem("user"));
-  
+//edited
+const getUser = () => {
+  return axios.get
+  (API_URL + "profile")
+  .then((resp) => {
+    return resp;
+  })
 };
 
 const AuthService = {
-  register,
-  login,
+  registerUser,
+  authenticateUser,
   logout,
-  getCurrentUser,
+  getUser,
 }
 
 export default AuthService;

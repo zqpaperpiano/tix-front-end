@@ -40,7 +40,7 @@ export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
 
     //fetch categories upon page load
     useEffect(() => {
-        TicketService.getCategories(eventName).then((categories) => {
+        TicketService.getCategoriesByName(eventName).then((categories) => {
         setEventCategories(categories);
         });
     }, [eventName]);
@@ -109,9 +109,9 @@ export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
       setChosenDate(selectedDate);
       setChosenCategory(selectedCategory);
 
-      TicketService.getSeatNumbers(eventName, selectedDate, selectedCategory)
+      TicketService.getTicketSeatNumberByEventNameAndCategory(eventName, selectedDate, selectedCategory)
       .then((numbers) => {
-        TicketService.getAllTicketsFromDateCategory(eventName, selectedDate, selectedCategory)
+        TicketService.getAllSeatNumberByEventNameAndCategory(eventName, selectedDate, selectedCategory)
         .then((tickets) => {
           setListOfAllSeats(tickets);
           setTimeout(() => {
@@ -148,7 +148,7 @@ export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
       let ticketPrice = 0;
       let date = extractDate(seat);
 
-      TicketService.getTicketByNameDateCategorySeat(eventName, selectedDate, selectedCategory, seatNo)
+      TicketService.getTicketByEventNameDateAndCategoryAndSeatNum(eventName, selectedDate, selectedCategory, seatNo)
       .then((ticket) => {
         let tixDetails = {
           "ticketID": ticket.id,
@@ -232,7 +232,6 @@ export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
     const handlePayment = (listOfDetailedTickets, ticketEventName, userID) => {
       let noOfTix = listOfDetailedTickets.length;
       localStorage.setItem("noOfTickets", JSON.stringify(noOfTix));
-      let listOfTix = [];
 
       listOfDetailedTickets.map((ticket, i) => {
         let storageNumber = i + 1;
@@ -241,7 +240,7 @@ export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
         let ticketDate = ticket.date
         localStorage.setItem(`ticket${storageNumber}`, ticket.ticketID);
 
-        TicketService.savePurchaseInfo(ticketEventName, ticketDate, ticketCat, seatNo, userID)
+        TicketService.purchaseTicket(ticketEventName, ticketDate, ticketCat, seatNo, userID)
         .then (
           () => {
           },(error) => {
@@ -319,7 +318,7 @@ export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
 
     const handleTimeout = () => {
         alert("Time is Up, Returning to Home");
-        TicketService.timeout(eventName, currentUser.id)
+        TicketService.sendUserToHomePage(eventName, currentUser.id)
         .then(() => {
           onRouteChange("Home");
       }, (error) => {

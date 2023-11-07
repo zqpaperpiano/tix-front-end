@@ -12,8 +12,7 @@ import AuthService from "../LoginSignUp/services/auth.service";
 export const Queue = ({ onRouteChange, currentEvent }) => {
   const currentUser = AuthService.getCurrentUser();
   const [queueNumber, setQueueNumber] = useState(null);
-  const [eventName, setName] = useState(currentEvent);
-  const [accessToBuy, setAccessToBuy] = useState(false);
+  const [eventName, setName] = useState("Taylor Swift Concert");
   const stompClient = new Client();   //Initialize the stompClient
 
   const connect = () => {
@@ -40,8 +39,6 @@ export const Queue = ({ onRouteChange, currentEvent }) => {
   }
 
   const onPrivateMessage = (payload) => {
-    console.log("hello");
-    console.log(payload);
     var payloadData = JSON.parse(payload.body);
     if (payloadData.isInBuySet == true) {
       disconnectWebSocket();
@@ -50,8 +47,7 @@ export const Queue = ({ onRouteChange, currentEvent }) => {
   }
 
   useEffect(() => {
-    console.log(eventName)
-    TicketService.getQueueNumber(eventName, currentUser.id).then((queueNumber) => {
+    TicketService.findQueueNumber(eventName, currentUser.id).then((queueNumber) => {
       setQueueNumber(queueNumber);
       connect();
     });

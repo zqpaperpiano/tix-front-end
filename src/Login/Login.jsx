@@ -40,11 +40,11 @@ class Login extends Component{
 
       //API call to validate username and password against database
       //user is also saved into localStorage in this api method call
-      AuthService.login(this.state.loginEmail, 
+      AuthService.authenticateUser(this.state.loginEmail, 
         this.state.loginPassword)
         .then(
         () => {
-          const user = AuthService.getCurrentUser();
+          const user = AuthService.getUser();
           //load user into state so system knows that user has logged in
           this.props.loadUser(
             user.fullname, user.email, user.mobile

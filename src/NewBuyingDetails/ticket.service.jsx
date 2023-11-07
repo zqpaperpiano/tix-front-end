@@ -4,6 +4,7 @@ const API_URL = "http://localhost:8081/api/v1/";
 axios.defaults.withCredentials = true
 
 //returns list of Dates from eventName
+//not in the list!!
 const getDates = (eventName) => {
   return axios.get
     (API_URL + `events/getDatesByName/${eventName}`, {
@@ -23,9 +24,10 @@ const getDates = (eventName) => {
 }
 
 //returns list of categories from eventName
-const getCategories = (eventName) => {
+//edited
+const getCategoriesByName = (eventName) => {
   return axios.get
-    (API_URL + `events/getCategoriesByName/${eventName}`, {
+    (API_URL + `event/${eventName}/Categories`, {
       eventName
     }, 
     { withCredentials: true,}
@@ -42,10 +44,10 @@ const getCategories = (eventName) => {
 }
 
 //returns list of available seats from event, date and category
-const getSeatNumbers = (eventName, eventDate, eventCategory) => {
-  // console.log(API_URL + `events/getEventByNameDate/${eventName}/${eventDate}/ticketByCategory/${eventCategory}/allSeats`);
+//edited
+const getTicketSeatNumberByEventNameAndCategory = (eventName, eventDate, eventCategory) => {
   return axios.get
-    (API_URL + `events/getEventByNameDate/${eventName}/${eventDate}/ticketByCategory/${eventCategory}/allAvailableSeats`, {
+    (API_URL + `ticket/${eventName}/${eventDate}/${eventCategory}/getAvailableSeat`, {
       eventName,
       eventDate,
       eventCategory
@@ -64,9 +66,10 @@ const getSeatNumbers = (eventName, eventDate, eventCategory) => {
 };
 
 //gets the specific ticket according to users input
-const getTicketByNameDateCategorySeat = (eventName, eventDate, eventCategory, seatNum) => {
+//edited
+const getTicketByEventNameDateAndCategoryAndSeatNum = (eventName, eventDate, eventCategory, seatNum) => {
   return axios.get
-    (API_URL + `events/getEventByNameDate/${eventName}/${eventDate}/ticketByCategory/${eventCategory}/allSeats/${seatNum}`, {
+    (API_URL + `ticket/${eventName}/${eventDate}/${eventCategory}/${seatNum}/getTicket`, {
       eventName,
       eventDate,
       eventCategory,
@@ -86,9 +89,10 @@ const getTicketByNameDateCategorySeat = (eventName, eventDate, eventCategory, se
 };
 
 //get all tickets regarrdless of availability, from each category
-const getAllTicketsFromDateCategory = (eventName, eventDate, eventCategory) => {
+//edited
+const getAllSeatNumberByEventNameAndCategory = (eventName, eventDate, eventCategory) => {
   return axios.get
-  (API_URL + `events/getEventByNameDate/${eventName}/${eventDate}/ticketByCategory/${eventCategory}/allSeatNumbers`, {
+  (API_URL + `ticket/${eventName}/${eventDate}/${eventCategory}/getSeatNumbers`, {
     eventName,
     eventDate,
     eventCategory
@@ -106,9 +110,10 @@ const getAllTicketsFromDateCategory = (eventName, eventDate, eventCategory) => {
 };
 
 //save new purchase info
-const savePurchaseInfo = (eventName, eventDate, eventCategory, seatNum, userId) => {
+//EDITED
+const purchaseTicket = (eventName, eventDate, eventCategory, seatNum, userId) => {
   return axios.post
-    (API_URL + `events/${eventName}/${eventDate}/${eventCategory}/${seatNum}/${userId}`, {
+    (API_URL + `ticket/${eventName}/${eventDate}/${eventCategory}/${seatNum}/${userId}/addPurchase`, {
       eventName,
       eventDate,
       eventCategory,
@@ -119,15 +124,12 @@ const savePurchaseInfo = (eventName, eventDate, eventCategory, seatNum, userId) 
     );
 };
 
-//returns the ticket stored in the local Storage
-const getCurrentTicket = () => {
-  return JSON.parse(localStorage.getItem("ticket"));
-};
 
 //returns the purchase entity as JSON
-const getPurchaseInfoFromTicketId = (ticketId) => {
+//edited
+const getSinglePurchaseByTicketId = (ticketId) => {
   return axios.get
-    (API_URL + `purchases/byTicketId/${ticketId}`, {
+    (API_URL + `purchases/${ticketId}/getPurchase`, {
     }, 
         { withCredentials: true,}
     )
@@ -144,9 +146,10 @@ const getPurchaseInfoFromTicketId = (ticketId) => {
 
 
 //retruns the list of purchases user made
-const getUserPurchasesFromUserId = (userId) => {
+//edited
+const userPurchase = (userId) => {
   return axios.get
-    (API_URL + `purchases/byUserId/${userId}`, {
+    (API_URL + `purchases/${userId}/getUserPurchases`, {
     },
         { withCredentials: true,}
     )
@@ -160,9 +163,11 @@ const getUserPurchasesFromUserId = (userId) => {
     });
 }
 
+//delete a purchase
+//edited
 const deletePurchase = (purchaseId) => {
   return axios.delete 
-  (API_URL +`purchases/${purchaseId}`, {
+  (API_URL +`purchases/${purchaseId}/deletePurchase`, {
     purchaseId
   }, 
       // { withCredentials: true,}
@@ -170,9 +175,10 @@ const deletePurchase = (purchaseId) => {
 } 
 
 //get queue number of current user
-const getQueueNumber = (eventName, userId) => {
+//edited
+const findQueueNumber = (eventName, userId) => {
   return axios.get
-  (API_URL + `queueNum/${eventName}/${userId}`, {
+  (API_URL + `event/${eventName}/${userId}/getQueueNum`, {
   }, 
     {withCredentials: true,}
   )
@@ -186,11 +192,13 @@ const getQueueNumber = (eventName, userId) => {
   });
 }
 
-const saveSetOrQueue = (userId, eventName) => {
+//add user to queue
+//edited
+const addToWaitingList = (userId, eventName) => {
   return axios.post
-  (API_URL + `buy/${userId}/${eventName}`, {
+  (API_URL + `event/${userId}/${eventName}/enqueue`, {
   }, 
-    {withCredentials: true }
+    {withCredentials: true,}
   )
   .then((response) => {
     const inSet = response.data;
@@ -203,9 +211,10 @@ const saveSetOrQueue = (userId, eventName) => {
 }
 
 //set a timeout for users, within which they must complete their purchase
-const timeout = (eventName, userId) => {
+//edited
+const sendUserToHomePage = (userId, eventName) => {
   return axios.put
-  (API_URL + `home/${eventName}/${userId}/deleteAndNotify`, {
+  (API_URL + `ticket/${eventName}/${userId}/deleteUserFromSet`, {
   }, 
     {withCredentials: true,}
   )
@@ -214,27 +223,25 @@ const timeout = (eventName, userId) => {
     console.log(inSet)
     return inSet;
   }).catch((error) => {
-    console.error("Error", error);
+    console.error("Error fetching information:", error);
     throw error;
   });
 }
 
 
-
 const TicketService = {
   getDates,
-  getCategories,
-  getSeatNumbers,
-  getTicketByNameDateCategorySeat,
-  savePurchaseInfo,
-  getCurrentTicket,
-  getPurchaseInfoFromTicketId,
-  getUserPurchasesFromUserId,
+  getCategoriesByName,
+  getTicketSeatNumberByEventNameAndCategory,
+  getTicketByEventNameDateAndCategoryAndSeatNum,
+  purchaseTicket,
+  getSinglePurchaseByTicketId,
+  userPurchase,
   deletePurchase,
-  getQueueNumber,
-  getAllTicketsFromDateCategory,
-  saveSetOrQueue,
-  timeout
+  findQueueNumber,
+  getAllSeatNumberByEventNameAndCategory,
+  addToWaitingList,
+  sendUserToHomePage
 }
 
 export default TicketService;

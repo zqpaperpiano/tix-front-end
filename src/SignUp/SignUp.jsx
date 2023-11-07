@@ -71,7 +71,7 @@ class SignUp extends Component{
 
   //calls API to register user
   onClickSubmit = () => {
-    AuthService.register(
+    AuthService.registerUser(
       this.state.fullName, 
       this.state.email, 
       this.state.mobile, 
