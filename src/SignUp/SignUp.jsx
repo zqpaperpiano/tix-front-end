@@ -18,20 +18,23 @@ class SignUp extends Component{
     })
   }
 
+  //change this.state.password to user's input
   onPasswordChange = (event) => {
     this.setState({
       password: event.target.value
     })
   }
 
+  //change this.state.email to user's input
   onEmailChange = (event) => {
     this.setState({
       email: event.target.value
     })
   }
 
+  //check if both passwords are matching;
   onConfirmPasswordChange = (event) => {
-   let confirm = event.target.value;
+   let confirm = event.target.value; //confirm is the user's current input
     if(this.state.samePassword === false && this.state.password === confirm){
       this.setState({samePassword: true})
     }else if(this.state.samePassword === true && this.state.password != confirm){
@@ -39,12 +42,14 @@ class SignUp extends Component{
     }
   }
 
+  //change this.state.fullName to user's input
   onNameChange = (event) => {
     this.setState({
       fullName: event.target.value
     })
   }
 
+  //chane this.state.mobile to user's input 
   onContactChange = (event) => {
     let mobile = event.target.value;
     if(!isNaN(mobile)){
@@ -59,10 +64,12 @@ class SignUp extends Component{
     }
   }
 
+  //redirect user to login page
   onClickLogin(){
     this.props.onRouteChange('Login');
   }
 
+  //calls API to register user
   onClickSubmit = () => {
     AuthService.register(
       this.state.fullName, 
@@ -83,14 +90,11 @@ class SignUp extends Component{
           error.toString();
 
         alert(resMessage, 'Please try again');
-        // setMessage(resMessage);
-        // setSuccessful(false);
       }
     );
   }
 
   render(){
-    // console.log('name: ', this.state.fullName);
     return (
       <div className="sign-up">
         <div className="welcome-sign-up">

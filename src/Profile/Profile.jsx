@@ -3,6 +3,7 @@ import { Component } from "react";
 import AuthService from "../LoginSignUp/services/auth.service";
 import './Profile.css';
 
+//get current user 
 const user = AuthService.getCurrentUser();
 
 const Profile = () => {

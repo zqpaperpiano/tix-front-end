@@ -17,30 +17,26 @@ class Confirmation extends Component{
         })
     }
 
+    //get list of ticketIDs purchased from local storage
     getTicketIds = () => {
         let noOfTickets = parseInt(localStorage.getItem("noOfTickets"));
         let tickets = [];
 
         for(let i = 1; i <= noOfTickets; ++i){
             tickets.push(localStorage.getItem(`ticket${i}`));
-            // localStorage.removeItem(`ticket${i}`);
         }
         console.log('these r my ticketids: ', tickets);
         return tickets;
     }
 
-
+//from the ticket ids, generate purchase info about the tickets
     getPurchaseInfo = () => {
         let tickets = this.getTicketIds();
-        // console.log('from confirmation:', tickets);
-        let purchases = [ ]
-        let purchaseIDs = [];
+        let purchases = []
 
         tickets.map((ticket, i) => {
-            console.log('one ticket coming through...: ', ticket);
             TicketService.getPurchaseInfoFromTicketId(ticket)
             .then((purchaseInfo) => {
-                console.log('retrived purchase info here: ', purchaseInfo);
                 let purchase = {
                     "purchaseId": purchaseInfo.purchaseId,
                     "userId": purchaseInfo.userId,
@@ -53,17 +49,16 @@ class Confirmation extends Component{
                     "seatNum": purchaseInfo.seatNum,
                     "category": purchaseInfo.category
                 }
-                console.log('this is a purchase', purchase);
+
                 purchases.push(purchase);
-                purchaseIDs.push(purchaseInfo.purchaseId);
                 this.setState({
                     purchaseInfo: purchases,
-                    purchaseIDs: purchaseIDs
                 })
             })
         })
     }
 
+    //when component starts, create a timeout before getting purchase info
     componentDidMount(){
         setTimeout(() => {
             this.getPurchaseInfo();

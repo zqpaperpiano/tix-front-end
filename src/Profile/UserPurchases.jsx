@@ -8,6 +8,7 @@ const UserPurchases = () => {
     const [userPurchases, setUserPurchases] = useState([]);
     const [purchaseInfoList, setPurchaseInfoList] = useState([]);
 
+    //upon load up, load all of the purchases under the userID stored in local storage
   useEffect(() => {
     TicketService.getUserPurchasesFromUserId(userID)
       .then((userPurchases) => {
@@ -18,20 +19,15 @@ const UserPurchases = () => {
       });
   }, [userID]);
 
-  const handleDeletePurchase = (purchaseId) => {
-    TicketService.deletePurchase(purchaseId)
-      .then(() => {
-        setPurchaseInfoList((prevPurchaseInfoList) =>
-          prevPurchaseInfoList.filter(
-            (purchaseInfo) => purchaseInfo.purchaseId !== purchaseId
-          )
-        );
-      })
-      .catch((error) => {
-        console.error(`Error deleting purchase with ID ${purchaseId}:`, error);
-      });
-  };
+  //upon loading, give a timer before loading all of the user's purchases
+  useEffect(() => {
+    setTimeout(() => {
+      getTicketDetails();
+    }, 1000)
+  }, [userPurchases]);
 
+
+  //get ticket details from purchaseID stored under the respective user IDs
   const getTicketDetails = () => {
     const promises = [];
     userPurchases.map((purchase) => {
@@ -44,20 +40,12 @@ const UserPurchases = () => {
 
       Promise.all(promises)
       .then((infoList) => {
-        // console.log('infolislt: ', infoList )
         setPurchaseInfoList(infoList);
       })
       .catch((error) => {
         console.error("Error fetching purchase info by ticket ID:", error);
       });
     }
-
-  useEffect(() => {
-    setTimeout(() => {
-      getTicketDetails();
-    }, 1000)
-  }, [userPurchases]);
-
 
   return (
     <div className="user-purchases">
@@ -75,7 +63,6 @@ const UserPurchases = () => {
           <p>{`Ticket ID: ${purchaseInfo.ticketId}`}</p>
           <p>{`Price: ${purchaseInfo.ticketPrice}`}</p>
           <p>{`Seat Number: ${purchaseInfo.seatNum}`}</p>
-          <button onClick={() => handleDeletePurchase(purchaseInfo.purchaseId)}>Sell Ticket</button>
         </div>
       ))}
     </div>

@@ -15,27 +15,27 @@ export const EventsAll = ({onRouteChange}) => {
 
           <div className="image-div">
                 <img onClick={() => {onRouteChange('TSInfo')}} className="event-image" alt="Taylor swift" src={TaylorSwift} />
-          </div> {/*end of div for image */}
+          </div>
 
           <div className="title">
               <p onClick={() => {onRouteChange('TSInfo')}} className="text-wrapper-2">TAYLOR SWIFT | THE ERAS TOUR</p>
-          </div>{/*end of div for title */}
+          </div>
 
-        </div> {/* end of div for taylor swift  */}
+        </div> 
               
         <div className="event-card">
 
           <div className="image-div">
                 <img className="event-image" onClick={() => {onRouteChange("UFCInfo")}} alt="Ufc" src={UFC} />
-          </div> {/*end of div for image */}
+          </div> 
 
           <div className="title">
             <p onClick={() => {onRouteChange("UFCInfo")}} className="text-wrapper-2">UFC | HOLLOWAY vs THE KOREAN ZOMBIE</p>
-          </div>{/*end of div for title */}
+          </div>
 
-        </div> {/* end of div for UFC  */}
+        </div> 
 
-      </div> {/*end of div for events-overview */}
+      </div> 
 
     </div>
   );

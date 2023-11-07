@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import TicketService from "./ticket.service";
 import AuthService from "../LoginSignUp/services/auth.service";
 import './SeatingPayment.css';
-import Stripe from "react-stripe-checkout";
 import axios from "axios";
 import StripeButton from "../Components/StripePayment/StripeButton";
 import CountdownTimer from "../Components/Timer/CountdownTimer";
@@ -10,8 +9,7 @@ import UFCSeatMap from '../assets/UFC/UFC-Seat-Map.jpeg';
 import TSSeatMap from '../assets/SeatMapPicture.png';
 
 
-
-export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
+export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
     const currentUser = AuthService.getCurrentUser();
     const [eventName, setName] = useState(currentEvent);
 
@@ -31,12 +29,23 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
     const [detailsOfChosenSeats, setDetailsOfChosenSeats] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
-    const [ticketDetails, setTicketDetails] = useState(null);
     const [message, setMessage] = useState("");
 
-    const [userPurchases, setUserPurchases] = useState([]);
+    //fetch dates upon page load
+    useEffect(() => {
+      TicketService.getDates(eventName).then((dates) => {
+      setEventDates(dates);
+      });
+  }, [eventName]);
 
+    //fetch categories upon page load
+    useEffect(() => {
+        TicketService.getCategories(eventName).then((categories) => {
+        setEventCategories(categories);
+        });
+    }, [eventName]);
 
+    //handle stripe payment
     async function handleToken(token) {
       console.log(token);
       await axios
@@ -54,40 +63,25 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
         });
     }
 
+    //changes selected date to user's input date
     const onChangeDate = (e) => {
         const selectedDate = e.target.value;
         if (selectedDate != "Select a Date"){
-            onChangingEventOrCategory();
             setSelectedDate(selectedDate);
         } else {
           alert("Please select a Date");
         }
       };
     
+    //change selected category to user's input category
     const onChangeCategory = (e) => {
         const selectedCategory = e.target.value;
         if (selectedCategory != "Select a Category"){
-            onChangingEventOrCategory();
             setSelectedCategory(selectedCategory);
         } else {
           alert("Please select a Category");
         }
       };
-
-      
-    //fetch dates upon page load
-    useEffect(() => {
-        TicketService.getDates(eventName).then((dates) => {
-        setEventDates(dates);
-        });
-    }, [eventName]);
-
-    //fetch categories upon page load
-    useEffect(() => {
-        TicketService.getCategories(eventName).then((categories) => {
-        setEventCategories(categories);
-        });
-    }, [eventName]);
 
     //calculate which seats r unvailable
     const findUnavailableSeats = (availableSeats, allSeats) => {
@@ -95,12 +89,12 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
       const unavailableSeats = [];
       const dateString = selectedDate.split("-").join("");
 
+      //create a set of all seats
       for(const seats of availableSeats){
         set.add(seats);
       }
 
-      // console.log('allSeats:', allSeats);
-
+      //check which seats are not available
       allSeats.map((seats) => {
         if(!set.has(seats)){
           let unavailableSeatId = `c${selectedCategory}s${seats}d${dateString}`;
@@ -132,6 +126,7 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
       onChangingEventOrCategory();
       setChosenDate(selectedDate);
       setChosenCategory(selectedCategory);
+
       TicketService.getSeatNumbers(eventName, selectedDate, selectedCategory)
       .then((numbers) => {
         TicketService.getAllTicketsFromDateCategory(eventName, selectedDate, selectedCategory)
@@ -151,7 +146,7 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
       });
     };
 
-    //isNaN(3) = false
+    //calculate the seat number from seatID
     const getSeatNumber = (seatID) => {
       let i = 3;
       let seatNum = ""
@@ -159,9 +154,7 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
         // console.log(seatID[i])
         seatNum += seatID[i];
         ++i;
-        // console.log(seatNum);
       }
-      // console.log('calculated seat number:');
       seatNum = parseInt(seatNum);
       return seatNum;
     }
@@ -191,13 +184,13 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
     }
 
 
+    //get the date of the ticket from seatID
     const extractDate = (seatID) => {
       let date = "";
       let seatIDlength = seatID.length;
       for(var i = seatIDlength - 8; i < seatID.length; ++i){
         date += seatID[i];
       }
-      // console.log(date);
       return date;
     }
 
@@ -216,7 +209,6 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
       })
 
       let price = currentTicket[0].price;
-      // console.log(price);
       price = -price;
       calculateTotalPrice(price);
       setDetailsOfChosenSeats(updatedDetails);
@@ -248,6 +240,7 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
       })
     }
 
+    //when changing date or category, keep the seats that have been originally selected
     const onChangingEventOrCategory = () => {
       unmarkSelected();
       markSelected();
@@ -260,7 +253,6 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
       let listOfTix = [];
 
       listOfDetailedTickets.map((ticket, i) => {
-        // console.log('from handling payment:', ticket);
         let storageNumber = i + 1;
         let ticketCat = ticket.cat
         let seatNo = ticket.seatNum;
@@ -292,6 +284,7 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
     return false;
   }
 
+  //calculate the total cost of all selected tickets
   const calculateTotalPrice = (changeInPrice) => {
     let price = totalPrice;
     price += changeInPrice;
@@ -299,6 +292,7 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
 
   }
 
+  //remove seats from the list of chosen seats
   const removeSeatNoFromChosenList = (currentSeatID, listOfChosenSeats) => {
     console.log(currentSeatID);
     let currentSeat = document.getElementById(currentSeatID);
@@ -310,6 +304,7 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
     return listOfChosenSeats;
   }
 
+  //kick user out when they have exceeded their allocated time
   const handleTimeout = () => {
     alert("Time is Up, Returning to Home");
     TicketService.timeout(eventName, currentUser.id)
@@ -324,6 +319,7 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
   });
 }
 
+  //select or unselect seats accordingly
     const onClickSeats = (event) => {
       var occupied = false;
       var currentSeatID = event.currentTarget.id;
@@ -354,9 +350,9 @@ export const SeatingPayment = ({purchase, onRouteChange, currentEvent}) => {
       }
     }
 
-    // console.log('eventName:', eventName);
     return (
       <div>
+        <h1>{currentEvent}</h1>
           <div className="seating-payment">
           <div className="seat-selection-area">
             <div className="initial-selection-options">

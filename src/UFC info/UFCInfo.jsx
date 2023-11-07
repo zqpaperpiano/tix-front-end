@@ -1,8 +1,8 @@
 import React from "react";
 import "./UFCInfo.css";
 import UFC from '../assets/UFC/UFC.jpeg'
-import SeatMapPicture from '../assets/SeatMapPicture.png';
-import PricingTable from '../assets/PricingTable.jpg';
+import SeatMapPicture from '../assets/UFC/UFC-Seat-Map.jpeg';
+import PricingTable from '../assets/UFC/UFC-Price-Table.jpeg';
 import TicketService from "../NewBuyingDetails/ticket.service";
 import AuthService from "../LoginSignUp/services/auth.service";
 import { useState } from "react";
@@ -13,18 +13,16 @@ export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
   const [isInSet, setIsInSet] = useState(false);
   const [message, setMessage] = useState("");
 
+//check if user needs to enter queue or can buy immediately
   const handleCheck = () => {
-    console.log("Handling Check")
-    console.log(currentUser.id)
     TicketService.saveSetOrQueue(currentUser.id, "UFC")
     .then ((isUserInSet) => {
-      console.log(isUserInSet);
       if (isUserInSet == true){
         onRouteChange("SeatingPayment");
       } 
-      // if (isUserInSet == false) {
-      //   onRouteChange("Queue");
-      // }
+      if (isUserInSet == false) {
+        onRouteChange("Queue");
+      }
       
     }, (error) => {
       const resMessage =
@@ -44,7 +42,6 @@ export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
 
         <div className="event-detail-title">
           <div className="event-summary">
-            {/* <p className="text-wrapper">UFC</p> */}
             <p className="text-wrapper-2">2 March 2024 (Sat) & 4 March 2024 (Sun)</p>
             <p className="text-wrapper-2">The Octogon</p>
           </div>
@@ -58,11 +55,11 @@ export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
             }else {
               setCurrentEvent("UFC");
               handleCheck();
-              if (isInSet === true){
-                onRouteChange("SeatingPayment");
-              } else {
-                onRouteChange("Queue");
-              }
+              // if (isInSet === true){
+              //   onRouteChange("SeatingPayment");
+              // } else {
+              //   onRouteChange("Queue");
+              // }
             }
           }} 
           className="buy-btm text-wrapper-3">
