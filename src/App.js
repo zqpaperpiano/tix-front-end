@@ -26,6 +26,7 @@ class App extends Component{
       route: 'Home',
       currentEvent: '',
       user: {
+        id: '',
         fullName: '',
         email: '',
         mobile: '',
@@ -34,9 +35,10 @@ class App extends Component{
   }
 
   //load User into state to ensure that user is logged in. 
-  loadUser = (fullName, email, mobile) => {
+  loadUser = (userid, fullName, email, mobile) => {
     this.setState({
       user: {
+        id: userid,
         fullName: fullName,
         email: email,
         mobile: mobile
@@ -89,7 +91,7 @@ class App extends Component{
           case 'Home': //checked
             return <HomePage onRouteChange={this.onRouteChange} />
           case 'Profile': //checked
-            return <Profile onRouteChange={this.onRouteChange} />
+            return <Profile onRouteChange={this.onRouteChange} user={this.state.user}/>
           case 'Confirmation': //checked
             return <Confirmation onRouteChange={this.onRouteChange} listOfTicketIds={this.state.listOfTicketIds}/>
           case 'Queue':
@@ -103,6 +105,10 @@ class App extends Component{
         }
   }
 
+  componentDidMount(){
+    localStorage.removeItem("user");
+  }
+
   
   render(){
     return (
@@ -112,8 +118,8 @@ class App extends Component{
         </div>
 
         <div className="other-pages">
-          {this.pageNavigation()} 
-          {/* <SeatingPayment purchase={this.onMadePurchase} onRouteChange={this.onRouteChange} currentEvent={this.state.currentEvent}/> */}
+          {/* {this.pageNavigation()}  */}
+          <TaylorSwiftInfo onRouteChange={this.onRouteChange} user={this.state.user} setCurrentEvent={this.setCurrentEvent}/>
         </div>
       </div>
     );

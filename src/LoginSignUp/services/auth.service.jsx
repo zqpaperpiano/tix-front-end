@@ -5,7 +5,7 @@ axios.defaults.withCredentials = true
 
 //edited  
 const registerUser = (fullname, email, mobile, password) => {
-  return axios.post(API_URL + "signUp", {
+  return axios.post(API_URL + "signup", {
     fullname,
     email,
     mobile,

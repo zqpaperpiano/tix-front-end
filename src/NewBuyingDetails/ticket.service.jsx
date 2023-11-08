@@ -7,7 +7,7 @@ axios.defaults.withCredentials = true
 //not in the list!!
 const getDates = (eventName) => {
   return axios.get
-    (API_URL + `event/${eventName}/getDatesByName`, {
+    (API_URL + `event/events/getDatesByName/${eventName}`, {
       eventName
     }, 
     { withCredentials: true,}

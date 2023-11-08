@@ -13,8 +13,6 @@ export const TaylorSwiftInfo = ({onRouteChange, user, setCurrentEvent}) => {
   const [message, setMessage] = useState("");
   
   const handleCheck = () => {
-    console.log("Handling Check")
-    console.log(currentUser.id)
     TicketService.addToWaitingList(currentUser.id, "Taylor Swift Concert")
     .then ((isUserInSet) => {
       if (isUserInSet == true){

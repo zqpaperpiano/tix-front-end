@@ -3,10 +3,8 @@ import { Component } from "react";
 import AuthService from "../LoginSignUp/services/auth.service";
 import './Profile.css';
 
-//get current user 
-const user = AuthService.getUser();
+const Profile = ({user}) => {
 
-const Profile = () => {
     return(
         <div className="profile-div">
             <h1 className="profile-header"> Profile Details </h1>
@@ -15,7 +13,7 @@ const Profile = () => {
                     {`ID: ${user.id}`}
                 </div>
                 <div className="profile-name">
-                    {`Name: ${user.fullname}`}
+                    {`Name: ${user.fullName}`}
                 </div>
                 <div className="profile-email">
                     {`Email: ${user.email}`}

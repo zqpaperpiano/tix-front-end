@@ -238,7 +238,10 @@ export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
         let ticketCat = ticket.cat
         let seatNo = ticket.seatNum;
         let ticketDate = ticket.date
+        
+        console.log('before storing, this is my ticket: ', ticket.ticketID);
         localStorage.setItem(`ticket${storageNumber}`, ticket.ticketID);
+        console.log('lets look inside local storrage: ', localStorage.getItem(`ticket${storageNumber}`));   
 
         TicketService.purchaseTicket(ticketEventName, ticketDate, ticketCat, seatNo, userID)
         .then (

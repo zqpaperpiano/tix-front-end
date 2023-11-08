@@ -47,7 +47,7 @@ class Login extends Component{
           const user = AuthService.getUser();
           //load user into state so system knows that user has logged in
           this.props.loadUser(
-            user.fullname, user.email, user.mobile
+            user.id, user.fullname, user.email, user.mobile
           )
           //upon successful login, redirects logged in user back to home page
           this.props.onRouteChange('Home');
