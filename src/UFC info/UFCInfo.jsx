@@ -9,7 +9,7 @@ import { useState } from "react";
 
 export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
 
-  const currentUser = AuthService.getCurrentUser();
+  const currentUser = AuthService.getUser();
   const [message, setMessage] = useState("");
 
 //check if user needs to enter queue or can buy immediately
@@ -17,17 +17,19 @@ export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
     TicketService.addToWaitingList(currentUser.id, "UFC")
     .then ((isUserInSet) => {
       if (isUserInSet == true){
+        setCurrentEvent("UFC");
         onRouteChange("SeatingPayment");
       } 
       if (isUserInSet == false) {
+        setCurrentEvent("UFC");
         onRouteChange("Queue");
       }
       
     }, (error) => {
       const resMessage =
         (error.response && error.response.data && error.response.data.message)  
-        || error.message  
-        || error.toString();
+        || error.message 
+         ||error.toString();
       setMessage(resMessage);
     });
   }
@@ -41,7 +43,7 @@ export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
 
         <div className="event-detail-title">
           <div className="event-summary">
-            <p className="text-wrapper-2">2 March 2024 (Sat) & 4 March 2024 (Sun)</p>
+            <p className="text-wrapper-2">6 March 2024 (Sat) - 8 March 2024 (Mon)</p>
             <p className="text-wrapper-2">The Octogon</p>
           </div>
 
@@ -52,13 +54,7 @@ export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
               alert('Please log in or sign up first!');
               onRouteChange('Login');
             }else {
-              setCurrentEvent("UFC");
               handleCheck();
-              // if (isInSet === true){
-              //   onRouteChange("SeatingPayment");
-              // } else {
-              //   onRouteChange("Queue");
-              // }
             }
           }} 
           className="buy-btm text-wrapper-3">
@@ -74,7 +70,7 @@ export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
               <br />
               <br />
             </span>
-            <span className="text-wrapper-5">Event Dates: 5th & 6th March 2024</span>
+            <span className="text-wrapper-5">Event Dates: 6th - 8th March 2024</span>
           </p>
         </div>
 
@@ -102,7 +98,6 @@ export const UFCInfo = ({onRouteChange, user, setCurrentEvent}) => {
             <img className="category-table" alt="Category table" src={PricingTable} />
             </div>
         </div>
-
         <div className="admission-policy">
           <div className="overlap-3">
             <div className="text-wrapper-11">Admission Policy</div>

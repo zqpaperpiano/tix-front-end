@@ -78,7 +78,7 @@ class SignUp extends Component{
       this.state.password)
       .then(
       (response) => {
-        alert('Registration Successul. Please log in');
+        alert('Registration Successul. Please verify your email before loging in.');
         this.props.onRouteChange('Login');
       },
       (error) => {

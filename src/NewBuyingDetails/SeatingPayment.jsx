@@ -10,7 +10,7 @@ import TSSeatMap from '../assets/SeatMapPicture.png';
 
 
 export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
-    const currentUser = AuthService.getCurrentUser();
+    const currentUser = AuthService.getUser();
     const [eventName, setName] = useState(currentEvent);
 
     const [eventDates, setEventDates] = useState([]);
@@ -44,24 +44,6 @@ export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
         setEventCategories(categories);
         });
     }, [eventName]);
-
-    //handle stripe payment
-    async function handleToken(token) {
-      console.log(token);
-      await axios
-        .post("http://localhost:8081/api/payment/charge", "", {
-          headers: {
-            token: token.id,
-            amount: 500,
-          },
-        })
-        .then(() => {
-          alert("Payment Success");
-        })
-        .catch((error) => {
-          alert(error);
-        });
-    }
 
     //changes selected date to user's input date
     const onChangeDate = (e) => {
@@ -256,7 +238,10 @@ export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
         let ticketCat = ticket.cat
         let seatNo = ticket.seatNum;
         let ticketDate = ticket.date
+        
+        console.log('before storing, this is my ticket: ', ticket.ticketID);
         localStorage.setItem(`ticket${storageNumber}`, ticket.ticketID);
+        console.log('lets look inside local storrage: ', localStorage.getItem(`ticket${storageNumber}`));   
 
         TicketService.purchaseTicket(ticketEventName, ticketDate, ticketCat, seatNo, userID)
         .then (
@@ -303,21 +288,6 @@ export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
     return listOfChosenSeats;
   }
 
-  //kick user out when they have exceeded their allocated time
-  const handleTimeout  = () => {
-    alert("Time is Up, Returning to Home");
-    TicketService.addToWaitingList(eventName, currentUser.id)
-    .then(() => {
-      onRouteChange("Home");
-  }, (error) => {
-      const resMessage =
-        (error.response && error.response.data && error.response.data.message)  
-        || error.message  
-        || error.toString();
-      setMessage(resMessage);
-  });
-}
-
   //select or unselect seats accordingly
     const onClickSeats = (event) => {
       var occupied = false;
@@ -347,6 +317,20 @@ export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
         }
         setChosenSeat(listOfChosenSeats);
       }
+    }
+
+    const handleTimeout = () => {
+        alert("Time is Up, Returning to Home");
+        TicketService.sendUserToHomePage(eventName, currentUser.id)
+        .then(() => {
+          onRouteChange("Home");
+      }, (error) => {
+          const resMessage =
+            (error.response && error.response.data && error.response.data.message)  
+            || error.message  
+            || error.toString();
+          setMessage(resMessage);
+      });
     }
 
     return (
@@ -433,7 +417,7 @@ export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
 
           <div className="customer-order-div">
             <div className="countdown-timer">
-              <CountdownTimer durationInSeconds={600} onTimeout={handleTimeout}/>
+              <CountdownTimer durationInSeconds={100} onTimeout={handleTimeout}/>
             </div>
 
             <div className="customer-particulars">

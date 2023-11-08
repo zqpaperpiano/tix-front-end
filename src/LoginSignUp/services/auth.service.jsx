@@ -5,7 +5,7 @@ axios.defaults.withCredentials = true
 
 //edited  
 const registerUser = (fullname, email, mobile, password) => {
-  return axios.post(API_URL + "signUp", {
+  return axios.post(API_URL + "signup", {
     fullname,
     email,
     mobile,
@@ -39,11 +39,7 @@ const logout = () => {
 
 //edited
 const getUser = () => {
-  return axios.get
-  (API_URL + "profile")
-  .then((resp) => {
-    return resp;
-  })
+  return JSON.parse(localStorage.getItem("user"));
 };
 
 const AuthService = {

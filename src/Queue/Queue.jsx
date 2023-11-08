@@ -10,16 +10,16 @@ import AuthService from "../LoginSignUp/services/auth.service";
 
 
 export const Queue = ({ onRouteChange, currentEvent }) => {
-  const currentUser = AuthService.getCurrentUser();
+  const currentUser = AuthService.getUser();
   const [queueNumber, setQueueNumber] = useState(null);
-  const [eventName, setName] = useState("Taylor Swift Concert");
+  const [eventName, setName] = useState(currentEvent);
   const stompClient = new Client();   //Initialize the stompClient
 
   const connect = () => {
     stompClient.webSocketFactory = () => {
-      return new SockJS('http: localhost:8081/ws');
+      return new SockJS('http://localhost:8081/ws');
     };
-
+  
     stompClient.activate();
     stompClient.onConnect = () => {
       onConnected();

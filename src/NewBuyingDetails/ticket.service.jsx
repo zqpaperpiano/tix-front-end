@@ -7,7 +7,7 @@ axios.defaults.withCredentials = true
 //not in the list!!
 const getDates = (eventName) => {
   return axios.get
-    (API_URL + `events/getDatesByName/${eventName}`, {
+    (API_URL + `event/events/getDatesByName/${eventName}`, {
       eventName
     }, 
     { withCredentials: true,}
@@ -43,11 +43,47 @@ const getCategoriesByName = (eventName) => {
     
 }
 
+//get queue number of current user
+//edited
+const findQueueNumber = (eventName, userId) => {
+  return axios.get
+  (API_URL + `event/${eventName}/${userId}/getQueueNum`, {
+  }, 
+    {withCredentials: true,}
+  )
+  .then((response) => {
+    const QueueNo = response.data;
+    console.log(QueueNo);
+    return QueueNo;
+  }).catch((error) => {
+    console.error("Error fetching user's queue number:", error);
+    throw error;
+  });
+}
+
+//add user to queue
+//edited
+const addToWaitingList = (userId, eventName) => {
+  return axios.post
+  (API_URL + `event/${userId}/${eventName}/enqueue`, {
+  }, 
+    {withCredentials: true,}
+  )
+  .then((response) => {
+    const inSet = response.data;
+    console.log(inSet)
+    return inSet;
+  }).catch((error) => {
+    console.error("Error fetching information:", error);
+    throw error;
+  });
+}
+
 //returns list of available seats from event, date and category
 //edited
 const getTicketSeatNumberByEventNameAndCategory = (eventName, eventDate, eventCategory) => {
   return axios.get
-    (API_URL + `ticket/${eventName}/${eventDate}/${eventCategory}/getAvailableSeat`, {
+    (API_URL + `ticket/${eventName}/${eventDate}/${eventCategory}/getAvailableSeats`, {
       eventName,
       eventDate,
       eventCategory
@@ -87,6 +123,24 @@ const getTicketByEventNameDateAndCategoryAndSeatNum = (eventName, eventDate, eve
       throw error;
     });
 };
+
+//set a timeout for users, within which they must complete their purchase
+//edited
+const sendUserToHomePage = (eventName, userId) => {
+  return axios.put
+  (API_URL + `ticket/${eventName}/${userId}/deleteUserFromSet`, {
+  }, 
+    {withCredentials: true,}
+  )
+  .then((response) => {
+    const inSet = response.data;
+    console.log(inSet)
+    return inSet;
+  }).catch((error) => {
+    console.error("Error fetching information:", error);
+    throw error;
+  });
+}
 
 //get all tickets regarrdless of availability, from each category
 //edited
@@ -170,63 +224,13 @@ const deletePurchase = (purchaseId) => {
   (API_URL +`purchases/${purchaseId}/deletePurchase`, {
     purchaseId
   }, 
-      // { withCredentials: true,}
+      { withCredentials: true,}
   );
 } 
 
-//get queue number of current user
-//edited
-const findQueueNumber = (eventName, userId) => {
-  return axios.get
-  (API_URL + `event/${eventName}/${userId}/getQueueNum`, {
-  }, 
-    {withCredentials: true,}
-  )
-  .then((response) => {
-    const QueueNo = response.data;
-    console.log(QueueNo);
-    return QueueNo;
-  }).catch((error) => {
-    console.error("Error fetching user's queue number:", error);
-    throw error;
-  });
-}
 
-//add user to queue
-//edited
-const addToWaitingList = (userId, eventName) => {
-  return axios.post
-  (API_URL + `event/${userId}/${eventName}/enqueue`, {
-  }, 
-    {withCredentials: true,}
-  )
-  .then((response) => {
-    const inSet = response.data;
-    console.log(inSet)
-    return inSet;
-  }).catch((error) => {
-    console.error("Error fetching information:", error);
-    throw error;
-  });
-}
 
-//set a timeout for users, within which they must complete their purchase
-//edited
-const sendUserToHomePage = (userId, eventName) => {
-  return axios.put
-  (API_URL + `ticket/${eventName}/${userId}/deleteUserFromSet`, {
-  }, 
-    {withCredentials: true,}
-  )
-  .then((response) => {
-    const inSet = response.data;
-    console.log(inSet)
-    return inSet;
-  }).catch((error) => {
-    console.error("Error fetching information:", error);
-    throw error;
-  });
-}
+
 
 
 const TicketService = {

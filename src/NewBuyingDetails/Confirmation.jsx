@@ -10,7 +10,7 @@ class Confirmation extends Component{
     constructor(){
         super();
         this.state=({
-            user: AuthService.getCurrentUser(),
+            user: AuthService.getUser(),
             purchaseInfo: [],
             ticketIDs: [],
             purchaseIDs: [],

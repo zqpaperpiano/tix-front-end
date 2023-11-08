@@ -4,15 +4,17 @@ import TicketService from "../NewBuyingDetails/ticket.service";
 import './UserPurchases.css';
 
 const UserPurchases = () => {
-    const userID = AuthService.getCurrentUser().id;
+    const userID = AuthService.getUser().id;
     const [userPurchases, setUserPurchases] = useState([]);
     const [purchaseInfoList, setPurchaseInfoList] = useState([]);
 
     //upon load up, load all of the purchases under the userID stored in local storage
   useEffect(() => {
-    TicketService.getUserPurchasesFromUserId(userID)
+    console.log("getting user purchases")
+    TicketService.userPurchase(userID)
       .then((userPurchases) => {
         setUserPurchases(userPurchases);
+        console.log(userPurchases[0])
       })
       .catch((error) => {
         console.error("Error fetching user's purchases:", error);
@@ -33,7 +35,7 @@ const UserPurchases = () => {
     userPurchases.map((purchase) => {
       const id = purchase.ticketId
       promises.push(
-        TicketService.getPurchaseInfoFromTicketId(id)
+        TicketService.getSinglePurchaseByTicketId(id)
         .then(data => {return data} )
       );
     })

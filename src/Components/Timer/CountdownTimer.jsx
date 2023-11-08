@@ -28,3 +28,4 @@ const CountdownTimer = ({ durationInSeconds, onTimeout }) => {
 };
 
 export default CountdownTimer;
+
