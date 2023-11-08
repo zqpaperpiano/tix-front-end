@@ -12,7 +12,7 @@ export const StripeButton = ({ price, onRouteChange, listOfDetailedTickets, user
   async function handleToken(token) {
     console.log(token);
     await axios
-      .post("http://localhost:8081/api/payment/charge", "", {
+      .post("https://cs203back.azurewebsites.net/api/payment/charge", "", {
         headers: {
           token: token.id,
           amount: stripePrice,

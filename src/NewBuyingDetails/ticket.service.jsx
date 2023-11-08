@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8081/api/v1/";
+const API_URL = "https://cs203back.azurewebsites.net/api/v1/";
 axios.defaults.withCredentials = true
 
 //returns list of Dates from eventName
 //not in the list!!
 const getDates = (eventName) => {
   return axios.get
-    (API_URL + `event/events/getDatesByName/${eventName}`, {
+    (API_URL + `event/${eventName}/getDatesByName`, {
       eventName
     }, 
     { withCredentials: true,}
