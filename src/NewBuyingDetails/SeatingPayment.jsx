@@ -417,7 +417,7 @@ export const SeatingPayment = ({ onRouteChange, currentEvent}) => {
 
           <div className="customer-order-div">
             <div className="countdown-timer">
-              <CountdownTimer durationInSeconds={300} onTimeout={handleTimeout}/>
+              <CountdownTimer durationInSeconds={100} onTimeout={handleTimeout}/>
             </div>
 
             <div className="customer-particulars">

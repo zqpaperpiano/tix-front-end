@@ -118,8 +118,7 @@ class App extends Component{
         </div>
 
         <div className="other-pages">
-          {/* {this.pageNavigation()}  */}
-          <TaylorSwiftInfo onRouteChange={this.onRouteChange} user={this.state.user} setCurrentEvent={this.setCurrentEvent}/>
+          {this.pageNavigation()} 
         </div>
       </div>
     );

@@ -39,8 +39,7 @@ img{
     width: 80%;
     height: 5%;
     display: flex;
-    background-color: green;
-    /* background-color: #d9d9d999; */
+    background-color: #d9d9d999;
     padding-bottom: 1%;
   }
 
