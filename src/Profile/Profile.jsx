@@ -5,6 +5,7 @@ import './Profile.css';
 
 //get current user 
 const user = AuthService.getUser();
+console.log(user.id);
 
 const Profile = () => {
     return(
