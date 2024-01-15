@@ -1,6 +1,7 @@
-###Tix
+# TIX
 
-##Online ticketing application that allows for a seamless ticket buying experience for all of your favorite events
+### An online ticketing platform that allows you to purchase the tickets to all of your favorite events seamlessly
 
-#Front end of the application is made with React.js and css. 
-#Back end of the application can be found [here] (https://github.com/enbot171/tix-back-end)
+Front end is created with React.js and styled with CSS. 
+
+Back end is created with SpringBoot, and can be found [here](https://github.com/enbot171/tix-back-end)
